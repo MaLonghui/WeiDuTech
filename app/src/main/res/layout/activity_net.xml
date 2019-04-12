@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/wang"
+        android:layout_width="@dimen/dp_174"
+        android:layout_height="@dimen/dp_174"
+        android:src="@mipmap/error"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/dp_50"
+        android:text="网络不可用，请检查你的网络连接"
+        android:textSize="@dimen/sp_14"
+        android:textColor="#666666"
+        android:layout_height="wrap_content" />
+   <Button
+       android:id="@+id/btn_net"
+       android:layout_width="@dimen/dp_100"
+       android:layout_marginTop="@dimen/dp_90"
+       android:textColor="#ffffff"
+       android:textSize="@dimen/sp_14"
+       android:background="@drawable/reg_btn_shape"
+       android:text="连接网络"
+       android:layout_height="@dimen/dp_40" />
+
+</LinearLayout>
