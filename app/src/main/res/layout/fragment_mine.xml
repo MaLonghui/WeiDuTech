@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:leon="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/draw_back"
+    android:gravity="center"
+    tools:context=".Fragment.MineFragment">
+
+    <RelativeLayout
+        android:id="@+id/no_login_relative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:id="@+id/login_n"
+            android:layout_width="@dimen/dp_56"
+            android:layout_height="@dimen/dp_56"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_12"
+            android:background="@drawable/login_n_shape"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/login_icon_n" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/login_n"
+            android:text="登录/注册"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/my_linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_178"
+            android:background="@mipmap/draw_back"
+            android:orientation="vertical">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/my_icon_simple"
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_76"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_88"
+                android:layout_toRightOf="@id/my_icon_simple"
+                android:text="JUKER"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/text_qm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_name"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_toRightOf="@id/my_icon_simple"
+                android:text="众人皆醉我独醒"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_12" />
+
+            <ImageView
+                android:id="@+id/img_qd"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:layout_alignBottom="@id/my_icon_simple"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:src="@mipmap/my_icon_sign_n" />
+
+            <TextView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img_qd"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:gravity="center"
+                android:text="签到"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_12" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25"
+                android:layout_alignBottom="@id/img_qd"
+                android:layout_marginRight="@dimen/dp_16"
+                android:layout_toLeftOf="@id/img_qd"
+                android:src="@mipmap/vip" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/my_menu_shape"
+            android:orientation="vertical">
+
+            <com.leon.lib.settingview.LSettingItem
+                android:id="@+id/item_collect"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_20"
+                leon:leftIcon="@mipmap/my_icon_collect_n"
+                leon:leftText="我的收藏" />
+
+            <com.leon.lib.settingview.LSettingItem
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                leon:leftIcon="@mipmap/my_icon_attention_n"
+                leon:leftText="我的关注" />
+
+            <com.leon.lib.settingview.LSettingItem
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                leon:leftIcon="@mipmap/my_icon_card_n"
+                leon:leftText="我的帖子" />
+
+
+            <com.leon.lib.settingview.LSettingItem
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                leon:leftIcon="@mipmap/my_icon_notice_n"
+                leon:leftText="我的积分" />
+
+            <com.leon.lib.settingview.LSettingItem
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                leon:leftIcon="@mipmap/my_icon_task_n"
+                leon:leftText="我的任务" />
+
+            <com.leon.lib.settingview.LSettingItem
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                leon:leftIcon="@mipmap/my_icon_setting_n"
+                leon:leftText="设置" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

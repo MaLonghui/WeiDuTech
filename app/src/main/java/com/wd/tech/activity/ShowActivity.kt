@@ -8,6 +8,7 @@ import com.hjm.bottomtabbar.BottomTabBar
 import com.wd.tech.Fragment.CommunityFragment
 import com.wd.tech.Fragment.InformationFragment
 import com.wd.tech.Fragment.MessageFragment
+import com.wd.tech.Fragment.MineFragment
 import com.wd.tech.R
 import kotlinx.android.synthetic.main.activity_show.*
 
@@ -19,7 +20,7 @@ class ShowActivity : AppCompatActivity() {
         window.enterTransition = Explode().setDuration(1000)
         window.exitTransition = Explode().setDuration(1000)
         bottom_ab_bar.init(supportFragmentManager)
-                .setImgSize(32f, 32f)
+                .setImgSize(90f, 90f)
                 .setFontSize(12f)
                 .setTabPadding(4f, 6f, 10f)
                 .setChangeColor(Color.BLACK, Color.GRAY)
@@ -33,5 +34,10 @@ class ShowActivity : AppCompatActivity() {
                     }
 
                 })
+        val supportFragmentManager = supportFragmentManager
+        var mineFragment = MineFragment()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.drawer_frame,mineFragment)
+                .commit()
     }
 }

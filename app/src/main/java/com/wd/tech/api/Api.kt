@@ -2,10 +2,11 @@
 package com.wd.tech.api
 class Api {
     companion object {
-        public var BASE_URL = "http://mobile.bwstudent.com/"
-        public var RECOMMENDCINEMA_URL = "movieApi/cinema/v1/findRecommendCinemas"
-        //登录
-        public var LOGIN_URL = "movieApi/user/v1/login"
-        public var MOVIE_URL = "small/commodity/v1/findCommodityDetailsById"
+        public var BASE_URL = "https://mobile.bwstudent.com/techApi/"
+        //资讯banner
+        public var TECH_BANNER = "information/v1/bannerShow"
+        //资讯展示
+        public var TECH_INFOR = "information/v1/infoRecommendList"
+
     }
 }

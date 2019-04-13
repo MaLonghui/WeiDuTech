@@ -1,6 +1,5 @@
-
-
 package com.wd.tech.base
+
 import android.app.Activity
 import android.content.Context
 import android.content.IntentFilter
@@ -15,34 +14,28 @@ import com.wd.tech.utils.NetWorkUtils
 import com.wd.tech.utils.NetWorkUtils.Companion.connectionReceiver
 
 
-open abstract class BaseFragment<in V : BaseContract.BaseView, P : BaseContract.BasePresenter<V>> : Fragment(), View.OnClickListener {
+ abstract class BaseFragment<in V : BaseContract.BaseView, P : BaseContract.BasePresenter<V>> : Fragment(){
 
     protected var mPresenter: P? = null
-    var  _context:Context? = null
-    override fun getContext():Context{
 
-        return _context!!
-
-    }
-
-    var activity:Activity = Activity()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(getLayoutId(), container, false)
-        if (NetWorkUtils.isNetworkAvailable(_context!!)) {
-            mPresenter = initPresenter()
-            mPresenter!!.attachView(this as V)
-            initData()
-        }
+        mPresenter = initPresenter()
+        mPresenter!!.attachView(this as V)
         connectionReceiver = connectionReceiver
         var intentFilter: IntentFilter = IntentFilter()
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
-        _context!!.registerReceiver(connectionReceiver, intentFilter)
+        activity!!.registerReceiver(connectionReceiver, intentFilter)
+        if (NetWorkUtils.isNetworkAvailable(activity!!)) {
+            initData()
+        }
+
         return view
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        _context!!.unregisterReceiver(connectionReceiver)
+        activity!!.unregisterReceiver(connectionReceiver)
         mPresenter!!.detachView()
     }
 
