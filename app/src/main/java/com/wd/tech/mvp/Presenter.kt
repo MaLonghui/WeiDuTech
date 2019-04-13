@@ -8,7 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class Presenter() : BasePresenter<Constanct.View>(), Constanct.Presenter {
+class Presenter : BasePresenter<Constanct.View>(), Constanct.Presenter {
     override fun getPresenter(url: String, headerMap: Map<String, Any>, clazz: Class<*>, parms: Map<String, Any>) {
         val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)
         apiService.get(url, headerMap, parms)

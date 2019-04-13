@@ -1,14 +1,11 @@
 package com.wd.tech.activity
 
-import android.app.ActivityOptions
-import android.content.Intent
 import android.os.Looper
 import com.wd.tech.R
 import com.wd.tech.base.BaseActivity
 import com.wd.tech.mvp.Constanct
 import com.wd.tech.mvp.Presenter
 import com.wd.tech.utils.JumpActivityUtils
-
 import io.reactivex.Flowable
 import java.util.concurrent.TimeUnit
 
@@ -33,7 +30,6 @@ class MainActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),Constan
                 .doOnComplete {
                     Looper.prepare()
                     JumpActivityUtils.skipAnotherActivity(this@MainActivity,ShowActivity::class.java)
-                    //startActivity(Intent(this@MainActivity, ShowActivity::class.java), ActivityOptions.makeSceneTransitionAnimation(this@MainActivity).toBundle())
                     Looper.loop()
                 }
                 .subscribe()

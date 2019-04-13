@@ -3,11 +3,12 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.wd.tech.mvp.Constanct
 import com.wd.tech.utils.NetWorkUtils
 import com.wd.tech.utils.NetWorkUtils.Companion.connectionReceiver
 
 
-abstract class BaseActivity <in V: BaseContract.BaseView,P :BaseContract.BasePresenter<V>> : AppCompatActivity(){
+abstract class BaseActivity <in V: BaseContract.BaseView,P :BaseContract.BasePresenter<V>> : AppCompatActivity(),Constanct.View{
 
     protected var mPresenter: P? = null
 

@@ -29,9 +29,7 @@ class ShowActivity : AppCompatActivity() {
                 .isShowDivider(false)
                 .setOnTabChangeListener(object : BottomTabBar.OnTabChangeListener {
                     override fun onTabChange(position: Int, name: String?) {
-
                     }
-
                 })
     }
 }
