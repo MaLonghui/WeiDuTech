@@ -23,15 +23,22 @@ import kotlinx.android.synthetic.main.activity_login.view.*
  * author:冯泽林{2019/4/12}
  * function:
  */
-class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>() {
-    var phone: Any? = null
-    var flag:Boolean=true
+class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>() ,Constanct.View{
+    var flag: Boolean = true
     override fun View(any: Any) {
         val loginBean = any as LoginBean
         if (loginBean.status.equals("0000")) {
+            val sp = getSharedPreferences("config", Context.MODE_PRIVATE)
+            val edit = sp.edit()
+            edit.putString("userId", loginBean.result.userId.toString())
+            edit.putString("sessionId", loginBean.result.sessionId)
+            edit.putString("headPic", loginBean.result.headPic)
+            edit.putString("nickName", loginBean.result.nickName)
+
+            edit.commit()
             if (loginBean.result != null)
                 Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
-            JumpActivityUtils.skipAnotherActivity(this@LoginActivity, ShowActivity::class.java)
+            JumpActivityUtils.skipAnotherActivity(this@LoginActivity,ShowActivity::class.java)
         } else {
             Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
         }
@@ -46,7 +53,8 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>() {
     }
 
     override fun initData() {
-        but_login.setOnClickListener{
+
+        but_login.setOnClickListener {
             var phone = edit_phone.text.toString().trim()
             var pwd = edit_pwd.text.toString().trim()
             val pwd1 = RsaCoder.encryptByPublicKey(pwd)
@@ -57,13 +65,12 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>() {
             }
         }
         iamge_eye.setOnClickListener {
-            if(flag){
-                edit_pwd.transformationMethod=HideReturnsTransformationMethod.getInstance()
-
-            }else{
-                edit_pwd.transformationMethod=PasswordTransformationMethod.getInstance()
+            if (flag) {
+                edit_pwd.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            } else {
+                edit_pwd.transformationMethod = PasswordTransformationMethod.getInstance()
             }
-            flag =!flag
+            flag = !flag
 
         }
 //        跳转到注册页面

@@ -1,4 +1,5 @@
 package com.wd.tech.mvp
+
 import com.google.gson.Gson
 import com.wd.tech.api.ApiService
 import com.wd.tech.base.BasePresenter

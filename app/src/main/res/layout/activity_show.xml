@@ -6,9 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start"
     tools:context=".activity.ShowActivity"
-    >
+    tools:openDrawer="start">
 
     <com.hjm.bottomtabbar.BottomTabBar
         android:id="@+id/bottom_ab_bar"
@@ -21,47 +20,16 @@
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/draw_back"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        >
-        <RelativeLayout
-            android:id="@+id/no_login_relative"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content">
+        android:fitsSystemWindows="true">
 
-            <LinearLayout
-                android:id="@+id/login_n"
-                android:layout_width="@dimen/dp_56"
-                android:layout_height="@dimen/dp_56"
-                android:gravity="center"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp_12"
-                android:background="@drawable/login_n_shape">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/login_icon_n" />
-            </LinearLayout>
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/login_n"
-                android:text="登录/注册"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_14" />
-        </RelativeLayout>
         <FrameLayout
             android:id="@+id/drawer_frame"
-            android:background="#ff0"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></FrameLayout>
     </android.support.design.widget.NavigationView>
 
+
 </android.support.v4.widget.DrawerLayout>
+

@@ -8,22 +8,22 @@ import com.wd.tech.utils.NetWorkUtils
 import com.wd.tech.utils.NetWorkUtils.Companion.connectionReceiver
 
 
-abstract class BaseActivity <in V: BaseContract.BaseView,P :BaseContract.BasePresenter<V>> : AppCompatActivity(),Constanct.View{
+abstract class BaseActivity <in V: BaseContract.BaseView,P :BaseContract.BasePresenter<V>> : AppCompatActivity(){
 
     protected var mPresenter: P? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
-        if (NetWorkUtils.isNetworkAvailable(this)){
-            initData()
-        }
         mPresenter = initPresenter()
         mPresenter!!.attachView(this as V)
         connectionReceiver = connectionReceiver
         var intentFilter:IntentFilter = IntentFilter()
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
         registerReceiver(connectionReceiver,intentFilter)
+        if (NetWorkUtils.isNetworkAvailable(this)){
+            initData()
+        }
     }
 
     override fun onDestroy() {
