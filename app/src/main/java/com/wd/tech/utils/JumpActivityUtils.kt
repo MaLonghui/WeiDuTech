@@ -59,7 +59,7 @@ open class JumpActivityUtils {
                         intent.putExtra(key, value as Double)
                     }
                 }
-                activity.startActivity(intent)
+                activity.startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
             } else {
                 activity.startActivity(Intent(activity, NetActivity::class.java),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
             }

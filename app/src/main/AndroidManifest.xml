@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ShowActivity" />
-        <activity android:name=".activity.MyCollectActivity"></activity>
+        <activity android:name=".activity.MyCollectActivity" />
+        <activity android:name=".activity.InfoDetailsActivity"></activity>
     </application>
 
 </manifest>

@@ -11,7 +11,7 @@
     >
 
     <com.hjm.bottomtabbar.BottomTabBar
-        android:id="@+id/bottom_ab_bar"
+        android:id="@+id/bottom_tab_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"></com.hjm.bottomtabbar.BottomTabBar>
