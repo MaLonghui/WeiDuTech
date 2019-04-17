@@ -12,18 +12,18 @@ data class Community(
 )
 
 data class CommunityBean(
-    val comment: Int,
-    val communityCommentVoList: List<Any>,
-    val content: String,
-    val `file`: String,
-    val headPic: String,
-    val id: Int,
-    val nickName: String,
-    val praise: Int,
-    val publishTime: Long,
-    val signature: String,
-    val userId: Int,
-    val whetherFollow: Int,
-    val whetherGreat: Int,
-    val whetherVip: Int
+        val comment: Int,
+        val communityCommentVoList: List<Any>,
+        val content: String,
+        val `file`: String,
+        val headPic: String,
+        val id: Int,
+        val nickName: String,
+        var praise: Int,
+        val publishTime: Long,
+        val signature: String,
+        val userId: Int,
+        val whetherFollow: Int,
+        var whetherGreat: Int,
+        val whetherVip: Int
 )

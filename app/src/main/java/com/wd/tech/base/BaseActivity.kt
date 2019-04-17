@@ -4,6 +4,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.wd.tech.mvp.Constanct
+import android.transition.Explode
 import com.wd.tech.utils.NetWorkUtils
 import com.wd.tech.utils.NetWorkUtils.Companion.connectionReceiver
 
@@ -15,6 +16,8 @@ abstract class BaseActivity <in V: BaseContract.BaseView,P :BaseContract.BasePre
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
+        window.enterTransition = Explode().setDuration(1000)
+        window.exitTransition = Explode().setDuration(1000)
         mPresenter = initPresenter()
         mPresenter!!.attachView(this as V)
         connectionReceiver = connectionReceiver

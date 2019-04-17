@@ -19,6 +19,7 @@ data class LoginResult(
     val sessionId: String,
     val userId: Int,
     val userName: String,
+    val signature: String,
     val whetherFaceId: Int,
     val whetherVip: Int
 )

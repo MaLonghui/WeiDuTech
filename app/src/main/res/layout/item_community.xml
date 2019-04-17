@@ -56,4 +56,48 @@
         android:layout_below="@+id/text_details"
         android:layout_marginTop="@dimen/dp_10"
         ></android.support.v7.widget.RecyclerView>
+    <ImageView
+        android:id="@+id/image_comment"
+        android:layout_width="@dimen/dp_16"
+        android:layout_height="@dimen/dp_16"
+        android:src="@mipmap/common_icon_comment_n"
+        android:layout_marginRight="@dimen/dp_100"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/recycler_image"
+        android:layout_marginTop="24dp"/>
+    <TextView
+        android:id="@+id/text_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dp_80"
+        android:layout_below="@+id/recycler_image"
+        android:layout_marginTop="@dimen/dp_24"/>
+    <ImageView
+        android:id="@+id/image_praise"
+        android:layout_width="@dimen/dp_16"
+        android:layout_height="@dimen/dp_16"
+        android:src="@mipmap/common_icon_prise_n"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dp_40"
+        android:layout_below="@+id/recycler_image"
+        android:layout_marginTop="@dimen/dp_24"
+        />
+    <TextView
+        android:id="@+id/text_praise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/recycler_image"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_20"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        android:layout_below="@+id/image_comment"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="#66666666"
+        />
 </RelativeLayout>

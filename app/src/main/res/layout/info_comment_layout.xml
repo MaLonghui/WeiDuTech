@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:paddingBottom="@dimen/dp_10"
+    android:layout_height="wrap_content">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/comment_simple_view"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_10"
+        app:progressBarAutoRotateInterval="3000"
+        app:progressBarImage="@drawable/img_loading"
+        app:roundAsCircle="true" />
+
+    <TextView
+        android:id="@+id/comment_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/comment_simple_view"
+        android:layout_toRightOf="@id/comment_simple_view"
+        android:text="safaasdf"
+        android:textColor="#333333"
+        android:textSize="@dimen/sp_14" />
+
+    <TextView
+        android:id="@+id/comment_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/comment_name"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_toRightOf="@id/comment_simple_view"
+        android:text="asdfa"
+        android:textColor="#999999"
+        android:textSize="@dimen/sp_10" />
+    <TextView
+        android:id="@+id/comment_content"
+        android:layout_toRightOf="@id/comment_simple_view"
+        android:layout_below="@id/comment_time"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textSize="@dimen/sp_12"
+        android:textColor="#666666"
+        android:text="asdfas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

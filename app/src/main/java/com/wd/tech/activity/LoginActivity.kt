@@ -1,6 +1,7 @@
 package com.wd.tech.activity
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.text.InputType
 import android.text.method.HideReturnsTransformationMethod
@@ -31,14 +32,16 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>() ,Const
             val sp = getSharedPreferences("config", Context.MODE_PRIVATE)
             val edit = sp.edit()
             edit.putString("userId", loginBean.result.userId.toString())
-            edit.putString("sessionId", loginBean.result.sessionId)
+            edit.putString("sessionId", loginBean.result.sessionId.toString())
             edit.putString("headPic", loginBean.result.headPic)
             edit.putString("nickName", loginBean.result.nickName)
-
+            edit.putString("signature",loginBean.result.signature)
             edit.commit()
             if (loginBean.result != null)
                 Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
             JumpActivityUtils.skipAnotherActivity(this@LoginActivity,ShowActivity::class.java)
+//            var it:Intent= Intent(this@LoginActivity,ShowActivity::class.java)
+//            startActivity(it)
         } else {
             Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
         }

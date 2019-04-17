@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_12"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_12"
+    android:paddingBottom="@dimen/dp_10">
+
+    <RelativeLayout
+        android:id="@+id/info_item_relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/info_item_simpleview"
+            android:layout_width="@dimen/dp_140"
+            android:layout_height="@dimen/dp_92"
+            android:layout_marginRight="@dimen/dp_10"
+            app:progressBarAutoRotateInterval="3000"
+            app:progressBarImage="@drawable/img_loading"
+            app:roundAsCircle="false"
+            app:roundedCornerRadius="@dimen/dp_8" />
+
+        <TextView
+            android:id="@+id/info_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/info_item_simpleview"
+            android:layout_toRightOf="@id/info_item_simpleview"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="aaaaa"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/info_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info_summary"
+            android:layout_toRightOf="@id/info_item_simpleview"
+            android:maxLines="2"
+            android:text="bbbbb"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_12" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info_title"
+            android:layout_marginTop="@dimen/dp_14"
+            android:layout_toRightOf="@id/info_item_simpleview">
+
+            <TextView
+                android:id="@+id/info_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="bbbbb"
+                android:textColor="#999999"
+                android:textSize="@dimen/sp_10" />
+
+            <ImageView
+                android:id="@+id/info_pay_img"
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
+                android:layout_alignTop="@+id/info_collect"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_toLeftOf="@id/info_collect"
+                android:src="@mipmap/info_pay" />
+            <TextView
+                android:id="@+id/info_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/info_source"
+                android:layout_marginTop="@dimen/dp_2"
+                android:singleLine="true"
+                android:text="bbbbb"
+                android:textColor="#999999"
+                android:textSize="@dimen/sp_10" />
+
+            <ImageView
+                android:id="@+id/info_share"
+                android:layout_width="@dimen/dp_12"
+                android:layout_height="@dimen/dp_11"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_6"
+                android:layout_toLeftOf="@id/info_share_num"
+                android:src="@mipmap/common_icon_share_n" />
+
+            <TextView
+                android:id="@+id/info_share_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="109"
+                android:textColor="#666666"
+                android:textSize="@dimen/sp_10" />
+
+            <TextView
+                android:id="@+id/info_collect_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_18"
+                android:layout_toLeftOf="@id/info_share"
+                android:text="359"
+                android:textColor="#666666"
+                android:textSize="@dimen/sp_10" />
+
+            <ImageView
+                android:id="@+id/info_collect"
+                android:layout_width="@dimen/dp_12"
+                android:layout_height="@dimen/dp_11"
+                android:layout_centerVertical="true"
+
+                android:layout_marginRight="@dimen/dp_6"
+                android:layout_toLeftOf="@id/info_collect_num"
+                android:src="@mipmap/common_icon_collect_n" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/info_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/info_adv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_12" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/info_adv_simpleview"
+            android:layout_width="@dimen/dp_336"
+            android:layout_height="@dimen/dp_220"
+            android:layout_below="@+id/info_adv_title"
+            android:layout_marginTop="@dimen/dp_18"
+            app:progressBarAutoRotateInterval="3000"
+            app:progressBarImage="@drawable/img_loading" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_18"
+            android:layout_alignTop="@id/info_adv_simpleview"
+            android:src="@mipmap/adv_group" />
+    </RelativeLayout>
+
+</LinearLayout>

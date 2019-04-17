@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoTitle_FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +28,13 @@
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.MyCollectActivity" />
         <activity android:name=".activity.CollectActivity" />
-        <activity android:name=".activity.IndividualInformationActivity"></activity>
+        <activity android:name=".activity.IndividualInformationActivity" />
+        <activity android:name=".activity.InfoDetailsActivity" />
+        <activity android:name=".activity.FollowActivity" />
+        <activity android:name=".adapter.CollectAdapter" />
+        <activity android:name=".activity.ChangePasswordActivity" />
+        <activity android:name=".activity.NextActivity" />
+        <activity android:name=".activity.CardActivity"></activity>
     </application>
 
 </manifest>
