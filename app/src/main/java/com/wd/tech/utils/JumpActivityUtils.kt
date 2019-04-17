@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.support.v4.content.ContextCompat.startActivity
 import com.wd.tech.activity.NetActivity
+import com.wd.tech.app.MyApp
 import java.util.Map
 
 open class JumpActivityUtils {
@@ -19,10 +20,12 @@ open class JumpActivityUtils {
             if (NetWorkUtils.isNetworkAvailable(activity)) {
                 val dialogprogress: DialogUtils = DialogUtils(activity)
                 dialogprogress.showProgressDialog(true, "正在加载数据……")
+                activity.startActivity(Intent(activity, clazz),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
+                activity.finish()
+                dialogprogress.dismiss()
                 handler.postDelayed(object : Runnable {
                     override fun run() {
-                        activity.startActivity(Intent(activity, clazz),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
-                        activity.finish()
+                      //  activity.startActivity(Intent(activity, clazz),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
                         dialogprogress.dismiss()
                     }
                 }, 650)

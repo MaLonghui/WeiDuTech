@@ -4,6 +4,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.transition.Explode
+import com.wd.tech.mvp.Constanct
 import com.wd.tech.utils.NetWorkUtils
 import com.wd.tech.utils.NetWorkUtils.Companion.connectionReceiver
 

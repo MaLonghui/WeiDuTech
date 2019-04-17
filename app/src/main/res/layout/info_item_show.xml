@@ -56,7 +56,7 @@
 
             <TextView
                 android:id="@+id/info_source"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="bbbbb"
@@ -118,7 +118,6 @@
                 android:layout_width="@dimen/dp_12"
                 android:layout_height="@dimen/dp_11"
                 android:layout_centerVertical="true"
-
                 android:layout_marginRight="@dimen/dp_6"
                 android:layout_toLeftOf="@id/info_collect_num"
                 android:src="@mipmap/common_icon_collect_n" />

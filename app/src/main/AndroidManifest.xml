@@ -22,7 +22,16 @@
         </activity>
         <activity android:name=".activity.ShowActivity" />
         <activity android:name=".activity.MyCollectActivity" />
-        <activity android:name=".activity.InfoDetailsActivity"></activity>
+        <activity android:name=".activity.InfoDetailsActivity" />
+        <activity android:name=".activity.NetActivity" />
+        <activity android:name=".activity.RegActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.CollectActivity" />
+        <activity android:name=".activity.IndividualInformationActivity" />
+        <activity android:name=".activity.BannerDetailsActivity" />
+        <activity android:name=".activity.InfoAllPlateActivity" />
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.PlateDetailsActivity"></activity>
     </application>
 
 </manifest>

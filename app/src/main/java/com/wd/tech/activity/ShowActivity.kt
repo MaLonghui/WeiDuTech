@@ -29,14 +29,12 @@ class ShowActivity : AppCompatActivity() {
                 .setTabPadding(4f, 6f, 10f)
                 .setChangeColor(Color.BLACK, Color.GRAY)
                 .addTabItem("资讯", R.mipmap.common_tab_informatiion_s, R.mipmap.common_tab_information_n, InformationFragment::class.java)
-                .addTabItem("消息", R.mipmap.common_tab_community_s, R.mipmap.common_tab_community_n, CommunityFragment::class.java)
-                .addTabItem("社区", R.mipmap.common_tab_message_s, R.mipmap.common_tab_message_n, MessageFragment::class.java)
+                .addTabItem("消息", R.mipmap.common_tab_message_s, R.mipmap.common_tab_message_n, MessageFragment::class.java)
+                .addTabItem("社区", R.mipmap.common_tab_community_s, R.mipmap.common_tab_community_n, CommunityFragment::class.java)
                 .isShowDivider(false)
                 .setOnTabChangeListener(object : BottomTabBar.OnTabChangeListener {
                     override fun onTabChange(position: Int, name: String?) {
-
                     }
-
                 })
         val supportFragmentManager = supportFragmentManager
         var mineFragment = MineFragment()

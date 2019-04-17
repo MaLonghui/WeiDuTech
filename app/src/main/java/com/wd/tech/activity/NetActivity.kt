@@ -7,7 +7,9 @@ import com.wd.tech.utils.NetWorkUtils
 
 import kotlinx.android.synthetic.main.activity_net.*
 
-
+/**
+ * 无网页面
+ */
 class NetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -51,10 +51,10 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
         info_details_back.setOnClickListener {
             onBackPressed()
         }
+
     }
 
     override fun View(any: Any) {
-
         if (any is InfoDetailsBean) {
             var infoDetailsBean = any
             val result = infoDetailsBean.result
@@ -74,8 +74,6 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
             } else {
                 info_details_collect_icon.setImageResource(R.mipmap.common_icon_collect_n)
             }
-
-
             val settings = info_details_webview.settings
             settings.javaScriptEnabled = true
             val js = "<script type=\"text/javascript\">" +
@@ -118,11 +116,6 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
                 info_no_comment.visibility = VISIBLE
                 info_details_pl_recycler.visibility = GONE
             }
-
         }
-
-
     }
-
-
 }

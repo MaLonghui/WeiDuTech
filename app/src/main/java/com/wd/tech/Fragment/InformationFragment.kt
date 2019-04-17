@@ -1,20 +1,27 @@
 package com.wd.tech.Fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.wd.tech.R
+import com.wd.tech.activity.InfoAllPlateActivity
+import com.wd.tech.activity.SearchActivity
 import com.wd.tech.adapter.InformationAdapter
 import com.wd.tech.api.Api
 import com.wd.tech.base.BaseFragment
 import com.wd.tech.bean.BannerBean
 import com.wd.tech.bean.InfoBean
+import com.wd.tech.bean.InfoResult
 import com.wd.tech.mvp.Constanct
 import com.wd.tech.mvp.Presenter
+import com.wd.tech.utils.JumpActivityUtils
+import kotlinx.android.synthetic.main.activity_plate_details.*
 import kotlinx.android.synthetic.main.fragment_information.*
 
 /**
@@ -23,7 +30,9 @@ import kotlinx.android.synthetic.main.fragment_information.*
 class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Constanct.View {
     var plateId = 0
     var page = 1
-    var count = 10
+    var count = 5
+    private var isRefresh = true
+    var allList: MutableList<InfoResult> = ArrayList()
     var informationAdapter: InformationAdapter? = null
 
     override fun getLayoutId(): Int {
@@ -57,12 +66,12 @@ class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(),
         xrecycler_view.layoutManager = layoutManager
         xrecycler_view.setPullRefreshEnabled(true)
         xrecycler_view.setLoadingMoreEnabled(true)
-        xrecycler_view.setLoadingListener(object :XRecyclerView.LoadingListener{
+        xrecycler_view.setLoadingListener(object : XRecyclerView.LoadingListener {
             override fun onLoadMore() {
-
-                Handler().postDelayed(object :Runnable{
+                Handler().postDelayed(object : Runnable {
                     override fun run() {
                         plateId++
+                        isRefresh = false
                         var sHeadMap = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
                         var infoPrams = mapOf(Pair("plateId", plateId), Pair("page", page), Pair("count", count))
                         if (userId.equals("") || sessionId.equals("")) {
@@ -72,15 +81,15 @@ class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(),
                         }
                         xrecycler_view.loadMoreComplete()
                     }
-
-                },2500)
+                }, 2500)
 
             }
 
             override fun onRefresh() {
-                Handler().postDelayed(object :Runnable{
+                Handler().postDelayed(object : Runnable {
                     override fun run() {
                         plateId = 0
+                        isRefresh = true
                         var sHeadMap = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
                         var infoPrams = mapOf(Pair("plateId", plateId), Pair("page", page), Pair("count", count))
                         if (userId.equals("") || sessionId.equals("")) {
@@ -90,37 +99,59 @@ class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(),
                         }
                         xrecycler_view.refreshComplete()
                     }
-
-                },2500)
-
-
+                }, 2500)
             }
-
         })
 
-        if (!informationAdapter!!.hasObservers()){
-            xrecycler_view.adapter = informationAdapter
-        }else {
-            informationAdapter!!.notifyDataSetChanged();
+        image_menu.setOnClickListener {
+            startActivity(Intent(activity, InfoAllPlateActivity::class.java))
         }
+        image_search.setOnClickListener {
+            startActivity(Intent(this!!.activity!!, SearchActivity::class.java))
+        }
+        if (!informationAdapter!!.hasObservers()) {
+            xrecycler_view.adapter = informationAdapter
+        } else {
+            informationAdapter!!.notifyDataSetChanged()
+        }
+
     }
 
     override fun initData() {
 
-
     }
 
     override fun View(any: Any) {
-
         if (any is BannerBean) {//banner数据
             var bannerBean = any
             val bannerList = bannerBean.result
             informationAdapter!!.setBannerResult(bannerList)
-        }else if(any is InfoBean){//资讯集合
+        } else if (any is InfoBean) {//资讯集合
             var infoBean = any
-            val infoList = infoBean.result
-            //Toast.makeText(context,infoList[1].summary,Toast.LENGTH_LONG).show()
-            informationAdapter!!.setInfoResult(infoList)
+            var infoList = infoBean.result
+            if (infoList.size > 0) {
+                allList.addAll(infoList)
+            } else {
+                Toast.makeText(context, "没有更多了", Toast.LENGTH_LONG).show()
+                isRefresh = true
+
+            }
+            informationAdapter!!.setInfoResult(allList)
+            if (!informationAdapter!!.hasObservers()) {
+                if (isRefresh) {
+                    xrecycler_view.adapter = informationAdapter
+                    informationAdapter!!.refresh(allList)
+                    xrecycler_view.refreshComplete()
+                } else {
+                    if (informationAdapter != null) {
+                        informationAdapter!!.loadMore(allList)
+                        xrecycler_view.loadMoreComplete()
+                    }
+                }
+            } else {
+                informationAdapter!!.notifyDataSetChanged()
+            }
+
         }
 
     }

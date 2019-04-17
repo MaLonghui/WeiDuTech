@@ -6,7 +6,6 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +28,6 @@ import com.wd.tech.utils.NetWorkUtils.Companion.connectionReceiver
         if (NetWorkUtils.isNetworkAvailable(activity!!)) {
             initData()
         }
-
         return view
     }
 
