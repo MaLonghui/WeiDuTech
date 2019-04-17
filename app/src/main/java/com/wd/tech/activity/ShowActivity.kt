@@ -1,5 +1,8 @@
 package com.wd.tech.activity
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -15,9 +18,12 @@ import com.wd.tech.Fragment.MessageFragment
 import com.wd.tech.Fragment.MineFragment
 import com.wd.tech.R
 import kotlinx.android.synthetic.main.activity_show.*
+import kotlinx.android.synthetic.main.fragment_mine.*
 
 class ShowActivity : AppCompatActivity() {
-
+    var headPic:String?=null
+    var nickName:String?=null
+    var signature:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show)
@@ -64,6 +70,8 @@ class ShowActivity : AppCompatActivity() {
         })
 
     }
+
+
 
     private var firstTime: Long = 0
 

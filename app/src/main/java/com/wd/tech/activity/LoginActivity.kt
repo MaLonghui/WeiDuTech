@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_login.view.*
  * author:冯泽林{2019/4/12}
  * function:
  */
-class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>() ,Constanct.View{
+class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Constanct.View {
     var flag: Boolean = true
     override fun View(any: Any) {
         val loginBean = any as LoginBean
@@ -32,13 +32,16 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>() ,Const
             val sp = getSharedPreferences("config", Context.MODE_PRIVATE)
             val edit = sp.edit()
             edit.putString("userId", loginBean.result.userId.toString())
-            edit.putString("sessionId", loginBean.result.sessionId)
+            edit.putString("sessionId", loginBean.result.sessionId.toString())
             edit.putString("headPic", loginBean.result.headPic)
             edit.putString("nickName", loginBean.result.nickName)
+            edit.putString("signature", loginBean.result.signature)
             edit.commit()
-            if (loginBean.result != null)
+            if (loginBean.result != null) {
                 Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
-            finish()
+                finish()
+            }
+
         } else {
             Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
         }

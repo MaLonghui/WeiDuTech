@@ -1,25 +1,24 @@
 package com.wd.tech.bean
 
 /**
- * date:2019/4/12
- * author:冯泽林{2019/4/12}
+ * date:2019/4/16
+ * author:冯泽林{2019/4/16}
  * function:
  */
-data class LoginBean(
+data class IndividualBean(
     val message: String,
-    val result: LoginResult,
+    val result: Result,
     val status: String
 )
 
-data class LoginResult(
+data class Result(
     val headPic: String,
+    val integral: Int,
     val nickName: String,
     val phone: String,
-    val pwd: String,
-    val sessionId: String,
+    val sex: Int,
     val userId: Int,
     val userName: String,
-    val signature: String,
     val whetherFaceId: Int,
     val whetherVip: Int
 )

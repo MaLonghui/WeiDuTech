@@ -23,12 +23,16 @@ open class JumpActivityUtils {
                 activity.startActivity(Intent(activity, clazz),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
                 activity.finish()
                 dialogprogress.dismiss()
-                handler.postDelayed(object : Runnable {
+                /*handler.postDelayed(object : Runnable {
                     override fun run() {
                       //  activity.startActivity(Intent(activity, clazz),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
+                        activity.finish()
                         dialogprogress.dismiss()
-                    }
-                }, 650)
+//                handler.postDelayed(object : Runnable {
+//                    override fun run() {
+//
+//                    }
+//                }, 650)*/
             } else {
                 activity.startActivity(Intent(activity, NetActivity::class.java),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
                 activity.finish()

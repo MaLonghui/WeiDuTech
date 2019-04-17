@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.jcodecraeer.xrecyclerview.XRecyclerView
@@ -53,7 +51,6 @@ class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(),
         var sHeadMap = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
         var infoPrams = mapOf(Pair("plateId", plateId), Pair("page", page), Pair("count", count))
         mPresenter!!.getPresenter(Api.TECH_BANNER, nHeadMap, BannerBean::class.java, bannerPrams)
-
         if (userId.equals("") || sessionId.equals("")) {
             mPresenter!!.getPresenter(Api.TECH_INFOR, nHeadMap, InfoBean::class.java, infoPrams)
         } else {
@@ -82,6 +79,7 @@ class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(),
                         xrecycler_view.loadMoreComplete()
                     }
                 }, 2500)
+
 
             }
 
@@ -153,8 +151,5 @@ class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(),
             }
 
         }
-
     }
-
-
 }

@@ -134,19 +134,26 @@
                 leon:leftText="我的关注" />
 
             <com.leon.lib.settingview.LSettingItem
+                android:id="@+id/item_card"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_50"
                 leon:leftIcon="@mipmap/my_icon_card_n"
                 leon:leftText="我的帖子" />
-
-
             <com.leon.lib.settingview.LSettingItem
+                android:id="@+id/item_notify"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                leon:leftIcon="@mipmap/my_icon_notify_n"
+                leon:leftText="我的通知" />
+            <com.leon.lib.settingview.LSettingItem
+                android:id="@+id/item_integral"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_50"
                 leon:leftIcon="@mipmap/my_icon_notice_n"
                 leon:leftText="我的积分" />
 
             <com.leon.lib.settingview.LSettingItem
+                android:id="@+id/item_task"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_50"
                 leon:leftIcon="@mipmap/my_icon_task_n"
@@ -159,8 +166,5 @@
                 leon:leftIcon="@mipmap/my_icon_setting_n"
                 leon:leftText="设置" />
         </LinearLayout>
-
-
     </LinearLayout>
-
 </RelativeLayout>

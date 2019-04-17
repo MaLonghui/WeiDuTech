@@ -14,27 +14,29 @@ import com.wd.tech.R
  * author:冯泽林{2019/4/15}
  * function:
  */
-class CommunityFileAdapter(context: Context) : RecyclerView.Adapter<CommunityFileAdapter.ViewHolder>() {
+class CommunityFileAdapter(context: Context,list:List<String>) : RecyclerView.Adapter<CommunityFileAdapter.ViewHolder>() {
     var context:Context ?=null
     var list:List<String> ?=null
 
+    init {
+        this.context=context
+        this.list=list
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         return ViewHolder(View.inflate(context, R.layout.item_filecommunity,null))
     }
 
     override fun getItemCount(): Int {
-        return list!!.size
+        if(list!!.size>0&&list!=null){
+            return list!!.size
+        }
+        return 0
     }
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0.image_nicai.setImageURI(list!![p1])
     }
-
-    fun setNiCai(split: MutableList<String>) {
-        list=split
-        notifyDataSetChanged()
-    }
-
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var image_nicai:SimpleDraweeView = itemView.findViewById(R.id.image_nicai)

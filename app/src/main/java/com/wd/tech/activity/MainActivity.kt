@@ -6,9 +6,6 @@ import android.os.Bundle
 import android.os.Looper
 import android.support.v7.app.AppCompatActivity
 import com.wd.tech.R
-import com.wd.tech.base.BaseActivity
-import com.wd.tech.mvp.Constanct
-import com.wd.tech.mvp.Presenter
 import com.wd.tech.utils.JumpActivityUtils
 import io.reactivex.Flowable
 import java.util.concurrent.TimeUnit
