@@ -39,7 +39,7 @@ class Presenter : BasePresenter<Constanct.View>(), Constanct.Presenter {
 
     override fun putPresenter(url: String, headerMap: Map<String, Any>, clazz: Class<*>, parms: Map<String, Any>) {
         val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)
-        apiService.post(url, headerMap, parms)
+        apiService.put(url, headerMap, parms)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
@@ -52,7 +52,7 @@ class Presenter : BasePresenter<Constanct.View>(), Constanct.Presenter {
 
     override fun deletePresenter(url: String, headerMap: Map<String, Any>, clazz: Class<*>, parms: Map<String, Any>) {
         val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)
-        apiService.post(url, headerMap, parms)
+        apiService.delete(url, headerMap, parms)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {

@@ -24,8 +24,12 @@ class Api {
         var INFO_TITLE = "information/v1/findInformationByTitle"
         //6.资讯点赞
         var INFO_GREAT = "information/verify/v1/addGreatRecord"
+        //7. 取消点赞
+        var INFO_CANCEL_GREAT="information/verify/v1/cancelGreat"
         //14.添加收藏
         var INFO_COLLECT = "user/verify/v1/addCollection"
+        //15.取消收藏（支持批量操作）
+        var INFO_CANCEl_COLLECT ="user/verify/v1/cancelCollection"
 
     }
 }

@@ -21,24 +21,23 @@ class InfoItemAdapter(context: Context) : RecyclerView.Adapter<InfoItemAdapter.V
     var context: Context? = null
     var infoList: MutableList<InfoResult>? = null
     var listener:(Int)->Unit = {  }
-    var collect:(Int)->Unit = {}
-
-
+    private lateinit var collectListener:(Int,Int)->Unit
+    //点击收藏
+    fun setCollectListener(collectListener:(Int,Int)->Unit){
+        this.collectListener = collectListener
+    }
     init {
         this.context = context
         infoList = ArrayList<InfoResult>()
-
     }
 
     fun setInfoItemResult(infoList: MutableList<InfoResult>) {
         this.infoList = infoList
         notifyDataSetChanged()
     }
+    //条目点击
     fun setItemClickListener(id :(Int)->Unit){
         this.listener = id
-    }
-    fun setCollectClickListener(collect:(Int)->Unit){
-        this.collect = collect
     }
 
     //刷新
@@ -75,12 +74,7 @@ class InfoItemAdapter(context: Context) : RecyclerView.Adapter<InfoItemAdapter.V
             }
             //点击收藏
             holder.itemView.info_collect.setOnClickListener {
-                if(infoList!![i].collection == 1){//取消收藏
-                    collect.invoke(infoList!![i].id)
-                }else if(infoList!![i].collection == 2){//收藏
-                    collect.invoke(infoList!![i].id)
-                }
-
+                collectListener.invoke(infoList!![i].id,infoList!![i].collection)
             }
             if(infoList!![i].whetherPay == 1){
                 holder.itemView.info_pay_img.visibility = View.VISIBLE
@@ -107,7 +101,6 @@ class InfoItemAdapter(context: Context) : RecyclerView.Adapter<InfoItemAdapter.V
             }else if(infoList!![i].whetherAdvertising == 1){
                 listener(infoList!![i].infoAdvertisingVo.id)
             }
-
         }
     }
 

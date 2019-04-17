@@ -14,6 +14,8 @@ class InfoPlateAdapter(context: Context) : RecyclerView.Adapter<InfoPlateAdapter
     var context: Context? = null
     var plateList: List<InfoPlateResult>? = null
     private lateinit var listener :(Int,String)->Unit
+
+    //条目点击
     fun setItemListener(listener: (Int,String) -> Unit){
         this.listener = listener
     }
@@ -21,6 +23,7 @@ class InfoPlateAdapter(context: Context) : RecyclerView.Adapter<InfoPlateAdapter
         this.context = context
         plateList = ArrayList()
     }
+
 
     fun setPlaList(plateList: List<InfoPlateResult>) {
         this.plateList = plateList
@@ -43,6 +46,7 @@ class InfoPlateAdapter(context: Context) : RecyclerView.Adapter<InfoPlateAdapter
         holder.itemView.setOnClickListener {
             listener.invoke(plateList!![i].id,plateList!![i].name)
         }
+
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
