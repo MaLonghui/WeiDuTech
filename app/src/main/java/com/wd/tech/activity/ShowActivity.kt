@@ -19,6 +19,7 @@ import com.wd.tech.Fragment.MineFragment
 import com.wd.tech.R
 import kotlinx.android.synthetic.main.activity_show.*
 import kotlinx.android.synthetic.main.fragment_mine.*
+import org.greenrobot.eventbus.EventBus
 
 class ShowActivity : AppCompatActivity() {
     var headPic:String?=null

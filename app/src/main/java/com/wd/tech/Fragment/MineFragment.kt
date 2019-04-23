@@ -17,8 +17,6 @@ import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Constanct.View {
 
-
-
     override fun onResume() {
         super.onResume()
         val sp = activity!!.getSharedPreferences("config", Context.MODE_PRIVATE)
@@ -57,11 +55,11 @@ class MineFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Consta
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val pf: SharedPreferences = activity!!.getSharedPreferences("config", Context.MODE_PRIVATE)
-        userId = pf.getString("userId", "")
-        sessionId = pf.getString("sessionId", "")
-        headPic = pf.getString("headPic", "")
-        nickName = pf.getString("nickName", "")
+        pf = activity!!.getSharedPreferences("config", Context.MODE_PRIVATE)
+        userId = pf!!.getString("userId", "")
+        sessionId = pf!!.getString("sessionId", "")
+        headPic = pf!!.getString("headPic", "")
+        nickName = pf!!.getString("nickName", "")
 //        头像和名字
         my_icon_simple.setImageURI(headPic)
         text_name.text = nickName
@@ -98,9 +96,8 @@ class MineFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Consta
         }
     }
 
-
-
     override fun initData() {
+
     }
 
 

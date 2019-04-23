@@ -64,13 +64,14 @@
     <LinearLayout
         android:id="@+id/search_no_data"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="gone"
-        android:layout_height="match_parent">
+        android:visibility="gone">
+
         <ImageView
             android:layout_width="@dimen/dp_110"
-            android:src="@mipmap/power_pay"
-            android:layout_height="@dimen/dp_110" />
+            android:layout_height="@dimen/dp_110"
+            android:src="@mipmap/power_pay" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.wd.tech">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_APN_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".app.MyApp"
@@ -13,17 +20,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoTitle_FullScreen">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ShowActivity"
-            android:theme="@style/AppTheme.NoTitle_FullScreen"/>
+        <activity android:name=".activity.ShowActivity" />
         <activity android:name=".activity.MyCollectActivity" />
         <activity android:name=".activity.InfoDetailsActivity" />
         <activity android:name=".activity.NetActivity" />
@@ -34,11 +38,17 @@
         <activity android:name=".activity.BannerDetailsActivity" />
         <activity android:name=".activity.InfoAllPlateActivity" />
         <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.PlateDetailsActivity"></activity>
+        <activity android:name=".activity.PlateDetailsActivity" />
         <activity android:name=".activity.FollowActivity" />
         <activity android:name=".activity.ChangePasswordActivity" />
         <activity android:name=".activity.NextActivity" />
-        <activity android:name=".activity.CardActivity"></activity>
+        <activity android:name=".activity.CardActivity" />
+        <activity android:name=".activity.CommunityReleaseActivity" />
+        <activity android:name=".activity.CommunityListActivity" />
+        <activity android:name=".activity.IntegralActivity" />
+        <activity android:name=".activity.BuyVipActivity" />
+        <activity android:name=".wxapi.WXEntryActivity" />
+        <activity android:name=".activity.FindUserActivity"></activity>
     </application>
 
 </manifest>

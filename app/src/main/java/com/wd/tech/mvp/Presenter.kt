@@ -7,9 +7,15 @@ import com.wd.tech.utils.RetrofitManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 import io.reactivex.schedulers.Schedulers
+import java.io.File
 
 
 class Presenter : BasePresenter<Constanct.View>(), Constanct.Presenter {
+    override fun imgsPostPresenter(uri: String, headerMap: Map<String, Any>, parms: Map<String, Any>, file: File, clazz: Class<*>) {
+        val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)
+       // apiService.releasePost(uri,headerMap,parms,file)
+    }
+
     override fun getPresenter(url: String, headerMap: Map<String, Any>, clazz: Class<*>, parms: Map<String, Any>) {
         val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)
         apiService.get(url, headerMap, parms)

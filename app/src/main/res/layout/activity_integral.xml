@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.IntegralActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_80"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/dp_2">
+
+            <ImageView
+                android:id="@+id/integral_back"
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:src="@mipmap/common_icon_back_n" />
+
+            <TextView
+                android:id="@+id/integral_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="积分兑换"
+                android:textColor="#000000"
+                android:textSize="@dimen/sp_20" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:padding="@dimen/dp_10">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/integral_simpleview"
+                    android:layout_width="@dimen/dp_140"
+                    android:layout_height="@dimen/dp_92"
+                    android:layout_marginRight="@dimen/dp_10"
+                    app:progressBarAutoRotateInterval="3000"
+                    app:progressBarImage="@drawable/img_loading"
+                    app:roundAsCircle="false"
+                    app:roundedCornerRadius="@dimen/dp_8" />
+
+                <TextView
+                    android:id="@+id/integral_summary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/integral_simpleview"
+                    android:layout_toRightOf="@id/integral_simpleview"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="aaaaa"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/integral_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/integral_summary"
+                    android:layout_toRightOf="@id/integral_simpleview"
+                    android:maxLines="2"
+                    android:text="bbbbb"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/sp_12" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/integral_title"
+                    android:layout_marginTop="@dimen/dp_14"
+                    android:layout_toRightOf="@id/integral_simpleview">
+
+                    <TextView
+                        android:id="@+id/integral_source"
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="bbbbb"
+                        android:textColor="#999999"
+                        android:textSize="@dimen/sp_10" />
+
+                    <TextView
+                        android:id="@+id/integral_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/integral_source"
+                        android:layout_marginTop="@dimen/dp_2"
+                        android:singleLine="true"
+                        android:text="bbbbb"
+                        android:textColor="#999999"
+                        android:textSize="@dimen/sp_10" />
+
+                    <ImageView
+                        android:id="@+id/integral_share"
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_11"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_6"
+                        android:layout_toLeftOf="@id/integral_share_num"
+                        android:src="@mipmap/common_icon_share_n" />
+
+                    <TextView
+                        android:id="@+id/integral_share_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="109"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/sp_10" />
+
+                    <TextView
+                        android:id="@+id/integral_collect_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_18"
+                        android:layout_toLeftOf="@id/integral_share_num"
+                        android:text="359"
+                        android:textColor="#666666"
+                        android:textSize="@dimen/sp_10" />
+
+                    <ImageView
+                        android:id="@+id/integral_collect"
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_11"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_6"
+                        android:layout_toLeftOf="@id/integral_collect_num"
+                        android:src="@mipmap/common_icon_collect_n" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_4"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:text="所需积分："
+                android:textColor="#666666"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:id="@+id/need_integral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="10"
+                android:textColor="#ff5757"
+                android:textSize="@dimen/sp_14" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_1"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:text="我的积分："
+                android:textColor="#666666"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:id="@+id/my_integral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="10"
+                android:textColor="#ff5757"
+                android:textSize="@dimen/sp_14" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_dui"
+        android:layout_width="@dimen/dp_336"
+        android:layout_height="@dimen/dp_40"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:background="@drawable/integral_btn_shape"
+        android:text="立即兑换"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/sp_20" />
+
+
+</RelativeLayout>

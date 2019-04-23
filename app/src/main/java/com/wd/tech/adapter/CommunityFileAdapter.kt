@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.wd.tech.R
+import org.greenrobot.eventbus.EventBus
 
 /**
  * date:2019/4/15

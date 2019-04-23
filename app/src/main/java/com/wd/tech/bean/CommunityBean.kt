@@ -13,7 +13,7 @@ data class Community(
 
 data class CommunityBean(
         val comment: Int,
-        val communityCommentVoList: List<Any>,
+        val communityCommentVoList: List<CommunityCommentVoList>,
         val content: String,
         val `file`: String,
         val headPic: String,
@@ -24,6 +24,12 @@ data class CommunityBean(
         val signature: String,
         val userId: Int,
         val whetherFollow: Int,
-        var whetherGreat: Int,
+        val whetherGreat: Int,
+        var great:Int,
         val whetherVip: Int
+)
+data class CommunityCommentVoList(
+        val userId: String,
+        val nickName:String,
+        val content :String
 )

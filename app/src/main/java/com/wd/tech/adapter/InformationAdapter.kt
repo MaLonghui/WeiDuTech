@@ -32,7 +32,11 @@ class InformationAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
 
     var context:Context ?=null
     var bannerList:List<BannerResult> ?= null
-    var infoList:MutableList<InfoResult>? = null
+    var infoList:List<InfoResult>? = null
+    private lateinit var collectListener : (Int,Int)->Unit
+    fun setCollectClick(collectListener : (Int,Int)->Unit){
+        this.collectListener = collectListener
+    }
     val TYPE_ONE = 0
     val TYPE_TWO = 1
     init {
@@ -45,11 +49,11 @@ class InformationAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
         this.bannerList = bannerList
         notifyDataSetChanged()
     }
-    fun setInfoResult(infoList:MutableList<InfoResult>) {
+    fun setInfoResult(infoList:List<InfoResult>) {
         this.infoList = infoList
         notifyDataSetChanged()
     }
-    //刷新
+    /*//刷新
     fun refresh(temList:MutableList<InfoResult>){
         this.infoList!!.clear()
         this.infoList!!.addAll(temList)
@@ -58,7 +62,7 @@ class InformationAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
     fun loadMore(list:MutableList<InfoResult>){
         this.infoList!!.addAll(list)
         notifyDataSetChanged()
-    }
+    }*/
 
 
     override fun getItemViewType(position: Int): Int {
@@ -124,6 +128,10 @@ class InformationAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
             infoItemAdapter.setItemClickListener {
                 var prams : HashMap<String,Any> = hashMapOf(Pair("id",it))
                 JumpActivityUtils.skipValueActivity(context as Activity,InfoDetailsActivity::class.java,prams)
+            }
+            //收藏
+            infoItemAdapter.setCollectListener { id, collect ->
+                collectListener.invoke(id,collect)
             }
         }
     }

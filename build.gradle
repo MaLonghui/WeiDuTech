@@ -21,6 +21,11 @@ allprojects {
         jcenter()
         //xbanner
         maven { url 'https://jitpack.io' }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        //集成支付宝支付
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 

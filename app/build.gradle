@@ -14,6 +14,15 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    //微信获取code值
+    signingConfigs {
+        debug {
+            storeFile file('tech.keystore')
+            keyAlias "tech"
+            storePassword "123456"
+            keyPassword "123456"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -44,7 +53,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     //AndroidSchedulers
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
     //fresco
     implementation 'com.facebook.fresco:fresco:1.12.0'
     //底部导航
@@ -58,11 +67,27 @@ dependencies {
     //XBanner
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'com.github.xiaohaibin:XBanner:1.6.1'
-//第三方集成 时间，城市，男女
+    //第三方集成 时间，城市，男女
     implementation 'com.airsaid.library:pickerview:1.0.3'
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    //微信登录
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    //依赖，name里的内容和导入libs下的包一样,集成支付宝支付
+    implementation(name: 'alipaySdk-15.5.9-20181123210657-noUtdid', ext: 'aar')
+    implementation 'me.imid.swipebacklayout.lib:library:1.0.0'
+    //u盟统计
+    implementation 'com.umeng.umsdk:analytics:7.5.4'
+    implementation 'com.umeng.umsdk:common:1.5.4'
+    implementation project(':library')
+    //ExpandableTextView
+    implementation 'com.github.MZCretin:ExpandableTextView:v1.5.3'
 }
-
+repositories {
+    mavenCentral()
+}
 configurations.all {
+
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested
         if (requested.group == 'com.android.support') {

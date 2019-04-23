@@ -1,9 +1,17 @@
 package com.wd.tech.activity
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.ImageView
+import android.widget.PopupWindow
+import android.widget.TextView
 import android.widget.Toast
 import com.wd.tech.R
 import com.wd.tech.adapter.InfoCommentAdapter
@@ -15,24 +23,62 @@ import com.wd.tech.bean.InfoDetailsBean
 import com.wd.tech.bean.UserPublicBean
 import com.wd.tech.mvp.Constanct
 import com.wd.tech.mvp.Presenter
+import com.wd.tech.utils.JumpActivityUtils
 import kotlinx.android.synthetic.main.activity_info_details.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 /**
  * 资讯详情页
  */
-class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Constanct.View {
+class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Constanct.View, View.OnClickListener {
+    override fun onClick(v: View?) {
+        when(v!!.id){
+            R.id.text_btn_ji->{//积分兑换
+                var id = intent.getIntExtra("id", 1)
+                var infoId: HashMap<String, Any> = hashMapOf(Pair("id", id))
+                JumpActivityUtils.skipValueActivity(this,IntegralActivity::class.java, infoId)
+                closePopupWindow()
+            }
+            R.id.text_btn_vip->{
+                JumpActivityUtils.skipAnotherActivity(this,BuyVipActivity::class.java)
+            }
+            R.id.pay_qu->{
+                closePopupWindow()
+            }
+        }
+    }
 
     var page: Int = 1
     var count: Int = 5
-
+    var pop: PopupWindow? = null
     override fun getLayoutId(): Int {
         return R.layout.activity_info_details
     }
 
     override fun initPresenter(): Constanct.Presenter {
         return Presenter()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        var id = intent.getIntExtra("id", 1)
+        var sp = getSharedPreferences("config", Context.MODE_PRIVATE)
+        var userId = sp.getString("userId", "")
+        var sessionId = sp.getString("sessionId", "")
+        var infoId: Map<String, Any> = mapOf(Pair("infoId", id))
+        var headMap: Map<String, Any> = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
+        var prams: Map<String, Any> = mapOf(Pair("id", id))
+        var commentPrams: Map<String, Any> = mapOf(Pair("infoId", id), Pair("page", page), Pair("count", count))
+        if (userId.equals("") || sessionId.equals("")) {
+            var nHeadMap: Map<String, Any> = mapOf()
+            mPresenter!!.getPresenter(Api.INFO_DETAILS, nHeadMap, InfoDetailsBean::class.java, prams)
+            mPresenter!!.getPresenter(Api.INFO_DETAILS_COMMENT, nHeadMap, InfoCommentListBean::class.java, commentPrams)
+        } else {
+            mPresenter!!.getPresenter(Api.INFO_DETAILS, headMap, InfoDetailsBean::class.java, prams)
+            mPresenter!!.getPresenter(Api.INFO_DETAILS_COMMENT, headMap, InfoCommentListBean::class.java, commentPrams)
+        }
     }
 
     override fun initData() {
@@ -55,6 +101,40 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
         info_details_back.setOnClickListener {
             onBackPressed()
         }
+
+        //付费
+        no_power_btn.setOnClickListener {
+            showPayPop()
+        }
+    }
+    private fun closePopupWindow() {
+        if (pop != null && pop!!.isShowing()) {
+            pop!!.dismiss()
+            pop = null
+        }
+    }
+    private fun showPayPop() {
+        val view = LayoutInflater.from(this).inflate(R.layout.pay_pop_layout, null)
+        val btn_ji = view.findViewById<TextView>(R.id.text_btn_ji)
+        val btn_vip = view.findViewById<TextView>(R.id.text_btn_vip)
+        val pay_qu = view.findViewById<ImageView>(R.id.pay_qu)
+        pop = PopupWindow(view, -1, -2);
+        pop!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        pop!!.isOutsideTouchable = true
+        pop!!.isFocusable = true
+        val lp = window.attributes
+        lp.alpha = 0.5f
+        window.attributes = lp
+        pop!!.setOnDismissListener {
+            val lp = window.attributes
+            lp.alpha = 1f
+            window.attributes = lp
+        }
+        pop!!.animationStyle = R.style.main_menu_photo_anim
+        pop!!.showAtLocation(window.decorView, Gravity.BOTTOM, 0, 0)
+        btn_ji.setOnClickListener(this)
+        btn_vip.setOnClickListener(this)
+        pay_qu.setOnClickListener(this)
 
     }
 
@@ -115,7 +195,6 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
                         //收藏
                         mPresenter!!.postPresenter(Api.INFO_COLLECT, headMap, UserPublicBean::class.java, infoId)
                     }
-
                 }
             }
 
@@ -174,8 +253,7 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
                 var prams: Map<String, Any> = mapOf(Pair("id", id))
                 mPresenter!!.getPresenter(Api.INFO_DETAILS, headMap, InfoDetailsBean::class.java, prams)
             }
-
-
         }
     }
+
 }
