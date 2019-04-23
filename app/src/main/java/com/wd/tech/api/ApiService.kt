@@ -1,6 +1,7 @@
 
 package com.wd.tech.api
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.http.*
 
@@ -18,5 +19,10 @@ interface ApiService {
 
     @DELETE
     fun delete(@Url url: String, @HeaderMap headerMap: Map<String, Any>, @QueryMap parms: Map<String, Any>):Observable<ResponseBody>
+
+    @POST
+    @Multipart
+    fun headicon(@Url url:String, @HeaderMap headMap:Map<String,String>,@Part image:MultipartBody.Part):Observable<ResponseBody>
+
 
 }

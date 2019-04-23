@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_marginBottom="@dimen/dp_20"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/search_text_re"
+        android:textColor="#666666"
+        android:textSize="@dimen/sp_16"
+        android:text="asda"
+        android:gravity="center"
+        android:background="@drawable/search_re_text"
+        android:layout_width="wrap_content"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:layout_height="@dimen/dp_30" />
+
+
+</LinearLayout>

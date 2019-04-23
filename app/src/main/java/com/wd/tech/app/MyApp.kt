@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 import com.facebook.drawee.backends.pipeline.Fresco
 
 class MyApp : Application() {
-
     private var context: Context? = null
     override fun onCreate() {
         super.onCreate()

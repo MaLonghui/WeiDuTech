@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.wd.tech.R
+import com.wd.tech.activity.BannerDetailsActivity
 import com.wd.tech.activity.InfoDetailsActivity
 import com.wd.tech.bean.BannerBean
 import com.wd.tech.bean.BannerResult
@@ -24,12 +25,14 @@ import kotlinx.android.synthetic.main.banner_item_layout.view.*
 import kotlinx.android.synthetic.main.fragment_information.*
 import kotlinx.android.synthetic.main.information_item_layout.view.*
 
-
+/**
+ * 资讯多条目展示
+ */
 class InformationAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var context:Context ?=null
     var bannerList:List<BannerResult> ?= null
-    var infoList:List<InfoResult>? = null
+    var infoList:MutableList<InfoResult>? = null
     val TYPE_ONE = 0
     val TYPE_TWO = 1
     init {
@@ -42,8 +45,18 @@ class InformationAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
         this.bannerList = bannerList
         notifyDataSetChanged()
     }
-    fun setInfoResult(infoList:List<InfoResult>) {
+    fun setInfoResult(infoList:MutableList<InfoResult>) {
         this.infoList = infoList
+        notifyDataSetChanged()
+    }
+    //刷新
+    fun refresh(temList:MutableList<InfoResult>){
+        this.infoList!!.clear()
+        this.infoList!!.addAll(temList)
+    }
+    //加载
+    fun loadMore(list:MutableList<InfoResult>){
+        this.infoList!!.addAll(list)
         notifyDataSetChanged()
     }
 
@@ -97,7 +110,8 @@ class InformationAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
                 }
             })
             holder.itemView.banner.setOnItemClickListener { banner, model, view, position ->
-                Toast.makeText(context, bannerList!![position].title,Toast.LENGTH_LONG).show()
+                var bannerPrams : HashMap<String,Any> = hashMapOf(Pair("url",bannerList!![position].jumpUrl))
+                JumpActivityUtils.skipValueActivity(context as Activity,BannerDetailsActivity::class.java,bannerPrams)
             }
         }else if(holder is ItemTwoViewHolder){
             val layoutManager = LinearLayoutManager(context)
@@ -112,8 +126,6 @@ class InformationAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
                 JumpActivityUtils.skipValueActivity(context as Activity,InfoDetailsActivity::class.java,prams)
             }
         }
-
-
     }
     class ItemOneViewHolder(inflate: View) : RecyclerView.ViewHolder(inflate) {
 

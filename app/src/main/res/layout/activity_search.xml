@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_12"
+    android:paddingRight="@dimen/dp_12"
+    tools:context=".activity.SearchActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/info_search_edit"
+            android:layout_width="@dimen/dp_285"
+            android:layout_height="@dimen/dp_34"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/search_shape"
+            android:drawableLeft="@mipmap/common_nav_btn_search_n"
+            android:drawablePadding="@dimen/dp_12"
+            android:hint="搜索文章"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="@dimen/dp_17"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/info_search_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:text="取消"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_18" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/search_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="热搜词"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_12" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/search_recycler_re"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/search_no_data"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="@dimen/dp_110"
+            android:src="@mipmap/power_pay"
+            android:layout_height="@dimen/dp_110" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_recycler_sou"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:visibility="gone"></android.support.v7.widget.RecyclerView>
+
+
+</LinearLayout>

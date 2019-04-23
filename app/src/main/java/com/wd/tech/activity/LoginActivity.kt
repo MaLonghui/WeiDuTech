@@ -39,9 +39,7 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>() ,Const
             edit.commit()
             if (loginBean.result != null)
                 Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
-            JumpActivityUtils.skipAnotherActivity(this@LoginActivity,ShowActivity::class.java)
-//            var it:Intent= Intent(this@LoginActivity,ShowActivity::class.java)
-//            startActivity(it)
+            finish()
         } else {
             Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
         }

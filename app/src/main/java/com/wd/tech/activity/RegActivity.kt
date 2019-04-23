@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_reg.*
  * date:2019/4/12
  * author:冯泽林{2019/4/12}
  * function:
+ * 注册
  */
 class RegActivity : BaseActivity<Constanct.View,Constanct.Presenter>() ,Constanct.View{
     override fun View(any: Any) {

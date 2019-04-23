@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import com.wd.tech.R
 import com.wd.tech.adapter.InfoCommentAdapter
 import com.wd.tech.bean.InfoCommentListBean
@@ -11,6 +12,7 @@ import com.wd.tech.adapter.InfoTuiJianAdapter
 import com.wd.tech.api.Api
 import com.wd.tech.base.BaseActivity
 import com.wd.tech.bean.InfoDetailsBean
+import com.wd.tech.bean.UserPublicBean
 import com.wd.tech.mvp.Constanct
 import com.wd.tech.mvp.Presenter
 import kotlinx.android.synthetic.main.activity_info_details.*
@@ -24,6 +26,7 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
 
     var page: Int = 1
     var count: Int = 5
+
     override fun getLayoutId(): Int {
         return R.layout.activity_info_details
     }
@@ -33,10 +36,11 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
     }
 
     override fun initData() {
-        val id = intent.getIntExtra("id", 1)
-        val sp = getSharedPreferences("config", Context.MODE_PRIVATE)
-        val userId = sp.getString("userId", "")
-        val sessionId = sp.getString("sessionId", "")
+        var id = intent.getIntExtra("id", 1)
+        var sp = getSharedPreferences("config", Context.MODE_PRIVATE)
+        var userId = sp.getString("userId", "")
+        var sessionId = sp.getString("sessionId", "")
+        var infoId: Map<String, Any> = mapOf(Pair("infoId", id))
         var headMap: Map<String, Any> = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
         var prams: Map<String, Any> = mapOf(Pair("id", id))
         var commentPrams: Map<String, Any> = mapOf(Pair("infoId", id), Pair("page", page), Pair("count", count))
@@ -51,10 +55,17 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
         info_details_back.setOnClickListener {
             onBackPressed()
         }
+
     }
 
     override fun View(any: Any) {
 
+        var id = intent.getIntExtra("id", 1)
+        var sp = getSharedPreferences("config", Context.MODE_PRIVATE)
+        var userId = sp.getString("userId", "")
+        var sessionId = sp.getString("sessionId", "")
+        var infoId: Map<String, Any> = mapOf(Pair("infoId", id))
+        var headMap: Map<String, Any> = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
         if (any is InfoDetailsBean) {
             var infoDetailsBean = any
             val result = infoDetailsBean.result
@@ -73,6 +84,39 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
                 info_details_collect_icon.setImageResource(R.mipmap.common_icon_collect_s)
             } else {
                 info_details_collect_icon.setImageResource(R.mipmap.common_icon_collect_n)
+            }
+
+            //点赞
+            info_details_prise_icon.setOnClickListener {
+
+                if (userId.equals("") || sessionId.equals("")) {
+                    Toast.makeText(this, "还没有登录哦", Toast.LENGTH_LONG).show()
+                } else {
+                    if (result.whetherGreat == 2) {
+                        //点赞
+                        mPresenter!!.postPresenter(Api.INFO_GREAT, headMap, UserPublicBean::class.java, infoId)
+                    } else if (result.whetherGreat == 1) {
+                        //取消点赞
+                        mPresenter!!.deletePresenter(Api.INFO_CANCEL_GREAT, headMap, UserPublicBean::class.java, infoId)
+                    }
+
+                }
+            }
+            //收藏
+            info_details_collect_icon.setOnClickListener {
+
+                if (userId.equals("") || sessionId.equals("")) {
+                    Toast.makeText(this, "还没有登录哦", Toast.LENGTH_LONG).show()
+                } else {
+                    if (result.whetherCollection == 1) {
+                        //取消收藏
+                        mPresenter!!.deletePresenter(Api.INFO_CANCEl_COLLECT, headMap, UserPublicBean::class.java, infoId)
+                    } else if (result.whetherCollection == 2) {
+                        //收藏
+                        mPresenter!!.postPresenter(Api.INFO_COLLECT, headMap, UserPublicBean::class.java, infoId)
+                    }
+
+                }
             }
 
 
@@ -118,11 +162,20 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
                 info_no_comment.visibility = VISIBLE
                 info_details_pl_recycler.visibility = GONE
             }
+        } else if (any is UserPublicBean) {
+            var publicBean: UserPublicBean = any
+            Toast.makeText(this, publicBean.message, Toast.LENGTH_LONG).show()
+            if (publicBean.status.equals("0000")) {
+                var id = intent.getIntExtra("id", 1)
+                var sp = getSharedPreferences("config", Context.MODE_PRIVATE)
+                var userId = sp.getString("userId", "")
+                var sessionId = sp.getString("sessionId", "")
+                var headMap: Map<String, Any> = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
+                var prams: Map<String, Any> = mapOf(Pair("id", id))
+                mPresenter!!.getPresenter(Api.INFO_DETAILS, headMap, InfoDetailsBean::class.java, prams)
+            }
+
 
         }
-
-
     }
-
-
 }

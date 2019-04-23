@@ -1,11 +1,12 @@
 package com.wd.tech.activity
 
 import android.os.Bundle
-import android.os.Looper
 import android.support.v7.app.AppCompatActivity
 import com.wd.tech.R
+import android.os.Looper
 import com.wd.tech.utils.JumpActivityUtils
 import io.reactivex.Flowable
+
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity(){
@@ -14,7 +15,6 @@ class MainActivity : AppCompatActivity(){
         setContentView(R.layout.activity_main)
         Flowable.intervalRange(0, 3, 0, 1, TimeUnit.SECONDS)
                 .doOnNext {
-
                 }
                 .doOnComplete {
                     Looper.prepare()

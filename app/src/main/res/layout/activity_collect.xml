@@ -4,7 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.CollectActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/view_style"
+        android:layout_margin="@dimen/dp_4"
+        android:layout_height="@dimen/dp_80">
+    <ImageView
+        android:id="@+id/back_setting"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:src="@mipmap/common_nav_btn_back_n"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24" />
+    <TextView
+        android:text="我的收藏"
+        android:layout_centerInParent="true"
+        android:textColor="#000000"
+        android:textSize="@dimen/sp_20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

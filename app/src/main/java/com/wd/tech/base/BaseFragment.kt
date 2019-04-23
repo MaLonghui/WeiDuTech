@@ -28,7 +28,6 @@ import com.wd.tech.utils.NetWorkUtils.Companion.connectionReceiver
         if (NetWorkUtils.isNetworkAvailable(activity!!)) {
             initData()
         }
-
         return view
     }
 

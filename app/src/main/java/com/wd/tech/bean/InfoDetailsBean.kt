@@ -24,7 +24,7 @@ data class InfoDetailsResult(
     var title: String,
     var whetherCollection: Int,
     var whetherGreat: Int,
-    var yuanCost: Int
+    var yuanCost: Double
 )
 
 data class Information(

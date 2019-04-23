@@ -44,19 +44,6 @@ class CommunityFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), C
         val mapone: Map<String, Int> = mapOf(Pair("page", page), Pair("count", count))
         mPresenter!!.getPresenter(Api.COMMUNITY, map, Community::class.java, mapone)
         recycler_community.adapter = adapter
-        adapter!!.setOnPriseClickListenter(object : CommunityAdapter.OnPriseClickListenter {
-            override fun onPriseClick(position: Int, b: Boolean) {
-                if (b) {
-                    val maptwo: Map<String, Int> = mapOf(Pair("communityId", position))
-                    mPresenter!!.postPresenter(Api.GIVEALIKE, map, GiveALikeBean::class.java, maptwo)
-                    adapter!!.notifyDataSetChanged()
-                } else {
-                    val maptwo: Map<String, Int> = mapOf(Pair("communityId", position))
-                    mPresenter!!.deletePresenter(Api.GIVEDELETE, map, CancelthethumbupBean::class.java, maptwo)
-                    adapter!!.notifyDataSetChanged()
-                }
-            }
-        })
         recycler_community.setLoadingListener(object : XRecyclerView.LoadingListener {
             override fun onLoadMore() {
 

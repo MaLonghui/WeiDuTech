@@ -8,12 +8,14 @@
 
     <RelativeLayout
         android:id="@+id/infor_relative"
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_80">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_marginBottom="@dimen/dp_2"
             android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
             android:layout_height="@dimen/dp_24">
             
            <ImageView

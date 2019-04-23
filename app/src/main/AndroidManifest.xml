@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".app.MyApp"
@@ -23,18 +25,25 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ShowActivity" />
+        <activity android:name=".activity.MyCollectActivity" />
+        <activity android:name=".activity.InfoDetailsActivity" />
         <activity android:name=".activity.NetActivity" />
         <activity android:name=".activity.RegActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.MyCollectActivity" />
         <activity android:name=".activity.CollectActivity" />
         <activity android:name=".activity.IndividualInformationActivity" />
-        <activity android:name=".activity.InfoDetailsActivity" />
         <activity android:name=".activity.FollowActivity" />
-        <activity android:name=".adapter.CollectAdapter" />
         <activity android:name=".activity.ChangePasswordActivity" />
         <activity android:name=".activity.NextActivity" />
-        <activity android:name=".activity.CardActivity"></activity>
+        <activity android:name=".activity.CardActivity" />
+        <activity android:name=".activity.BannerDetailsActivity" />
+        <activity android:name=".activity.InfoAllPlateActivity" />
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.PlateDetailsActivity" />
+        <activity android:name=".activity.NotifyActivity" />
+        <activity android:name=".activity.IntegralActivity" />
+        <activity android:name=".activity.TaskActivity" />
+        <activity android:name=".activity.SigninActivity"></activity>
     </application>
 
 </manifest>

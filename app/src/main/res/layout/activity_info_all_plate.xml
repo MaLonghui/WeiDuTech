@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingLeft="@dimen/dp_20"
+    android:paddingRight="@dimen/dp_20"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.InfoAllPlateActivity">
+    <TextView
+        android:text="选择兴趣分类"
+        android:textColor="#666666"
+        android:textSize="@dimen/sp_20"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="选择兴趣分类"
+        android:textColor="#999999"
+        android:textSize="@dimen/sp_12"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dp_30"
+        android:layout_height="wrap_content" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/info_plate_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
