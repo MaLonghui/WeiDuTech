@@ -1,13 +1,10 @@
 package com.wd.tech.activity
 
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.text.InputType
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.view.MotionEvent
 import android.widget.Toast
+import com.tencent.mm.opensdk.modelmsg.SendAuth
 import com.wd.tech.R
 import com.wd.tech.api.Api
 import com.wd.tech.base.BaseActivity
@@ -16,15 +13,15 @@ import com.wd.tech.mvp.Constanct
 import com.wd.tech.mvp.Presenter
 import com.wd.tech.utils.JumpActivityUtils
 import com.wd.tech.utils.RsaCoder
+import com.wd.tech.utils.WeiXinUtil
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.view.*
 
 /**
  * date:2019/4/12
  * author:冯泽林{2019/4/12}
  * function:
  */
-class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>() ,Constanct.View{
+class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Constanct.View {
     var flag: Boolean = true
     override fun View(any: Any) {
         val loginBean = any as LoginBean
@@ -40,9 +37,17 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>() ,Const
             if (loginBean.result != null)
                 Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
             finish()
+            edit.putString("signature", loginBean.result.signature)
+            edit.commit()
+            if (loginBean.result != null) {
+                Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
+                finish()
+            }
+
         } else {
             Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
         }
+
     }
 
     override fun getLayoutId(): Int {
@@ -78,6 +83,19 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>() ,Const
         text_reg.setOnClickListener {
             JumpActivityUtils.skipAnotherActivity(this@LoginActivity, RegActivity::class.java)
         }
+        image_wx.setOnClickListener {
+            if (!WeiXinUtil.success(this)) {
+                Toast.makeText(this, "请先安装应用", Toast.LENGTH_SHORT).show()
+            } else {
+                //  验证
+                val req = SendAuth.Req()
+                req.scope = "snsapi_userinfo"
+                req.state = "wechat_sdk_demo_test_neng"
+                WeiXinUtil.reg(this@LoginActivity)!!.sendReq(req)
+            }
+        }
+        iamge_face.setOnClickListener {
 
+        }
     }
 }

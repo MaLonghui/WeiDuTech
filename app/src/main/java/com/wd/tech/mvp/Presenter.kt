@@ -8,11 +8,12 @@ import com.wd.tech.utils.RetrofitManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
+import java.io.File
 
 class Presenter : BasePresenter<Constanct.View>(), Constanct.Presenter {
     override fun imagePost(uri: String, headmap: Map<String, String>, image: MultipartBody.Part) {
         val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)
-        apiService.headicon(uri,headmap, image)
+        apiService.headicon(uri, headmap, image)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
@@ -23,6 +24,10 @@ class Presenter : BasePresenter<Constanct.View>(), Constanct.Presenter {
                 }
     }
 
+    override fun imgsPostPresenter(uri: String, headerMap: Map<String, Any>, parms: Map<String, Any>, file: File, clazz: Class<*>) {
+        val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)
+        // apiService.releasePost(uri,headerMap,parms,file)
+    }
 
     override fun getPresenter(url: String, headerMap: Map<String, Any>, clazz: Class<*>, parms: Map<String, Any>) {
         val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)

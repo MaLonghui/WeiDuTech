@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_192"
+        android:background="@drawable/group">
+        <TextView
+            android:id="@+id/text_integral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/sp_36"
+            android:text="0"
+            android:layout_marginTop="@dimen/dp_60"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:id="@+id/text_keyong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_integral"
+            android:text="可用积分"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/sp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:id="@+id/text_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_keyong"
+            android:text="你已连续签到0天"
+            android:textSize="@dimen/sp_10"
+            android:textColor="#ffffff"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_10"
+            />
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_integral"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/padding"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_50">
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>
+

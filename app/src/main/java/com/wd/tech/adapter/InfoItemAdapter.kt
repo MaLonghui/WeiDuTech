@@ -7,10 +7,14 @@ import android.support.v7.widget.VectorEnabledTintResources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.wd.tech.R
+import com.wd.tech.api.Api
 import com.wd.tech.bean.InfoResult
+import com.wd.tech.bean.TaskBean
 import kotlinx.android.synthetic.main.fragment_information.view.*
 import kotlinx.android.synthetic.main.info_item_show.view.*
+import org.greenrobot.eventbus.EventBus
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,7 +23,7 @@ import java.util.*
  */
 class InfoItemAdapter(context: Context) : RecyclerView.Adapter<InfoItemAdapter.ViewHodder>() {
     var context: Context? = null
-    var infoList: MutableList<InfoResult>? = null
+    var infoList: List<InfoResult>? = null
     var listener:(Int)->Unit = {  }
     private lateinit var collectListener:(Int,Int)->Unit
     //点击收藏
@@ -31,7 +35,7 @@ class InfoItemAdapter(context: Context) : RecyclerView.Adapter<InfoItemAdapter.V
         infoList = ArrayList<InfoResult>()
     }
 
-    fun setInfoItemResult(infoList: MutableList<InfoResult>) {
+    fun setInfoItemResult(infoList: List<InfoResult>) {
         this.infoList = infoList
         notifyDataSetChanged()
     }
@@ -40,16 +44,6 @@ class InfoItemAdapter(context: Context) : RecyclerView.Adapter<InfoItemAdapter.V
         this.listener = id
     }
 
-    //刷新
-    fun refresh(temList:MutableList<InfoResult>){
-        this.infoList!!.clear()
-        this.infoList!!.addAll(temList)
-    }
-    //加载
-    fun loadMore(list:MutableList<InfoResult>){
-        this.infoList!!.addAll(list)
-        notifyDataSetChanged()
-    }
     override fun onCreateViewHolder(viewGroup: ViewGroup, p1: Int): ViewHodder {
         return ViewHodder(LayoutInflater.from(context).inflate(R.layout.info_item_show, viewGroup, false))
     }
@@ -67,14 +61,14 @@ class InfoItemAdapter(context: Context) : RecyclerView.Adapter<InfoItemAdapter.V
             holder.itemView.info_summary.text = infoList!![i].summary
             holder.itemView.info_title.text = infoList!![i].title
             holder.itemView.info_source.text = infoList!![i].source
-            if (infoList!![i].collection == 1){
+            if (infoList!![i].whetherCollection == 1){
                 holder.itemView.info_collect.setImageResource(R.mipmap.common_icon_collect_s)
             }else{
                 holder.itemView.info_collect.setImageResource(R.mipmap.common_icon_collect_n)
             }
             //点击收藏
             holder.itemView.info_collect.setOnClickListener {
-                collectListener.invoke(infoList!![i].id,infoList!![i].collection)
+                collectListener.invoke(infoList!![i].id,infoList!![i].whetherCollection)
             }
             if(infoList!![i].whetherPay == 1){
                 holder.itemView.info_pay_img.visibility = View.VISIBLE
@@ -86,6 +80,7 @@ class InfoItemAdapter(context: Context) : RecyclerView.Adapter<InfoItemAdapter.V
             val sdf = SimpleDateFormat("yyyy-MM-dd")
             val s = sdf.format(date)
             holder.itemView.info_time.text = s
+            EventBus.getDefault().post(infoList!![i].collection.toString())
             holder.itemView.info_collect_num.text = "${infoList!![i].collection}"
             holder.itemView.info_share_num.text = "${infoList!![i].share}"
         }else if(infoList!![i].whetherAdvertising == 1){
@@ -100,7 +95,7 @@ class InfoItemAdapter(context: Context) : RecyclerView.Adapter<InfoItemAdapter.V
                 listener(infoList!![i].id)
             }else if(infoList!![i].whetherAdvertising == 1){
                 listener(infoList!![i].infoAdvertisingVo.id)
-            }
+             }
         }
     }
 

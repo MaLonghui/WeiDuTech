@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context=".activity.CommunityListActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_34"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:background="#ffffff">
+
+            <ImageView
+                android:id="@+id/more_comm_back"
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:src="@mipmap/common_icon_back_n" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/f_simple_view"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
+                    app:progressBarAutoRotateInterval="3000"
+                    app:progressBarImage="@drawable/img_loading"
+                    app:roundAsCircle="true" />
+
+                <TextView
+                    android:id="@+id/f_text_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="sdadas"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/sp_18" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_4"
+            android:background="#d9d8d8" />
+
+        <TextView
+            android:id="@+id/comm_num"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_58"
+            android:background="#ffffff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_20"
+            android:text="sdfahf"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_16" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_2"
+            android:background="#f2f2f2" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/more_comm_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
+        android:background="#ffffff">
+
+        <EditText
+            android:id="@+id/more_edit"
+            android:layout_width="@dimen/dp_260"
+            android:layout_height="@dimen/dp_35"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:background="@drawable/comment_edit_shape"
+            android:hint="说点什么！见证当下"
+            android:paddingLeft="@dimen/dp_10" />
+
+        <TextView
+            android:id="@+id/more_send"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_toRightOf="@id/more_edit"
+            android:background="@drawable/reg_btn_shape"
+            android:gravity="center"
+            android:text="发送"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/sp_12" />
+
+    </RelativeLayout>
+
+</LinearLayout>

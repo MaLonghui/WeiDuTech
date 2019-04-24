@@ -112,7 +112,7 @@
             android:password="true"
             android:textColor="#ffffff"
             android:digits="0123456789qwertyuiopasdfghjklzxcvbnm,."
-            android:maxLength="5"
+            android:maxLength="6"
             android:singleLine="true"
             android:textColorHint="#ffffff" />
     </LinearLayout>

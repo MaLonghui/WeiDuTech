@@ -1,15 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff0"
+    android:orientation="vertical"
+    android:background="#f2f2f2"
     tools:context=".Fragment.MessageFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:layout_width="@dimen/dp_24"
+        android:layout_alignTop="@id/radio_group"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dp_12"
+        android:src="@mipmap/common_nav_btn_add_n"
+        android:layout_height="@dimen/dp_24" />
 
-</FrameLayout>
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="@dimen/dp_188"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radio_n_shape"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rb_msg"
+            android:button="@null"
+            android:text="消息"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:background="@drawable/radio_back_selsetor"
+            android:checked="true"
+            android:textSize="@dimen/sp_20"
+
+            android:layout_width="@dimen/dp_94"
+            android:layout_height="@dimen/dp_30" />
+        <RadioButton
+            android:id="@+id/rb_linkman"
+            android:button="@null"
+            android:text="联系人"
+            android:gravity="center"
+            android:background="@drawable/radio_back_selsetor"
+            android:textSize="@dimen/sp_20"
+            android:layout_width="@dimen/dp_94"
+            android:layout_height="@dimen/dp_30" />
+    </RadioGroup>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_below="@+id/radio_group"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
+</RelativeLayout>

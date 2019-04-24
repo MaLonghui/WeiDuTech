@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    >
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/head_image"
@@ -10,7 +11,7 @@
         android:layout_height="@dimen/dp_50"
         android:layout_marginLeft="@dimen/dp_12"
         android:layout_marginTop="@dimen/dp_30"
-        app:roundAsCircle="true"/>
+        app:roundAsCircle="true" />
 
     <TextView
         android:id="@+id/text_name"
@@ -28,76 +29,124 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_20"
-        android:layout_marginTop="@dimen/dp_32"
+        android:layout_marginTop="@dimen/dp_34"
         android:layout_toRightOf="@+id/text_name"
         android:text="3分钟时间"
         android:textColor="#999999"
         android:textSize="@dimen/dp_10" />
+    <TextView
+        android:id="@+id/text_signature"
+        android:layout_toRightOf="@+id/head_image"
+        android:layout_below="@id/text_name"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_14"
+        android:textColor="#999999"
+        android:textSize="@dimen/sp_10"
+        android:text="asdhflkashfa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/text_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:lines="3"
-        android:singleLine="true"
-        android:text="详情"
-        android:textColor="#666666"
-        android:textSize="@dimen/sp_10"
         android:layout_below="@+id/head_image"
         android:layout_marginLeft="@dimen/dp_12"
         android:layout_marginTop="@dimen/dp_10"
-        />
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="详情"
+        android:textColor="#666666"
+        android:textSize="@dimen/sp_10" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_image"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_150"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/text_details"
-        android:layout_marginTop="@dimen/dp_10"
-        ></android.support.v7.widget.RecyclerView>
+        android:layout_marginTop="@dimen/dp_10"></android.support.v7.widget.RecyclerView>
+
     <ImageView
         android:id="@+id/image_comment"
         android:layout_width="@dimen/dp_16"
         android:layout_height="@dimen/dp_16"
-        android:src="@mipmap/common_icon_comment_n"
-        android:layout_marginRight="@dimen/dp_100"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/recycler_image"
-        android:layout_marginTop="24dp"/>
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="@dimen/dp_100"
+        android:src="@mipmap/common_icon_comment_n" />
+
+    <RelativeLayout
+        android:id="@+id/comment_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_comment">
+
+        <ImageView
+            android:id="@+id/comment_img"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_125"
+            android:src="@drawable/comment" />
+
+        <TextView
+            android:id="@+id/comment_text_come"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:text="快来评论呀！！"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_16" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/comment_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_90"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"></android.support.v7.widget.RecyclerView>
+        <TextView
+            android:id="@+id/comment_text_more"
+            android:text="点击查看更多评论"
+            android:textColor="#22bdf5"
+            android:textSize="@dimen/sp_16"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_alignBottom="@+id/comment_img"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+
     <TextView
         android:id="@+id/text_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="6"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_80"
         android:layout_below="@+id/recycler_image"
-        android:layout_marginTop="@dimen/dp_24"/>
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_80"
+        android:text="6" />
+
+
+
     <ImageView
         android:id="@+id/image_praise"
         android:layout_width="@dimen/dp_16"
         android:layout_height="@dimen/dp_16"
-        android:src="@mipmap/common_icon_prise_n"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_40"
         android:layout_below="@+id/recycler_image"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/dp_24"
-        />
+        android:layout_marginRight="@dimen/dp_40"
+        android:src="@mipmap/common_icon_prise_n" />
+
     <TextView
         android:id="@+id/text_praise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1"
-        android:layout_alignParentRight="true"
         android:layout_below="@id/recycler_image"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/dp_24"
-        android:layout_marginRight="@dimen/dp_20"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_10"
-        android:layout_below="@+id/image_comment"
-        android:layout_marginTop="@dimen/dp_10"
-        android:background="#66666666"
-        />
+        android:layout_marginRight="@dimen/dp_20"
+        android:text="1" />
+
+
 </RelativeLayout>

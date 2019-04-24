@@ -23,6 +23,8 @@ open class JumpActivityUtils {
                 activity.startActivity(Intent(activity, clazz),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
                         activity.finish()
                 dialogprogress.dismiss()
+                activity.finish()
+                dialogprogress.dismiss()
             } else {
                 activity.startActivity(Intent(activity, NetActivity::class.java),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
                 activity.finish()

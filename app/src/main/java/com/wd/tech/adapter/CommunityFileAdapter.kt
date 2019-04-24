@@ -1,11 +1,9 @@
 package com.wd.tech.adapter
 
 import android.content.Context
-import android.media.Image
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.wd.tech.R
 

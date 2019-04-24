@@ -10,6 +10,8 @@ class Api {
         var LOGIN_URL = "user/v1/login"
         //注册
         var REG_URL = "user/v1/register"
+        //微信登录
+        var WXLOGIN_API="user/v1/weChatLogin"
         //根据用户ID查询用户信息
         var INDIVIDUALINFORMATION="user/verify/v1/getUserInfoByUserId"
         //修改签名
@@ -51,8 +53,9 @@ class Api {
         // 社区列表
         var COMMUNITY = "community/v1/findCommunityList"
         //点赞
+        //社区点赞
         var GIVEALIKE="community/verify/v1/addCommunityGreat"
-        //取消点赞
+        //社区取消点赞
         var GIVEDELETE="community/verify/v1/cancelCommunityGreat"
         //3. 资讯详情展示
         var INFO_DETAILS = "information/v1/findInformationDetails"
@@ -70,6 +73,23 @@ class Api {
         var INFO_COLLECT = "user/verify/v1/addCollection"
         //15.取消收藏（支持批量操作）
         var INFO_CANCEl_COLLECT ="user/verify/v1/cancelCollection"
-
+        //8.社区评论
+        var INFO_COMMENT_ADD = "community/verify/v1/addCommunityComment"
+        //7.社区用户评论列表（bean方式返参)
+        var COMMUNITY_LIST = "community/v1/findCommunityUserCommentList"
+        //2.发布帖子
+        var COMMUNITY_RELEASE = "community/verify/v1/releasePost"
+        //11.查询用户积分
+        var USER_INTEGRAL = "user/verify/v1/findUserIntegral"
+        //13.资讯积分兑换
+        var INFO_PAY_INTEGRRAL = "information/verify/v1/infoPayByIntegral"
+        //1.查询所有会员商品
+        var VIP_GOODS = "tool/v1/findVipCommodityList"
+        //2.用户购买VIP
+        var BUY_VIP = "tool/verify/v1/buyVip"
+        //支付
+        var VIP_PAY = "tool/verify/v1/pay"
+        //10. 查询用户发布的帖子
+        var FIND_USER_POST = "community/verify/v1/findUserPostById"
     }
 }

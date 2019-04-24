@@ -1,22 +1,16 @@
 package com.wd.tech.activity
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
 import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.widget.Toast
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.wd.tech.R
 import com.wd.tech.adapter.InfoItemAdapter
-import com.wd.tech.adapter.InformationAdapter
 import com.wd.tech.api.Api
 import com.wd.tech.base.BaseActivity
 import com.wd.tech.bean.InfoBean
-import com.wd.tech.bean.InfoResult
+import com.wd.tech.bean.UserPublicBean
 import com.wd.tech.mvp.Constanct
 import com.wd.tech.mvp.Presenter
 import com.wd.tech.utils.JumpActivityUtils
@@ -26,8 +20,6 @@ class PlateDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>()
     var plateId = 0
     var page = 1
     var count = 5
-    private var isRefresh = true
-    var allList: MutableList<InfoResult> = ArrayList()
     var infoitemAdapter: InfoItemAdapter? = null
 
     override fun getLayoutId(): Int {
@@ -66,8 +58,7 @@ class PlateDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>()
             override fun onLoadMore() {
                 Handler().postDelayed(object : Runnable {
                     override fun run() {
-                        page++
-                        isRefresh = false
+                        count += 5
                         var sHeadMap = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
                         var infoPrams = mapOf(Pair("plateId", plateId), Pair("page", page), Pair("count", count))
                         if (userId.equals("") || sessionId.equals("")) {
@@ -84,7 +75,6 @@ class PlateDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>()
                 Handler().postDelayed(object : Runnable {
                     override fun run() {
 
-                        isRefresh = true
                         var sHeadMap = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
                         var infoPrams = mapOf(Pair("plateId", plateId), Pair("page", page), Pair("count", count))
                         if (userId.equals("") || sessionId.equals("")) {
@@ -108,44 +98,38 @@ class PlateDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>()
         } else {
             infoitemAdapter!!.notifyDataSetChanged()
         }
-
+//收藏
+        infoitemAdapter!!.setCollectListener { id, collect ->
+            var prams = mapOf(Pair("infoId", id))
+            if (collect == 2) {
+                mPresenter!!.postPresenter(Api.INFO_COLLECT, sHeadMap, UserPublicBean::class.java, prams)
+            } else if (collect == 1) {
+                mPresenter!!.deletePresenter(Api.INFO_CANCEl_COLLECT, sHeadMap, UserPublicBean::class.java, prams)
+            }
+        }
 
     }
 
     override fun View(any: Any) {
         if (any != null) {
-            var infoBean = any as InfoBean
-            var infoList = infoBean.result
-            if (infoList.size > 0) {
-                allList.addAll(infoList)
-            } else {
-                isRefresh = true
-                Toast.makeText(this, "没有更多了", Toast.LENGTH_LONG).show()
-            }
-
-            infoitemAdapter!!.setInfoItemResult(allList)
-            if (!infoitemAdapter!!.hasObservers()) {
-                if (isRefresh) {
-                    plate_xrecycler_view.adapter = infoitemAdapter
-                    infoitemAdapter!!.refresh(allList)
-                    plate_xrecycler_view.refreshComplete()
-                } else {
-                    if (infoitemAdapter != null) {
-                        infoitemAdapter!!.loadMore(allList)
-                        plate_xrecycler_view.loadMoreComplete()
-                    }
+            if (any is InfoBean) {
+                var infoBean = any as InfoBean
+                var infoList = infoBean.result
+                infoitemAdapter!!.setInfoItemResult(infoList)
+                infoitemAdapter!!.setItemClickListener {
+                    var prams: HashMap<String, Any> = hashMapOf(Pair("id", it))
+                    JumpActivityUtils.skipValueActivity(this, InfoDetailsActivity::class.java, prams)
                 }
-            } else {
-                infoitemAdapter!!.notifyDataSetChanged()
-            }
-
-
-            infoitemAdapter!!.setItemClickListener {
-                var prams: HashMap<String, Any> = hashMapOf(Pair("id", it))
-                JumpActivityUtils.skipValueActivity(this, InfoDetailsActivity::class.java, prams)
+            } else if (any is UserPublicBean) {
+                var userPublicBean: UserPublicBean = any
+                Toast.makeText(this, userPublicBean.message, Toast.LENGTH_LONG).show()
+                var sp = getSharedPreferences("config", Context.MODE_PRIVATE)
+                var userId = sp.getString("userId", "")
+                var sessionId = sp.getString("sessionId", "")
+                var sHeadMap = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
+                var infoPrams = mapOf(Pair("plateId", plateId), Pair("page", page), Pair("count", count))
+                mPresenter!!.getPresenter(Api.TECH_INFOR, sHeadMap, InfoBean::class.java, infoPrams)
             }
         }
     }
-
-
 }
