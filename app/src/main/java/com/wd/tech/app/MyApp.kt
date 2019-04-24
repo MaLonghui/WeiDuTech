@@ -12,7 +12,7 @@ class MyApp : Application() {
 
     private var context: Context? = null
     var APP_ID = "wx4c96b6b8da494224"
-    var api: IWXAPI ? = null
+    var api: IWXAPI? = null
     override fun onCreate() {
         super.onCreate()
         Fresco.initialize(this)

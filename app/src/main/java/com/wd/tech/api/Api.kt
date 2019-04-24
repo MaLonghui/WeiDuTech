@@ -10,6 +10,8 @@ class Api {
         var LOGIN_URL = "user/v1/login"
         //注册
         var REG_URL = "user/v1/register"
+        //微信登录
+        var WXLOGIN_API="user/v1/weChatLogin"
         //根据用户ID查询用户信息
         var INDIVIDUALINFORMATION = "user/verify/v1/getUserInfoByUserId"
         //修改签名
@@ -52,7 +54,8 @@ class Api {
         // 社区列表
         var COMMUNITY = "community/v1/findCommunityList"
         //点赞
-        var GIVEALIKE = "community/verify/v1/addCommunityGreat"
+        //社区点赞
+        var GIVEALIKE="community/verify/v1/addCommunityGreat"
         //社区取消点赞
         var GIVEDELETE = "community/verify/v1/cancelCommunityGreat"
         //3. 资讯详情展示

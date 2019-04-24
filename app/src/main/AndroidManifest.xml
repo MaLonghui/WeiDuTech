@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.WRITE_APN_SETTINGS"
         tools:ignore="ProtectedPermissions" />
@@ -22,7 +25,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoTitle_FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,7 +54,6 @@
         <activity android:name=".activity.CommunityListActivity" />
         <activity android:name=".activity.IntegralActivity" />
         <activity android:name=".activity.BuyVipActivity" />
-        <activity android:name=".wxapi.WXEntryActivity" />
         <activity android:name=".activity.FindUserActivity" />
         <activity android:name=".activity.NotifyActivity" />
         <activity android:name=".activity.TaskActivity" />
@@ -57,6 +61,9 @@
         <activity android:name=".activity.MyIntegralActivity" />
         <activity android:name=".activity.AddFriendOrGroupActivity" />
         <activity android:name=".activity.AddFriendActivity"></activity>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

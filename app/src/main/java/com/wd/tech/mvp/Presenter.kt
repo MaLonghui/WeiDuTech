@@ -15,10 +15,11 @@ import okhttp3.RequestBody
 import java.io.File
 
 
-
-
-
 class Presenter : BasePresenter<Constanct.View>(), Constanct.Presenter {
+    override fun imgsPostPresenter(uri: String, headerMap: Map<String, Any>, parms: Map<String, Any>, file: File, clazz: Class<*>) {
+
+    }
+
     override fun loadSend(uri: String,headMap: Map<String, Any>, content: String, selectList: MutableList<LocalMedia>) {
         var list : ArrayList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
         selectList.forEach {
@@ -40,7 +41,7 @@ class Presenter : BasePresenter<Constanct.View>(), Constanct.Presenter {
 
     override fun imagePost(uri: String, headmap: Map<String, String>, image: MultipartBody.Part) {
         val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)
-        apiService.headicon(uri,headmap, image)
+        apiService.headicon(uri, headmap, image)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {

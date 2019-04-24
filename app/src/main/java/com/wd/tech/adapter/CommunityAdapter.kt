@@ -16,8 +16,6 @@ import com.facebook.drawee.view.SimpleDraweeView
 import com.wd.tech.R
 import com.wd.tech.activity.CommunityListActivity
 import com.wd.tech.bean.CommunityBean
-import com.wd.tech.utils.JumpActivityUtils
-import kotlinx.android.synthetic.main.community_list_layout.view.*
 import kotlinx.android.synthetic.main.item_community.view.*
 import org.greenrobot.eventbus.EventBus
 import java.text.SimpleDateFormat
@@ -84,6 +82,8 @@ class CommunityAdapter(context: Context) : RecyclerView.Adapter<CommunityAdapter
         val split = file.split(",".toRegex())
         p0.recycler_image.adapter = CommunityFileAdapter(this.context!!, split)
         p0.recycler_image.adapter=CommunityFileAdapter(this.context!!,split)
+        p0.recycler_image.adapter=CommunityFileAdapter(this.context!!,split)
+        p0.recycler_image.adapter = CommunityFileAdapter(this.context!!, split)
         p0.text_comment.setText("${list!![p1].comment}")
         p0.text_praise.setText("${list!![p1].praise}")
 
@@ -98,7 +98,6 @@ class CommunityAdapter(context: Context) : RecyclerView.Adapter<CommunityAdapter
         p0.image_praise.setOnClickListener {
             priseListener.invoke(list!![p1].id, p1)
         }
-
 
         p0.itemView.head_image.setOnClickListener {
             iconListener.invoke(list!![p1].userId)

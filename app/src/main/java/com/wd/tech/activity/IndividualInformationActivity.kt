@@ -15,8 +15,12 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import android.widget.EditText
+import android.widget.PopupWindow
+import android.widget.Toast
 import com.facebook.common.util.UriUtil
 import com.wd.tech.R
+import com.wd.tech.R.id.setting_image
 import com.wd.tech.api.Api
 import com.wd.tech.base.BaseActivity
 import com.wd.tech.bean.AltruserBean
@@ -27,7 +31,6 @@ import kotlinx.android.synthetic.main.activity_individual_information.*
 import java.io.File
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
-
 
 /*
 *
@@ -86,24 +89,24 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
         }
 //        退出登录
         back_login.setOnClickListener {
-            val alert: AlertDialog.Builder =AlertDialog.Builder(this)
+            val alert: AlertDialog.Builder = AlertDialog.Builder(this)
             alert.setIcon(R.drawable.icon)
             alert.setTitle("退出登录")
             alert.setMessage("是否进行退出登录")
-            alert.setPositiveButton("是",DialogInterface.OnClickListener{dialogInterface, i ->
+            alert.setPositiveButton("是", DialogInterface.OnClickListener { dialogInterface, i ->
                 val sp = this.getSharedPreferences("config", Context.MODE_PRIVATE)
                 val edit = sp.edit()
                 edit.putString("userId", "")
                 edit.putString("session", "")
                 edit.commit()
                 finish()
-            }).setNeutralButton("否",null)
+            }).setNeutralButton("否", null)
                     .create()
                     .show()
         }
         //       修改密码
         res_pwd.setOnClickListener {
-           startActivity(Intent(this@IndividualInformationActivity,ChangePasswordActivity::class.java))
+            startActivity(Intent(this@IndividualInformationActivity, ChangePasswordActivity::class.java))
         }
         val sp = this.getSharedPreferences("config", Context.MODE_PRIVATE)
         val userid = sp.getString("userId", "")
@@ -132,14 +135,6 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
         }
 
 
-
-
-
-//        修改签名
-        next_to.setOnClickListener {
-
-            startActivity(Intent(this@IndividualInformationActivity, NextActivity::class.java))
-        }
 //        图片
         val view = View.inflate(this@IndividualInformationActivity, R.layout.popup_camera, null)
         popupWindow = PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true
@@ -158,7 +153,8 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
             startActivityForResult(intent_takePhoto, PHOTO_FLAG)
             popupWindow!!.dismiss()
         }
-        picture.setOnClickListener{
+        picture.setOnClickListener {
+
             val intent = Intent(Intent.ACTION_PICK)
             //设置图片的格式
             intent.type = "image/*"
@@ -169,10 +165,17 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
             popupWindow!!.dismiss()
         }
         setting_image.setOnClickListener {
-            popupWindow!!.showAtLocation(it,Gravity.BOTTOM, 0, 0)
+            popupWindow!!.showAtLocation(it, Gravity.BOTTOM, 0, 0)
         }
-
+        res_pwd.setOnClickListener {
+            startActivity(Intent(this@IndividualInformationActivity, ChangePasswordActivity::class.java))
+        }
+//        修改签名
+        next_to.setOnClickListener {
+            startActivity(Intent(this@IndividualInformationActivity, NextActivity::class.java))
+        }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PHOTO_FLAG && resultCode == RESULT_OK) {//相机返回的数据
@@ -188,7 +191,7 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
                 val bitmap = data.getParcelableExtra<Bitmap>("data")
                 val list = ArrayList<Any>()
                 list.add(bitmap)
-                val file:File=File("data")
+                val file: File = File("data")
                 val img_path = bitmapToString(bitmap)
                 setting_image.setImageURI(UriUtil.parseUriOrNull("file://$img_path"))
                 val sp = this.getSharedPreferences("config", Context.MODE_PRIVATE)
@@ -196,11 +199,12 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
                 val session = sp.getString("sessionId", "")
                 val map: HashMap<String, String> = hashMapOf(Pair("userId", userId), Pair("sessionId", session))
                 val mapHead = HashMap<String, String>()
-                mapHead.put("image",img_path)
+                mapHead.put("image", img_path)
 //                mPresenter!!.imagePost(Api.HEAD,map,mapHead)
             }
         }
     }
+
     //bitMap转换为file(转file不一定对)
     fun bitmapToString(bitmap: Bitmap): String {
         //将bitmap转换为uri
@@ -234,16 +238,28 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
         intent.putExtra("return-data", true)
         startActivityForResult(intent, CAIJIAN_FLAG)
     }
+
     //    隐藏键盘
     fun hideSoftInputMethod(ed: EditText) {
         val currentVersion: Int = android.os.Build.VERSION.SDK_INT
         var methodName: String? = null
         if (currentVersion >= 16) {
+
+        }
+
+        //    隐藏键盘
+        fun hideSoftInputMethod(ed: EditText) {
+            val currentVersion: Int = android.os.Build.VERSION.SDK_INT
+            var methodName: String? = null
+            if (currentVersion >= 16) {
 //                4.2
-            methodName = "setShowSoftInputOnFocus"
-        } else if (currentVersion >= 14) {
+                methodName = "setShowSoftInputOnFocus"
+            } else if (currentVersion >= 14) {
 //                4.0
-            methodName = "setSoftInputShownOnFocus"
+                methodName = "setSoftInputShownOnFocus"
+            }
+
+
         }
         if (methodName == null) {
             ed.setInputExtras(InputType.TYPE_NULL)
@@ -264,7 +280,6 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
             }
         }
     }
-
-
 }
+
 

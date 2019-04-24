@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.wd.tech.R
+import com.wd.tech.api.Api
 import com.wd.tech.bean.InfoResult
+import com.wd.tech.bean.TaskBean
 import kotlinx.android.synthetic.main.fragment_information.view.*
 import kotlinx.android.synthetic.main.info_item_show.view.*
 import org.greenrobot.eventbus.EventBus
@@ -93,7 +95,7 @@ class InfoItemAdapter(context: Context) : RecyclerView.Adapter<InfoItemAdapter.V
                 listener(infoList!![i].id)
             }else if(infoList!![i].whetherAdvertising == 1){
                 listener(infoList!![i].infoAdvertisingVo.id)
-            }
+             }
         }
     }
 

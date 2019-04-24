@@ -1,14 +1,11 @@
 package com.wd.tech.adapter
 
 import android.content.Context
-import android.media.Image
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.wd.tech.R
-import org.greenrobot.eventbus.EventBus
 
 /**
  * date:2019/4/15
@@ -18,7 +15,6 @@ import org.greenrobot.eventbus.EventBus
 class CommunityFileAdapter(context: Context,list:List<String>) : RecyclerView.Adapter<CommunityFileAdapter.ViewHolder>() {
     var context:Context ?=null
     var list:List<String> ?=null
-
     init {
         this.context=context
         this.list=list

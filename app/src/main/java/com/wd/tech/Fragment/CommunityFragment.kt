@@ -24,7 +24,6 @@ import com.wd.tech.mvp.Constanct
 import com.wd.tech.mvp.Presenter
 import com.wd.tech.utils.JumpActivityUtils
 import kotlinx.android.synthetic.main.fragment_community.*
-import kotlinx.android.synthetic.main.fragment_information.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 

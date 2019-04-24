@@ -17,6 +17,7 @@ data class Result(
     val nickName: String,
     val phone: String,
     val sex: Int,
+    val signature: String,
     val userId: Int,
     val userName: String,
     val whetherFaceId: Int,

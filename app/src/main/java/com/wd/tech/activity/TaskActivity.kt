@@ -38,6 +38,7 @@ class TaskActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Consta
         mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcanthress)
         mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcanfour)
 
+
         mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcansix)
         mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcanseven)
 

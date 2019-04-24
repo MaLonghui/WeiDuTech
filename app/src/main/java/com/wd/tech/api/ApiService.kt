@@ -20,7 +20,6 @@ interface ApiService {
     @DELETE
     fun delete(@Url url: String, @HeaderMap headerMap: Map<String, Any>, @QueryMap parms: Map<String, Any>):Observable<ResponseBody>
 
-
     //多图上传
     @POST
     @Multipart

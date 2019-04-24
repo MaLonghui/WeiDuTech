@@ -35,6 +35,10 @@ open class JumpActivityUtils {
 //                }, 650)*/
                         activity.finish()
                 dialogprogress.dismiss()
+                        activity.finish()
+                dialogprogress.dismiss()
+                activity.finish()
+                dialogprogress.dismiss()
             } else {
                 activity.startActivity(Intent(activity, NetActivity::class.java),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
                 activity.finish()
