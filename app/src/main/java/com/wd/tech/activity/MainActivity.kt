@@ -3,11 +3,12 @@ package com.wd.tech.activity
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.os.Looper
 import android.support.v7.app.AppCompatActivity
 import com.wd.tech.R
+import android.os.Looper
 import com.wd.tech.utils.JumpActivityUtils
 import io.reactivex.Flowable
+
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity(){

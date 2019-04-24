@@ -42,6 +42,11 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Const
                 finish()
             }
 
+            edit.putString("signature",loginBean.result.signature)
+            edit.commit()
+            if (loginBean.result != null)
+                Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
+            finish()
         } else {
             Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
         }

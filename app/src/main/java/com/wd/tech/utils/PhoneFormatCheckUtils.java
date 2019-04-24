@@ -58,4 +58,17 @@ public class PhoneFormatCheckUtils {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+    /**
+     * 判断是否为数字(正负数都行)
+     * @param str 需要验证的字符串
+     * @return
+     */
+    public static boolean isNumeric(String str){
+        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+        Matcher isNum = pattern.matcher(str);
+        if( !isNum.matches() ){
+            return false;
+        }
+        return true;
+    }
 }

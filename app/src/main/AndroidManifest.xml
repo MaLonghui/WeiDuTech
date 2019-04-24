@@ -11,6 +11,8 @@
         android:name="android.permission.WRITE_APN_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".app.MyApp"
@@ -48,7 +50,13 @@
         <activity android:name=".activity.IntegralActivity" />
         <activity android:name=".activity.BuyVipActivity" />
         <activity android:name=".wxapi.WXEntryActivity" />
-        <activity android:name=".activity.FindUserActivity"></activity>
+        <activity android:name=".activity.FindUserActivity" />
+        <activity android:name=".activity.NotifyActivity" />
+        <activity android:name=".activity.TaskActivity" />
+        <activity android:name=".activity.SigninActivity" />
+        <activity android:name=".activity.MyIntegralActivity" />
+        <activity android:name=".activity.AddFriendOrGroupActivity" />
+        <activity android:name=".activity.AddFriendActivity"></activity>
     </application>
 
 </manifest>

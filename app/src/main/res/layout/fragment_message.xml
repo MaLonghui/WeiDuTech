@@ -8,6 +8,7 @@
     tools:context=".Fragment.MessageFragment">
 
     <ImageView
+        android:id="@+id/img_add"
         android:layout_width="@dimen/dp_24"
         android:layout_alignTop="@id/radio_group"
         android:layout_alignParentRight="true"

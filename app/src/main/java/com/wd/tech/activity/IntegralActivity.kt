@@ -145,6 +145,7 @@ class IntegralActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Co
             dialog.dismiss()
         }
     }
-
-
 }
+
+
+

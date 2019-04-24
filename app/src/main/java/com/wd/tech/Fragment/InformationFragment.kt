@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.wd.tech.R
+import com.wd.tech.R.id.xrecycler_view
 import com.wd.tech.activity.InfoAllPlateActivity
 import com.wd.tech.activity.SearchActivity
 import com.wd.tech.adapter.InformationAdapter
@@ -108,7 +109,9 @@ class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(),
                         xrecycler_view.loadMoreComplete()
                     }
                 }, 2500)
+
             }
+
 
             override fun onRefresh() {
                 Handler().postDelayed(object : Runnable {
