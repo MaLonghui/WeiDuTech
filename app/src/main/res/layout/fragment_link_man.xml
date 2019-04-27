@@ -1,16 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f00"
     tools:context=".Fragment.LinkManFragment"
-    tools:ignore="MissingDefaultResource">
+    tools:ignore="MissingDefaultResource"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_52"
+        android:background="#ffffff"
+        android:gravity="center">
+
+
+        <EditText
+            android:layout_width="@dimen/dp_336"
+            android:layout_height="@dimen/dp_32"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/linkman_edit_shape"
+            android:drawableLeft="@mipmap/common_nav_btn_search_n"
+            android:drawablePadding="@dimen/dp_12"
+            android:gravity="center_vertical"
+            android:hint="Bearch"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_10"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_12" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="#f2f2f2" />
+
+
+    <LinearLayout
+        android:id="@+id/lin_newfriends"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:gravity="center_vertical"
+        android:background="#FFFFFF"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:id="@+id/new_friend"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:background="@drawable/group_icon_shape">
+
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/message_icon_notice_n" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/text_newfriends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="新朋友"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="#f2f2f2" />
+
+    <RelativeLayout
+        android:id="@+id/group_relative"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="#ffffff">
+
+        <RelativeLayout
+            android:id="@+id/group_icon"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:background="@drawable/group_icon_shape">
+
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/common_icon_group_n" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_toRightOf="@id/group_icon"
+            android:text="群组"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_4"
+        android:background="#f2f2f2" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#ffffff">
 
-</FrameLayout>
+        <ExpandableListView
+            android:id="@+id/expandableListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:childDivider="#efefef"
+            android:divider="#efefef"
+            android:dividerHeight="1dp"
+            android:groupIndicator="@null"
+            android:scrollbars="none" />
+    </LinearLayout>
+
+
+</LinearLayout>

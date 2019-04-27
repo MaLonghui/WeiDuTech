@@ -139,6 +139,9 @@ class CommunityFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), C
                 var prams = mapOf(Pair("communityId", communityId), Pair("content", content))
                 mPresenter!!.postPresenter(Api.INFO_COMMENT_ADD, map, UserPublicBean::class.java, prams)
                 community_relative.visibility = GONE
+                //评论任务
+                val mapcantwo: Map<String, Int> = mapOf(Pair("taskId",1002))
+                mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcantwo)
             }
         }
         //发布帖子

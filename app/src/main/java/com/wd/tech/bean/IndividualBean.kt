@@ -12,6 +12,8 @@ data class IndividualBean(
 )
 
 data class Result(
+    val birthday: Long,
+    val email: String,
     val headPic: String,
     val integral: Int,
     val nickName: String,

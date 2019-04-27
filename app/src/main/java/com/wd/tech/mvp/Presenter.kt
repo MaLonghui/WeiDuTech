@@ -1,6 +1,8 @@
 package com.wd.tech.mvp
 
+import android.util.Log
 import com.google.gson.Gson
+import com.luck.picture.lib.entity.LocalMedia
 import com.wd.tech.api.ApiService
 import com.wd.tech.base.BasePresenter
 import com.wd.tech.bean.HeadBean
@@ -8,21 +10,47 @@ import com.wd.tech.utils.RetrofitManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import java.io.File
 
+
+
+
+
 class Presenter : BasePresenter<Constanct.View>(), Constanct.Presenter {
-    override fun imagePost(uri: String, headmap: Map<String, String>, image: MultipartBody.Part) {
+    override fun headIconPresenter(url: String,headMap: Map<String, Any>, file: File) {
+        val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+        val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
         val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)
-        apiService.headicon(uri, headmap, image)
-                .subscribeOn(Schedulers.io())
+        apiService.headicon(url,headMap,body)
+                .subscribeOn(Schedulers.io
+
+                ())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    val string = it.string()
-                    var gson: Gson = Gson()
-                    val it1 = gson.fromJson(string, HeadBean::class.java)
-                    mView!!.View(it1)
+                    mView!!.View(it)
                 }
     }
+
+    override fun loadSend(uri: String,headMap: Map<String, Any>, content: String, selectList: MutableList<LocalMedia>) {
+        var list : ArrayList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
+        selectList.forEach {
+            Log.e("123", it.path)
+            val file = File(it.path)
+            val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+            val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+            list.add(body)
+        }
+        val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)
+        apiService.sendCommunity(uri,headMap,content,list)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    mView!!.View(it)
+                }
+    }
+
 
     override fun imgsPostPresenter(uri: String, headerMap: Map<String, Any>, parms: Map<String, Any>, file: File, clazz: Class<*>) {
         val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)

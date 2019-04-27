@@ -251,8 +251,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <EditText
-                        android:id="@+id/email"
-                        android:text="1097204893@qq.com"
+                        android:id="@+id/edit_email"
                         android:background="@null"
                         android:layout_alignParentRight="true"
                         android:textColor="#999999"

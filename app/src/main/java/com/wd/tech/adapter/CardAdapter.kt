@@ -1,7 +1,7 @@
 package com.wd.tech.adapter
 
 import android.content.Context
-import android.content.SharedPreferences
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.wd.tech.R
 import com.wd.tech.bean.Card
+import kotlinx.android.synthetic.main.item_community.view.*
 import java.text.SimpleDateFormat
 
 /**
@@ -48,8 +49,26 @@ class CardAdapter(context:Context) : RecyclerView.Adapter<CardAdapter.ViewHolder
                 mOnClickDelete!!.clickDelete(p1)
                 notifyDataSetChanged()
             }
-
         }
+        p0.recyc_card.layoutManager=GridLayoutManager(context,3)
+        val file = list!![p1].file
+        val split = file.split(",".toRegex())
+        p0.recyc_card.adapter=CardSmallAdapter(this.context!!,split)
+
+
+//        if (list!![p1].whetherGreat == 1) {
+//            p0.image_praise.setImageResource(R.mipmap.common_icon_praise_s)
+//        } else if (list!![p1].whetherGreat == 2) {
+//            p0.image_praise.setImageResource(R.mipmap.common_icon_prise_n)
+//        }
+//        //点赞
+//        p0.image_praise.setOnClickListener {
+//            priseListener.invoke(list!![p1].id, p1)
+//        }
+//
+//        p0.itemView.head_image.setOnClickListener {
+//            iconListener.invoke(list!![p1].userId)
+//        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -60,6 +79,7 @@ class CardAdapter(context:Context) : RecyclerView.Adapter<CardAdapter.ViewHolder
         var image_praise:ImageView =itemView.findViewById(R.id.image_praise)
         var image_comment:ImageView =itemView.findViewById(R.id.image_comment)
         var text_delete:TextView=itemView.findViewById(R.id.text_delete)
+        var recyc_card:RecyclerView=itemView.findViewById(R.id.recyc_card)
     }
     interface OnClickDelete{
         fun clickDelete(i:Int)

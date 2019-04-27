@@ -1,68 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/camera"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_gravity="center_horizontal"
-        android:gravity="center"
-    >
+        android:gravity="center">
+
         <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@mipmap/common_btn_camera_n"
-        />
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@mipmap/common_btn_camera_n" />
+
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="拍照"
-                android:textSize="20sp"
-                android:layout_marginLeft="10dp"
-                android:textColor="#666"
-                android:gravity="center"
-        />
-    </LinearLayout>
-    <TextView
-            android:layout_width="match_parent"
-            android:background="#000"
-            android:layout_height="1dp" />
-    <LinearLayout
-            android:id="@+id/picture"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:layout_height="52dp">
-        <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@mipmap/common_btn_camera_n"
-        />
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="相册"
-                android:textSize="20sp"
-                android:layout_marginLeft="10dp"
-                android:textColor="#333"
-                android:gravity="center"
-        />
+            android:text="拍照"
+            android:textColor="#666"
+            android:textSize="20sp" />
     </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:background="#000"
-        android:layout_marginTop="14dp"
-        android:layout_height="1dp" />
 
     <TextView
-            android:id="@+id/popup_cancle"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:text="取消"
-            android:textSize="20sp"
-            android:textColor="#333"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000" />
+
+    <LinearLayout
+        android:id="@+id/picture"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@mipmap/common_btn_camera_n" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
-    />
+            android:text="相册"
+            android:textColor="#333"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="14dp"
+        android:background="#000" />
+
+    <TextView
+        android:id="@+id/popup_cancle"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="#333"
+        android:textSize="20sp" />
 </LinearLayout>

@@ -79,9 +79,14 @@ dependencies {
     //u盟统计
     implementation 'com.umeng.umsdk:analytics:7.5.4'
     implementation 'com.umeng.umsdk:common:1.5.4'
-    implementation project(':library')
     //ExpandableTextView
     implementation 'com.github.MZCretin:ExpandableTextView:v1.5.3'
+    //图片选择
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.9'
+    implementation files('libs/MobCommons-2019.0409.1452.jar')
+    implementation files('libs/MobTools-2019.0403.1047.jar')
+    implementation files('libs/SDKWrapper-2018.0801.1824.jar')
+    implementation files('libs/SMSSDK-3.3.1.jar')
 }
 repositories {
     mavenCentral()

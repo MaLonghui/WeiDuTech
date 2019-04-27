@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.wd.tech.R
 import com.wd.tech.activity.InfoAllPlateActivity
 import com.wd.tech.activity.SearchActivity
@@ -104,8 +105,7 @@ class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(),
 
                         xrecycler_view.loadMoreComplete()
                     }
-
-                },2500)
+                }, 2500)
             }
 
             override fun onRefresh() {

@@ -13,39 +13,41 @@ class Api {
         //微信登录
         var WXLOGIN_API="user/v1/weChatLogin"
         //根据用户ID查询用户信息
-        var INDIVIDUALINFORMATION="user/verify/v1/getUserInfoByUserId"
+        var INDIVIDUALINFORMATION = "user/verify/v1/getUserInfoByUserId"
         //修改签名
-        var SIGNATURE="user/verify/v1/modifySignature"
+        var SIGNATURE = "user/verify/v1/modifySignature"
         //修改用户昵称
-        var ALTERUSER="user/verify/v1/modifyNickName"
+        var ALTERUSER = "user/verify/v1/modifyNickName"
         //上传头像
-        var HEAD="user/verify/v1/modifyHeadPic"
+        var HEAD = "user/verify/v1/modifyHeadPic"
         //修改密码
-        var PWD="user/verify/v1/modifyUserPwd"
+        var PWD = "user/verify/v1/modifyUserPwd"
+        //完善
+        var PERFECT="user/verify/v1/perfectUserInfo"
         //用户签到
-        var SIGNIN="user/verify/v1/userSign"
+        var SIGNIN = "user/verify/v1/userSign"
         //用户签到状态
-        var SIGNINTURN="user/verify/v1/findUserSignStatus"
+        var SIGNINTURN = "user/verify/v1/findUserSignStatus"
         //连续签到
-        var DAYSIGN="user/verify/v1/findContinuousSignDays"
+        var DAYSIGN = "user/verify/v1/findContinuousSignDays"
         //签到日期
-        var TIMEDAYSIGN="user/verify/v1/findUserSignRecording"
+        var TIMEDAYSIGN = "user/verify/v1/findUserSignRecording"
         //用户收藏
-        var COLLECT="user/verify/v1/findAllInfoCollection"
+        var COLLECT = "user/verify/v1/findAllInfoCollection"
         //关注
-        var FOLLOW="user/verify/v1/findFollowUserList"
+        var FOLLOW = "user/verify/v1/findFollowUserList"
         //帖子
         var CARD="community/verify/v1/findMyPostById"
         //删除帖子
-        var DELETECARD="community/verify/v1/deletePost"
+        var DELETECARD = "community/verify/v1/deletePost"
         //用户积分查询
-        var INTEGRAL="user/verify/v1/findUserIntegral"
+        var INTEGRAL = "user/verify/v1/findUserIntegral"
         //用户积分查询明细
-        var DEFINITE="user/verify/v1/findUserIntegralRecord"
+        var DEFINITE = "user/verify/v1/findUserIntegralRecord"
         //任务查询列表
-        var TASK="user/verify/v1/findUserTaskList"
+        var TASK = "user/verify/v1/findUserTaskList"
         //做任务
-        var ZUOTASK="user/verify/v1/doTheTask"
+        var ZUOTASK = "user/verify/v1/doTheTask"
         //1.banner展示列表
         var TECH_BANNER = "information/v1/bannerShow"
         //2.资讯推荐展示列表(包含单独板块列表展示)
@@ -53,10 +55,9 @@ class Api {
         // 社区列表
         var COMMUNITY = "community/v1/findCommunityList"
         //点赞
-        //社区点赞
-        var GIVEALIKE="community/verify/v1/addCommunityGreat"
+        var GIVEALIKE = "community/verify/v1/addCommunityGreat"
         //社区取消点赞
-        var GIVEDELETE="community/verify/v1/cancelCommunityGreat"
+        var GIVEDELETE = "community/verify/v1/cancelCommunityGreat"
         //3. 资讯详情展示
         var INFO_DETAILS = "information/v1/findInformationDetails"
         //9. 查询资讯评论列表
@@ -68,11 +69,11 @@ class Api {
         //6.资讯点赞
         var INFO_GREAT = "information/verify/v1/addGreatRecord"
         //7. 取消点赞
-        var INFO_CANCEL_GREAT="information/verify/v1/cancelGreat"
+        var INFO_CANCEL_GREAT = "information/verify/v1/cancelGreat"
         //14.添加收藏
         var INFO_COLLECT = "user/verify/v1/addCollection"
         //15.取消收藏（支持批量操作）
-        var INFO_CANCEl_COLLECT ="user/verify/v1/cancelCollection"
+        var INFO_CANCEl_COLLECT = "user/verify/v1/cancelCollection"
         //8.社区评论
         var INFO_COMMENT_ADD = "community/verify/v1/addCommunityComment"
         //7.社区用户评论列表（bean方式返参)
@@ -91,5 +92,13 @@ class Api {
         var VIP_PAY = "tool/verify/v1/pay"
         //10. 查询用户发布的帖子
         var FIND_USER_POST = "community/verify/v1/findUserPostById"
+        //6.查询用户所有分组
+        var FRIEND_GROUP_LIST = "chat/verify/v1/findFriendGroupList"
+        //17.查询我的好友列表
+        var SEARCH_FREND = "chat/verify/v1/searchFriend"
+        //10.查询分组下的好友列表信息
+        var MY_FRIEND_LIST = "chat/verify/v1/findFriendListByGroupId"
+        //31.根据手机号查询用户信息
+        var FIND_USER_PHONE = "user/verify/v1/findUserByPhone"
     }
 }

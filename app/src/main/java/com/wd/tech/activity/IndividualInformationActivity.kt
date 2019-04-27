@@ -1,6 +1,6 @@
 package com.wd.tech.activity
 
-import android.app.AlertDialog
+
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -9,13 +9,14 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
+import android.support.v7.app.AlertDialog
 import android.text.InputType
 import android.view.Gravity
-import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.PopupWindow
 import android.widget.Toast
+import android.widget.*
 import com.facebook.common.util.UriUtil
 import com.wd.tech.R
 import com.wd.tech.R.id.setting_image
@@ -26,10 +27,10 @@ import com.wd.tech.bean.IndividualBean
 import com.wd.tech.mvp.Constanct
 import com.wd.tech.mvp.Presenter
 import kotlinx.android.synthetic.main.activity_individual_information.*
-import kotlinx.android.synthetic.main.popup_camera.view.*
 import java.io.File
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
+import java.text.SimpleDateFormat
 
 /*
 *
@@ -49,8 +50,13 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
                 } else {
                     user_sex.setText("女")
                 }
-                email.setText("")
-                time.setText("")
+                val email = bean.result.email
+                edit_email.setText(email)
+
+                val birthday = bean.result.birthday
+                val format = SimpleDateFormat("yyyy-MM-dd")
+                val s = format.format(birthday)
+                time.setText(s)
                 JiFen.setText("${bean.result.integral}")
                 if (bean.result.whetherVip == 2) {
                     vip.setText("普通用户")
@@ -124,22 +130,25 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
             val mapcan: Map<String, Any> = mapOf(Pair("nickName", name))
             mPresenter!!.putPresenter(Api.ALTERUSER, map, AltruserBean::class.java, mapcan)
         }
-
+//       修改密码
+        res_pwd.setOnClickListener {
+            startActivity(Intent(this@IndividualInformationActivity, ChangePasswordActivity::class.java))
+        }
 //        修改签名
         next_to.setOnClickListener {
-
             startActivity(Intent(this@IndividualInformationActivity, NextActivity::class.java))
         }
 //        图片
-        val v = View.inflate(this@IndividualInformationActivity, R.layout.popup_camera, null)
-        popupWindow = PopupWindow(
-                v, ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT, true
+        val view = android.view.View.inflate(this@IndividualInformationActivity, R.layout.popup_camera, null)
+        popupWindow = PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true
         )
         popupWindow!!.setFocusable(true)
         popupWindow!!.setTouchable(true)
         popupWindow!!.setBackgroundDrawable(BitmapDrawable())
-        v.camera.setOnClickListener {
+        val camera = view.findViewById<LinearLayout>(R.id.camera)
+        val picture = view.findViewById<LinearLayout>(R.id.picture)
+        val popup_cancle = view.findViewById<TextView>(R.id.popup_cancle)
+        camera.setOnClickListener {
             //MediaStore.ACTION_IMAGE_CAPTURE 打开相机的Action
             val intent_takePhoto = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             //存放到内存中
@@ -147,14 +156,14 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
             startActivityForResult(intent_takePhoto, PHOTO_FLAG)
             popupWindow!!.dismiss()
         }
-        v.picture.setOnClickListener {
+        picture.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             //设置图片的格式
             intent.type = "image/*"
             startActivityForResult(intent, CAMERA_FLAG)
             popupWindow!!.dismiss()
         }
-        v.popup_cancle.setOnClickListener {
+        popup_cancle.setOnClickListener {
             popupWindow!!.dismiss()
         }
         setting_image.setOnClickListener {
@@ -191,9 +200,7 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
                 val userId = sp.getString("userId", "")
                 val session = sp.getString("sessionId", "")
                 val map: HashMap<String, String> = hashMapOf(Pair("userId", userId), Pair("sessionId", session))
-                val mapHead = HashMap<String, String>()
-                mapHead.put("image", img_path)
-//                mPresenter!!.imagePost(Api.HEAD,map,mapHead)
+                mPresenter!!.headIconPresenter(Api.HEAD,map,file)
             }
         }
     }
@@ -216,7 +223,7 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
 
 
     //裁剪图片
-    private fun crop(uri: Uri) {
+    fun crop(uri: Uri) {
         val intent = Intent("com.android.camera.action.CROP")
         intent.setDataAndType(uri, "image/*")
         //支持裁剪
@@ -239,30 +246,36 @@ fun hideSoftInputMethod(ed: EditText) {
     val currentVersion: Int = android.os.Build.VERSION.SDK_INT
     var methodName: String? = null
     if (currentVersion >= 16) {
+        //    隐藏键盘
+        fun hideSoftInputMethod(ed: EditText) {
+            val currentVersion: Int = android.os.Build.VERSION.SDK_INT
+            var methodName: String? = null
+            if (currentVersion >= 16) {
 //                4.2
-        methodName = "setShowSoftInputOnFocus"
-    } else if (currentVersion >= 14) {
+                methodName = "setShowSoftInputOnFocus"
+            } else if (currentVersion >= 14) {
 //                4.0
-        methodName = "setSoftInputShownOnFocus"
-    }
-    if (methodName == null) {
-        ed.setInputExtras(InputType.TYPE_NULL)
-    } else {
-        val cls: Class<EditText> = EditText::class.java
-        var setShowSoftInputOnFocus: Method? = null
-        try {
-            setShowSoftInputOnFocus = cls.getMethod(methodName, Boolean::class.java)
-            setShowSoftInputOnFocus.isAccessible = true
-            setShowSoftInputOnFocus.invoke(ed, false)
-        } catch (e: NoSuchMethodException) {
-            ed.setInputType(InputType.TYPE_NULL);
-            e.printStackTrace()
-        } catch (e: InvocationTargetException) {
-            e.printStackTrace()
-        } catch (e: IllegalAccessException) {
-            e.printStackTrace()
+                methodName = "setSoftInputShownOnFocus"
+            }
+            if (methodName == null) {
+                ed.setInputExtras(InputType.TYPE_NULL)
+            } else {
+                val cls: Class<EditText> = EditText::class.java
+                var setShowSoftInputOnFocus: Method? = null
+                try {
+                    setShowSoftInputOnFocus = cls.getMethod(methodName, Boolean::class.java)
+                    setShowSoftInputOnFocus.isAccessible = true
+                    setShowSoftInputOnFocus.invoke(ed, false)
+                } catch (e: NoSuchMethodException) {
+                    ed.setInputType(InputType.TYPE_NULL);
+                    e.printStackTrace()
+                } catch (e: InvocationTargetException) {
+                    e.printStackTrace()
+                } catch (e: IllegalAccessException) {
+                    e.printStackTrace()
+                }
+            }
         }
     }
 }
-
 

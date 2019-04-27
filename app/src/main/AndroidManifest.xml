@@ -5,13 +5,18 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission
         android:name="android.permission.WRITE_APN_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
     <application
         android:name=".app.MyApp"
         android:allowBackup="true"
@@ -20,7 +25,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"
+        <activity
+            android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoTitle_FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +41,6 @@
         <activity android:name=".activity.RegActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.CollectActivity" />
-        <activity android:name=".activity.IndividualInformationActivity" />
         <activity android:name=".activity.BannerDetailsActivity" />
         <activity android:name=".activity.InfoAllPlateActivity" />
         <activity android:name=".activity.SearchActivity" />
@@ -44,17 +49,22 @@
         <activity android:name=".activity.ChangePasswordActivity" />
         <activity android:name=".activity.NextActivity" />
         <activity android:name=".activity.CardActivity" />
-        <activity android:name=".activity.NotifyActivity" />
-        <activity android:name=".activity.IntegralActivity" />
-        <activity android:name=".activity.TaskActivity" />
-        <activity android:name=".activity.SigninActivity"></activity>
         <activity android:name=".activity.CommunityReleaseActivity" />
         <activity android:name=".activity.CommunityListActivity" />
+        <activity android:name=".activity.IntegralActivity" />
         <activity android:name=".activity.BuyVipActivity" />
-        <activity android:name=".wxapi.WXEntryActivity"
-            android:exported="true"/>
-        <activity android:name=".activity.FindUserActivity"></activity>
-        <activity android:name=".activity.MyIntegralActivity"/>
+        <activity android:name=".activity.FindUserActivity" />
+        <activity android:name=".activity.NotifyActivity" />
+        <activity android:name=".activity.TaskActivity" />
+        <activity android:name=".activity.SigninActivity" />
+        <activity android:name=".activity.IndividualInformationActivity" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true" />
+        <activity android:name=".activity.MyIntegralActivity" />
+        <activity android:name=".activity.AddFriendOrGroupActivity" />
+        <activity android:name=".activity.AddFriendActivity" />
+        <activity android:name=".activity.PerfectAvtivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.AddFriendOrGroupActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80"
+        android:layout_margin="@dimen/dp_4"
+        android:background="@drawable/view_style">
+
+        <ImageView
+            android:id="@+id/back_add"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:src="@mipmap/common_icon_back_n" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="添加"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_20" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="#ffffff">
+
+        <RadioGroup
+            android:id="@+id/radio_group_find"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginLeft="@dimen/dp_60"
+            android:layout_marginRight="@dimen/dp_60"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RadioButton
+                android:id="@+id/radio_btn_people"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="找人"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/radio_btn_qun"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_60"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="找群"
+                android:textSize="18sp" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_3">
+
+        <View
+            android:id="@+id/view_people"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_3"
+            android:layout_marginLeft="@dimen/dp_86"
+            android:background="#20affa"
+            android:visibility="visible" />
+
+        <View
+            android:id="@+id/view_qun"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_3"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_86"
+            android:background="#20affa"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lin_findPeople"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_32"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="#ffffff"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/people_img_search"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:src="@mipmap/common_nav_btn_search_n" />
+
+        <EditText
+            android:id="@+id/people_edit_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:background="#ffffff"
+            android:enabled="true"
+            android:focusable="true"
+            android:hint="根据手机号查询"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="@dimen/dp_10"
+            android:singleLine="true" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lin_findQun"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_32"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="#ffffff"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/qun_img_search"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:src="@mipmap/common_nav_btn_search_n" />
+
+        <EditText
+            android:id="@+id/qun_edit_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:background="#ffffff"
+            android:enabled="true"
+            android:focusable="true"
+            android:hint="根据群ID查询"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="@dimen/dp_10"
+            android:singleLine="true" />
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/lin_search_result"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_46"
+        android:layout_marginTop="@dimen/dp_4"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/img_search_result"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_10"
+            app:roundAsCircle="true" />
+
+        <TextView
+            android:id="@+id/name_search_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_toRightOf="@+id/img_search_result"
+            android:text="小米"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14" />
+
+        <ImageView
+            android:id="@+id/next_search_result"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_12"
+            android:src="@drawable/ic_navigate_next_" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/no_search_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_30"
+        android:text="搜索无结果"
+        android:textColor="#20affa"
+        android:textSize="@dimen/sp_14"
+        android:visibility="gone" />
+
+</LinearLayout>

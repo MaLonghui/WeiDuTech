@@ -3,6 +3,8 @@ package com.wd.tech.activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import com.wd.tech.R
 import com.wd.tech.adapter.CardAdapter
 import com.wd.tech.api.Api
@@ -63,9 +65,12 @@ class CardActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Consta
     override fun View(any: Any) {
         if (any is CardBean) {
             bean = any
-            if (bean!!.result != null) {
-                val result = bean!!.result
+            val result = bean!!.result
+            if (result != null) {
                 adapter!!.setData(result)
+            }else if(result == null){
+                recycler_card.visibility=GONE
+                image_null.visibility=VISIBLE
             }
 
         }

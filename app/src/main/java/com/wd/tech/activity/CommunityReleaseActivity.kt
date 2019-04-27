@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Looper
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import com.wd.tech.R
@@ -20,39 +22,59 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
 import android.widget.Toast
-import com.huburt.library.ImagePicker
-import com.huburt.library.bean.ImageItem
-import com.huburt.library.util.Utils
-import com.huburt.library.view.GridSpacingItemDecoration
-import com.wd.tech.adapter.ImageAdapter
+import com.luck.picture.lib.PictureSelector
+import com.luck.picture.lib.config.PictureConfig
+import com.luck.picture.lib.config.PictureMimeType
+import com.luck.picture.lib.entity.LocalMedia
+import com.wd.tech.adapter.GridImageAdapter
+import com.wd.tech.api.Api
+import com.wd.tech.bean.TaskBean
+import com.wd.tech.bean.UserPublicBean
+import com.wd.tech.utils.FullyGridLayoutManager
+import java.util.ArrayList
 
 
-class CommunityReleaseActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Constanct.View, View.OnClickListener, ImagePicker.OnPickImageResultListener {
+class CommunityReleaseActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Constanct.View, View.OnClickListener {
+    private val maxSelectNum = 9
+    private val selectList = ArrayList<LocalMedia>()
+    private var adapter: GridImageAdapter? = null
+    private var pop: PopupWindow? = null
+
 
 
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.tv_camera -> {
                 //直接打开相机
-                ImagePicker.camera(this@CommunityReleaseActivity, this@CommunityReleaseActivity)
+                //拍照
+                PictureSelector.create(this@CommunityReleaseActivity)
+                        .openCamera(PictureMimeType.ofImage())
+                        .forResult(PictureConfig.CHOOSE_REQUEST)
                 closePopupWindow()
             }
             R.id.tv_album -> {
                 //选择图片，第二次进入会自动带入之前选择的图片（未重置图片参数）
-                ImagePicker.pick(this@CommunityReleaseActivity, this@CommunityReleaseActivity)
+                //相册
+                PictureSelector.create(this@CommunityReleaseActivity)
+                        .openGallery(PictureMimeType.ofImage())
+                        .maxSelectNum(maxSelectNum)
+                        .minSelectNum(1)
+                        .imageSpanCount(4)
+                        .compress(true)
+                        .selectionMode(PictureConfig.MULTIPLE)
+                        .forResult(PictureConfig.CHOOSE_REQUEST)
                 closePopupWindow()
             }
             R.id.tv_cancel -> {
                 closePopupWindow()
             }
-            else ->{
+            else -> {
                 closePopupWindow()
             }
         }
     }
 
 
-    var pop: PopupWindow? = null
     override fun getLayoutId(): Int {
         return R.layout.activity_community_release
     }
@@ -61,25 +83,19 @@ class CommunityReleaseActivity : BaseActivity<Constanct.View, Constanct.Presente
     override fun initPresenter(): Constanct.Presenter {
         return Presenter()
     }
-    override fun onImageResult(imageItems: ArrayList<ImageItem>) {
-        (recycer_release.adapter as ImageAdapter).updateData(imageItems)
-    }
+
     override fun initData() {
         var sp = getSharedPreferences("config", Context.MODE_PRIVATE)
         var userId = sp.getString("userId", "")
         var sessionId = sp.getString("sessionId", "")
-        var content = ""
         var sHeadMap = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
-        val string = release_edit.text.toString()
-        content = string
-        //使用自定义默认参数或者默认参数,并清除Application启动之后选择图片缓存
-        ImagePicker.defaultConfig()
-        ImagePicker.isCrop(false)
-        ImagePicker.multiMode(true)
+       var content= "666666"
+        initWidget()
         //监听输入框的字符数
         release_edit.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 edit_count.text = s!!.length.toString() + "/200"
+                content = s.toString()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -94,46 +110,58 @@ class CommunityReleaseActivity : BaseActivity<Constanct.View, Constanct.Presente
         release_back.setOnClickListener {
             onBackPressed()
         }
-        recycer_release.layoutManager = GridLayoutManager(this, 3)
-        val imageAdapter = ImageAdapter(ArrayList())
-        imageAdapter.listener = object : ImageAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                //回顾已选择图片，可以删除
-                ImagePicker.review(this@CommunityReleaseActivity, position, this@CommunityReleaseActivity)
-            }
-        }
-        recycer_release.addItemDecoration(GridSpacingItemDecoration(3, Utils.dp2px(this, 2f), false))
-        recycer_release.adapter = imageAdapter
-        imageAdapter.ImgList {
-            //Toast.makeText(this,it[0].path,Toast.LENGTH_LONG).show()
-        }
-
-
-
         //发表
         release_fabiao.setOnClickListener {
-
-
+            mPresenter!!.loadSend(Api.COMMUNITY_RELEASE,sHeadMap,content,selectList)
+            val mapcanthress: Map<String, Int> = mapOf(Pair("taskId",1003))
+            mPresenter!!.postPresenter(Api.ZUOTASK, sHeadMap, TaskBean::class.java, mapcanthress)
         }
 
 
-
-
-
-
-        initWidget()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        ImagePicker.clear()//清除缓存已选择的图片
+
     }
+
     private fun initWidget() {
-        val layoutManager = GridLayoutManager(this, 3)
-        recycer_release.layoutManager = layoutManager
-        img_add.setOnClickListener {
+
+        val manager = FullyGridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false)
+
+        recycer_release.layoutManager = manager
+        adapter = GridImageAdapter(this)
+        adapter!!.onAddPicClickListener {
             showPop()
         }
+        adapter!!.setList(selectList)
+        adapter!!.setSelectMax(maxSelectNum)
+        recycer_release.adapter = adapter
+        adapter!!.setOnItemClickListener(object : GridImageAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int, v: View) {
+                if (selectList.size > 0) {
+                    val media = selectList[position]
+                    val pictureType = media.pictureType
+                    val mediaType = PictureMimeType.pictureToVideo(pictureType)
+                    when (mediaType) {
+                        1 -> {
+                            // 预览图片 可自定长按保存路径
+                            //PictureSelector.create(MainActivity.this).externalPicturePreview(position, "/custom_file", selectList);
+                            PictureSelector.create(this@CommunityReleaseActivity).externalPicturePreview(position, selectList)
+                        }
+                        2 -> {
+                            // 预览视频
+                            PictureSelector.create(this@CommunityReleaseActivity).externalPictureVideo(media.path)
+                        }
+                        3 -> {
+                            // 预览音频
+                            PictureSelector.create(this@CommunityReleaseActivity).externalPictureAudio(media.path)
+                        }
+                    }
+                }
+            }
+
+        })
 
     }
 
@@ -171,11 +199,30 @@ class CommunityReleaseActivity : BaseActivity<Constanct.View, Constanct.Presente
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        val images: List<LocalMedia>
+        if (resultCode == Activity.RESULT_OK) {
+            when(requestCode){
+                PictureConfig.CHOOSE_REQUEST->{
+                    images = PictureSelector.obtainMultipleResult(data)
+                    selectList.addAll(images)
+                    adapter!!.setList(selectList)
+                    adapter!!.notifyDataSetChanged()
+                }
+            }
+        }
 
     }
 
     override fun View(any: Any) {
-
+        if (any !=null){
+            var userPublicBean:UserPublicBean = any as UserPublicBean
+           /* Looper.prepare()
+            Toast.makeText(this@CommunityReleaseActivity,userPublicBean.message,Toast.LENGTH_LONG).show()
+            Looper.loop()*/
+            if (userPublicBean.status.equals("0000")){
+                finish()
+            }
+        }
     }
 
 

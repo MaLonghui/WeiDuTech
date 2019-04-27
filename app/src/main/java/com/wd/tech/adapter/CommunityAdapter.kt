@@ -29,6 +29,8 @@ import kotlin.collections.ArrayList
  * function:
  */
 class CommunityAdapter(context: Context) : RecyclerView.Adapter<CommunityAdapter.ViewHolder>() {
+
+
     var context: Context? = null
     var list: List<CommunityBean>? = null
     private lateinit var priseListener: (Int, Int) -> Unit
@@ -80,6 +82,8 @@ class CommunityAdapter(context: Context) : RecyclerView.Adapter<CommunityAdapter
         val split = file.split(",".toRegex())
         p0.recycler_image.adapter=CommunityFileAdapter(this.context!!,split)
         p0.recycler_image.adapter = CommunityFileAdapter(this.context!!, split)
+        p0.recycler_image.adapter = CommunityFileAdapter(this.context!!, split)
+        p0.recycler_image.adapter=CommunityFileAdapter(this.context!!,split)
         p0.text_comment.setText("${list!![p1].comment}")
         p0.text_praise.setText("${list!![p1].praise}")
 

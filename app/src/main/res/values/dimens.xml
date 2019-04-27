@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Your custom size defind by references, can be writted in anywhere, any module, any values/*.xml, for example: -->
 
@@ -44,10 +44,11 @@
     <dimen name="dp_40">40dp</dimen>
     <dimen name="dp_44">44dp</dimen>
     <dimen name="dp_45">45dp</dimen>
+    <dimen name="dp_46">46dp</dimen>
     <dimen name="dp_50">50dp</dimen>
-    <dimen name="dp_51">51dp</dimen>
     <dimen name="dp_52">50dp</dimen>
     <dimen name="dp_53">53dp</dimen>
+    <dimen name="dp_51">51dp</dimen>
     <dimen name="dp_54">54dp</dimen>
     <dimen name="dp_56">56dp</dimen>
     <dimen name="dp_57">57dp</dimen>
@@ -116,6 +117,7 @@
     <dimen name="dp_224">224dp</dimen>
     <dimen name="dp_236">236dp</dimen>
     <dimen name="dp_250">250dp</dimen>
+    <dimen name="dp_256">256dp</dimen>
     <dimen name="dp_259">259dp</dimen>
     <dimen name="dp_260">260dp</dimen>
     <dimen name="dp_272">272dp</dimen>
