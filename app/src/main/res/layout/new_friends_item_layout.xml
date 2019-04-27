@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/view_style"
+        android:layout_margin="@dimen/dp_4"
+        android:layout_height="@dimen/dp_80">
+        <ImageView
+            android:id="@+id/newfriends_img_back_setting"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:src="@mipmap/common_icon_back_n"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24" />
+        <TextView
+
+            android:text="消息"
+            android:layout_centerInParent="true"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+
+
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/beauty"
+      android:layout_margin="@dimen/dp_20"
+      android:padding="@dimen/dp_20"
+      >
+      <TextView
+          android:id="@+id/newfriends_time"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="下午 6:53"
+          android:layout_centerHorizontal="true"
+          />
+
+
+     <com.facebook.drawee.view.SimpleDraweeView
+         android:layout_width="@dimen/dp_36"
+         android:layout_height="@dimen/dp_36"
+         android:background="@mipmap/ic_launcher"
+         android:layout_below="@id/newfriends_time"
+         android:layout_marginTop="@dimen/dp_20"
+         android:layout_marginLeft="@dimen/dp_12"
+         android:id="@+id/newfriends_img" />
+
+      <TextView
+          android:id="@+id/newfriends_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/sp_14"
+          android:layout_marginLeft="@dimen/dp_10"
+          android:layout_toRightOf="@id/newfriends_img"
+          android:text="张大米"
+          android:layout_marginTop="@dimen/dp_12"
+          android:layout_alignTop="@id/newfriends_img"
+          />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/beizhu_context"
+            android:layout_below="@id/newfriends_img"
+            android:text="请求添加你为好友"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+
+            />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_below="@id/beizhu_context"
+            android:layout_marginTop="@dimen/dp_12"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+
+            <RadioButton
+                android:id="@+id/btn_agree"
+                android:layout_width="@dimen/dp_130"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_0"
+                android:background="#20affa"
+                android:text="同意"
+                android:button="@null"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_14"
+                android:gravity="center"
+                />
+
+            <RadioButton
+                android:id="@+id/btn_refuse"
+                android:layout_width="@dimen/dp_130"
+                android:layout_height="match_parent"
+                android:background="#ff5757"
+                android:text="拒绝"
+                android:button="@null"
+                android:layout_marginLeft="@dimen/dp_14"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_14"
+                android:gravity="center"
+                />
+        </RadioGroup>
+
+
+
+
+  </RelativeLayout>
+
+
+
+
+</LinearLayout>
