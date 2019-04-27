@@ -60,10 +60,28 @@
         <activity android:name=".activity.SigninActivity" />
         <activity android:name=".activity.MyIntegralActivity" />
         <activity android:name=".activity.AddFriendOrGroupActivity" />
-        <activity android:name=".activity.AddFriendActivity"></activity>
+        <activity android:name=".activity.AddFriendActivity" />
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="微信分享回调"
+            android:launchMode="singleTask"
+
+         />
+
+
+        <activity android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:label="微信支付回调"
+            android:launchMode="singleTask"
+
+            />
+        <activity android:name=".activity.SendAddFriendActivity" />
+        <activity android:name=".activity.NewFriendActivity" />
+        <activity android:name=".activity.SendMesageActivity"
+            />
+        <activity android:name=".activity.UserSettingActivity"></activity>
+
     </application>
 
 </manifest>

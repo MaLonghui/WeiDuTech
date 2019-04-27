@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.fragment_message.*
 /**
  * 消息
  */
-class MessageFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Constanct.View{
+class MessageFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Constanct.View {
 
 
     var adapter: MyPagerAdapter? = null
@@ -100,12 +100,12 @@ class MessageFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Con
         pop!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         pop!!.isOutsideTouchable = true
         pop!!.isFocusable = true
-        pop!!.showAsDropDown(img_add,100,0)
-        add_friend_linear.setOnClickListener{
-            startActivity(Intent(context,AddFriendOrGroupActivity::class.java))
+        pop!!.showAsDropDown(img_add, 100, 0)
+        add_friend_linear.setOnClickListener {
+            startActivity(Intent(context, AddFriendOrGroupActivity::class.java))
             pop!!.dismiss()
         }
-        creat_group_linear.setOnClickListener{
+        creat_group_linear.setOnClickListener {
 
         }
     }

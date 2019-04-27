@@ -25,10 +25,15 @@ class InfoItemAdapter(context: Context) : RecyclerView.Adapter<InfoItemAdapter.V
     var context: Context? = null
     var infoList: List<InfoResult>? = null
     var listener:(Int)->Unit = {  }
+    private lateinit var shareListen:(String) ->Unit
     private lateinit var collectListener:(Int,Int)->Unit
     //点击收藏
     fun setCollectListener(collectListener:(Int,Int)->Unit){
         this.collectListener = collectListener
+    }
+    //分享
+    fun setShareClickListener(shareListen:(String) ->Unit){
+        this.shareListen = shareListen
     }
     init {
         this.context = context
@@ -69,6 +74,10 @@ class InfoItemAdapter(context: Context) : RecyclerView.Adapter<InfoItemAdapter.V
             //点击收藏
             holder.itemView.info_collect.setOnClickListener {
                 collectListener.invoke(infoList!![i].id,infoList!![i].whetherCollection)
+            }
+            //分享
+            holder.itemView.info_share.setOnClickListener {
+                shareListen.invoke(infoList!![i].title)
             }
             if(infoList!![i].whetherPay == 1){
                 holder.itemView.info_pay_img.visibility = View.VISIBLE

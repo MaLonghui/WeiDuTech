@@ -4,6 +4,8 @@ import android.content.Context
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.api.BasicCallback
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import com.wd.tech.R
 import com.wd.tech.api.Api
@@ -33,22 +35,13 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Const
             edit.putString("headPic", loginBean.result.headPic)
             edit.putString("nickName", loginBean.result.nickName)
             edit.putString("signature",loginBean.result.signature)
+            edit.putString("phone",loginBean.result.phone)
             edit.commit()
             if (loginBean.result != null)
-                Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
+              //  Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
             finish()
             edit.putString("signature", loginBean.result.signature)
             edit.commit()
-            if (loginBean.result != null) {
-                Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
-                finish()
-            }
-
-            edit.putString("signature",loginBean.result.signature)
-            edit.commit()
-            if (loginBean.result != null)
-                Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
-            finish()
         } else {
             Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
         }
@@ -73,6 +66,14 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Const
                 var map: Map<String, Any> = mapOf()
                 var map1: Map<String, Any> = mapOf(Pair("phone", phone), Pair("pwd", pwd1))
                 mPresenter!!.postPresenter(Api.LOGIN_URL, map, LoginBean::class.java, map1)
+                JMessageClient.login(phone, pwd, object : BasicCallback(){
+                    override fun gotResult(p0: Int, p1: String?) {
+                        if (p0 == 0){
+                            Toast.makeText(this@LoginActivity,"J登录成功",Toast.LENGTH_LONG).show()
+                        }
+                    }
+
+                })
             }
         }
         iamge_eye.setOnClickListener {

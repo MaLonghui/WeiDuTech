@@ -80,8 +80,11 @@ class CommunityFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), C
             mPresenter!!.getPresenter(Api.COMMUNITY, map, Community::class.java, mapone)
         }
         adapter!!.setIconClickListener { i->
-            var map:HashMap<String,Any> = hashMapOf(Pair("i",i))
-            JumpActivityUtils.skipValueActivity(context as Activity, FindUserActivity::class.java,map)
+
+            var intent:Intent = Intent(activity,FindUserActivity::class.java)
+            intent.putExtra("i",i)
+            startActivity(intent)
+
         }
         recycler_community.adapter = adapter
         recycler_community.setPullRefreshEnabled(true)

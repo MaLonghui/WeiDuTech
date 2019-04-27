@@ -73,8 +73,10 @@ open class JumpActivityUtils {
                     }
                 }
                 activity.startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
+                activity.finish()
             } else {
                 activity.startActivity(Intent(activity, NetActivity::class.java),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
+                activity.finish()
             }
         }
 

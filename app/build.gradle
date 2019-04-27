@@ -9,10 +9,20 @@ android {
     defaultConfig {
         applicationId "com.wd.tech"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "d4cf77f0d3b85e9edc540dee", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
     //微信获取code值
     signingConfigs {
@@ -84,6 +94,10 @@ dependencies {
     implementation 'com.github.MZCretin:ExpandableTextView:v1.5.3'
     //图片选择
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.9'
+    implementation 'cn.jiguang.sdk:jmessage:2.8.2'  // 此处以JMessage 2.8.2 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:1.2.7'  // 此处以JCore 1.2.7 版本为例。
+    //baseQuick
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 }
 repositories {
     mavenCentral()

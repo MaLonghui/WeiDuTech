@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout
 import android.transition.Explode
 import android.view.KeyEvent
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import com.hjm.bottomtabbar.BottomTabBar
 import com.wd.tech.Fragment.CommunityFragment
@@ -28,6 +29,7 @@ class ShowActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         window.enterTransition = Explode().setDuration(1000)
         window.exitTransition = Explode().setDuration(1000)
         bottom_tab_bar.init(supportFragmentManager)

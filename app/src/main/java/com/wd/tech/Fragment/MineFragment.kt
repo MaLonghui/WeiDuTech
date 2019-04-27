@@ -80,12 +80,6 @@ class MineFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Consta
             startActivity(it)
         }
 
-
-
-        //签到
-        img_qd.setOnClickListener {
-            startActivity(Intent(this.context!!,SigninActivity::class.java))
-        }
         // 收藏
         item_collect.setmOnLSettingItemClick {
             startActivity(Intent(this.context!!, CollectActivity::class.java))

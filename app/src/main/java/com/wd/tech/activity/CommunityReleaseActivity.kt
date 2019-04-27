@@ -9,6 +9,7 @@ import android.os.Looper
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import com.wd.tech.R
 import com.wd.tech.base.BaseActivity
@@ -38,7 +39,6 @@ class CommunityReleaseActivity : BaseActivity<Constanct.View, Constanct.Presente
     private val selectList = ArrayList<LocalMedia>()
     private var adapter: GridImageAdapter? = null
     private var pop: PopupWindow? = null
-
 
 
     override fun onClick(v: View?) {
@@ -88,7 +88,7 @@ class CommunityReleaseActivity : BaseActivity<Constanct.View, Constanct.Presente
         var userId = sp.getString("userId", "")
         var sessionId = sp.getString("sessionId", "")
         var sHeadMap = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
-       var content= "666666"
+        var content = ""
         initWidget()
         //监听输入框的字符数
         release_edit.addTextChangedListener(object : TextWatcher {
@@ -109,9 +109,20 @@ class CommunityReleaseActivity : BaseActivity<Constanct.View, Constanct.Presente
         release_back.setOnClickListener {
             onBackPressed()
         }
+
         //发表
         release_fabiao.setOnClickListener {
-            mPresenter!!.loadSend(Api.COMMUNITY_RELEASE,sHeadMap,content,selectList)
+            if (TextUtils.isEmpty(content)) {
+                Toast.makeText(this, "请输入要发表的内容", Toast.LENGTH_LONG).show()
+            } else {
+                if (selectList!!.size > 0) {
+                    mPresenter!!.loadSend(Api.COMMUNITY_RELEASE, sHeadMap, content, selectList)
+                } else {
+                    var list: MutableList<LocalMedia> = listOf<LocalMedia>().toMutableList()
+                    mPresenter!!.loadSend(Api.COMMUNITY_RELEASE, sHeadMap, content, list)
+                }
+            }
+
         }
 
 
@@ -198,8 +209,8 @@ class CommunityReleaseActivity : BaseActivity<Constanct.View, Constanct.Presente
         super.onActivityResult(requestCode, resultCode, data)
         val images: List<LocalMedia>
         if (resultCode == Activity.RESULT_OK) {
-            when(requestCode){
-                PictureConfig.CHOOSE_REQUEST->{
+            when (requestCode) {
+                PictureConfig.CHOOSE_REQUEST -> {
                     images = PictureSelector.obtainMultipleResult(data)
                     selectList.addAll(images)
                     adapter!!.setList(selectList)
@@ -211,12 +222,10 @@ class CommunityReleaseActivity : BaseActivity<Constanct.View, Constanct.Presente
     }
 
     override fun View(any: Any) {
-        if (any !=null){
-            var userPublicBean:UserPublicBean = any as UserPublicBean
-           /* Looper.prepare()
-            Toast.makeText(this@CommunityReleaseActivity,userPublicBean.message,Toast.LENGTH_LONG).show()
-            Looper.loop()*/
-            if (userPublicBean.status.equals("0000")){
+        if (any != null) {
+            var userPublicBean: UserPublicBean = any as UserPublicBean
+           // Toast.makeText(this@CommunityReleaseActivity, userPublicBean.message, Toast.LENGTH_LONG).show()
+            if (userPublicBean.status.equals("0000")) {
                 finish()
             }
         }

@@ -17,8 +17,10 @@ import com.wd.tech.base.BaseActivity
 import com.wd.tech.bean.UserByPhoneBean
 import com.wd.tech.mvp.Constanct
 import com.wd.tech.mvp.Presenter
+import com.wd.tech.utils.JumpActivityUtils
 import kotlinx.android.synthetic.main.activity_add_friend_or_group.*
 import kotlinx.android.synthetic.main.activity_search.*
+import java.util.HashMap
 
 class AddFriendOrGroupActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Constanct.View {
     override fun getLayoutId(): Int {
@@ -80,13 +82,13 @@ class AddFriendOrGroupActivity : BaseActivity<Constanct.View, Constanct.Presente
                 val uri = Uri.parse(result.headPic)
                 img_search_result.setImageURI(uri)
                 name_search_result.text = result.nickName
-            }else{
+            } else {
                 lin_search_result.visibility = GONE
                 no_search_result.visibility = VISIBLE
             }
-
             lin_search_result.setOnClickListener {
-
+                var intentMap:HashMap<String,Any> = hashMapOf(Pair("userId", result.userId) )
+                JumpActivityUtils.skipValueActivity(this, AddFriendActivity::class.java, intentMap)
             }
         }
     }

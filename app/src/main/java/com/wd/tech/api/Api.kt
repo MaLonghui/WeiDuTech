@@ -100,5 +100,17 @@ class Api {
         var MY_FRIEND_LIST = "chat/verify/v1/findFriendListByGroupId"
         //31.根据手机号查询用户信息
         var FIND_USER_PHONE = "user/verify/v1/findUserByPhone"
+        //4.检测是否为我的好友
+        var CHECK_MYFRIEND = "chat/verify/v1/checkMyFriend"
+        //1.添加好友
+        var SEND_FRIEND = "chat/verify/v1/addFriend"
+        //11.查询用户的好友通知记录
+        var FRIEND_NOTICE = "chat/verify/v1/findFriendNoticePageList"
+        //12.审核好友申请
+        var FRIEND_SHENHE = "chat/verify/v1/reviewFriendApply"
+        //28.查询好友信息
+        var FRIEND_INFORMATION = "user/verify/v1/queryFriendInformation"
+        //4.微信分享
+        var WX_SHARE = "tool/v1/wxShare"
     }
 }

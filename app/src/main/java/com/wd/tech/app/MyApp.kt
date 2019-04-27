@@ -2,6 +2,7 @@ package com.wd.tech.app
 
 import android.app.Application
 import android.content.Context
+import cn.jpush.im.android.api.JMessageClient
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
@@ -22,8 +23,8 @@ class MyApp : Application() {
         //U盟
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null)
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL)
-
-
+        JMessageClient.setDebugMode(true);
+        JMessageClient.init(this);
     }
 
 
@@ -31,4 +32,5 @@ class MyApp : Application() {
     fun getmContext(): Context? {
         return context
     }
+
 }

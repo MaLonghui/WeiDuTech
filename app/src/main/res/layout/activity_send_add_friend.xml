@@ -1,9 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
     tools:context=".activity.SendAddFriendActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_38"
+        android:paddingLeft="@dimen/dp_12"
+        android:paddingRight="@dimen/dp_12"
+        android:layout_marginBottom="@dimen/dp_22"
+        android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/send_friend_back"
+            android:src="@mipmap/common_icon_back_n"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24" />
+        <TextView
+            android:text="加好友"
+            android:layout_centerInParent="true"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/text_send"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="发送"
+            android:textSize="@dimen/sp_16"
+            android:textColor="#666666"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:background="#f2f2f2"
+        android:layout_height="@dimen/dp_1"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingRight="@dimen/dp_12"
+        android:paddingLeft="@dimen/dp_12"
+        android:layout_height="wrap_content">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/send_friend_icon"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_20"
+            app:roundAsCircle="true"
+            app:progressBarImage="@drawable/img_loading"
+            app:progressBarAutoRotateInterval="3000"
+            android:layout_marginBottom="@dimen/dp_28"
+            android:layout_width="@dimen/dp_77"
+            android:layout_height="@dimen/dp_77" />
+        <TextView
+            android:id="@+id/send_friend_name"
+            android:layout_marginTop="@dimen/dp_26"
+            android:layout_toRightOf="@id/send_friend_icon"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_18"
+            android:text="sdaf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/send_friend_qian"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_below="@id/send_friend_name"
+            android:layout_toRightOf="@id/send_friend_icon"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_14"
+            android:text="sdaf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <TextView
+        android:text="申请备注"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:textSize="@dimen/sp_14"
+        android:textColor="#666666"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/send_friend_edit"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="#ffffff"
+        android:hint="好友备注"
+        android:paddingLeft="@dimen/dp_14"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48" />
+</LinearLayout>

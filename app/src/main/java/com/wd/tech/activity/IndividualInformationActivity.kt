@@ -18,6 +18,7 @@ import android.widget.*
 import android.widget.EditText
 import android.widget.PopupWindow
 import android.widget.Toast
+import cn.jpush.im.android.api.JMessageClient
 import com.facebook.common.util.UriUtil
 import com.wd.tech.R
 import com.wd.tech.R.id.setting_image
@@ -100,9 +101,11 @@ class IndividualInformationActivity : BaseActivity<Constanct.View, Constanct.Pre
                 edit.putString("session", "")
                 edit.commit()
                 finish()
+                JMessageClient.logout();
             }).setNeutralButton("否", null)
                     .create()
                     .show()
+
         }
         //       修改密码
         res_pwd.setOnClickListener {

@@ -57,6 +57,7 @@ class WXPayEntryActivity : AppCompatActivity(), IWXAPIEventHandler {
                 Toast.makeText(this, "付款成功", Toast.LENGTH_SHORT).show()
                 //Intent intent = new Intent(this, ReccordActivity.class);
                 // startActivity(intent);
+
             } else if (resp.errCode == -2) {
                 Toast.makeText(this, "您已取消付款", Toast.LENGTH_SHORT).show()
             } else {

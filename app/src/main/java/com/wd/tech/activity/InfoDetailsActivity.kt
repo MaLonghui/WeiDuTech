@@ -3,16 +3,13 @@ package com.wd.tech.activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.ImageView
-import android.widget.PopupWindow
-import android.widget.TextView
-import android.widget.Toast
 import com.wd.tech.R
 import com.wd.tech.adapter.InfoCommentAdapter
 import com.wd.tech.bean.InfoCommentListBean
@@ -28,23 +25,33 @@ import kotlinx.android.synthetic.main.activity_info_details.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
+import com.tencent.mm.opensdk.openapi.IWXAPI
+import com.tencent.mm.opensdk.modelmsg.WXTextObject
+import android.widget.*
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
+import com.wd.tech.utils.MD5Utils
+
 
 /**
  * 资讯详情页
  */
 class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Constanct.View, View.OnClickListener {
+    private var api: IWXAPI? = null
+    var title: String? = null
     override fun onClick(v: View?) {
-        when(v!!.id){
-            R.id.text_btn_ji->{//积分兑换
+        when (v!!.id) {
+            R.id.text_btn_ji -> {//积分兑换
                 var id = intent.getIntExtra("id", 1)
                 var infoId: HashMap<String, Any> = hashMapOf(Pair("id", id))
-                JumpActivityUtils.skipValueActivity(this,IntegralActivity::class.java, infoId)
+                JumpActivityUtils.skipValueActivity(this, IntegralActivity::class.java, infoId)
                 closePopupWindow()
             }
-            R.id.text_btn_vip->{
-                JumpActivityUtils.skipAnotherActivity(this,BuyVipActivity::class.java)
+            R.id.text_btn_vip -> {
+                JumpActivityUtils.skipAnotherActivity(this, BuyVipActivity::class.java)
             }
-            R.id.pay_qu->{
+            R.id.pay_qu -> {
                 closePopupWindow()
             }
         }
@@ -53,6 +60,7 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
     var page: Int = 1
     var count: Int = 5
     var pop: PopupWindow? = null
+    var pop1: PopupWindow? = null
     override fun getLayoutId(): Int {
         return R.layout.activity_info_details
     }
@@ -82,6 +90,9 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
     }
 
     override fun initData() {
+        api = WXAPIFactory.createWXAPI(this, "wx4c96b6b8da494224", true);
+        api!!.registerApp("wx4c96b6b8da494224")
+
         var id = intent.getIntExtra("id", 1)
         var sp = getSharedPreferences("config", Context.MODE_PRIVATE)
         var userId = sp.getString("userId", "")
@@ -106,13 +117,16 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
         no_power_btn.setOnClickListener {
             showPayPop()
         }
+
     }
+
     private fun closePopupWindow() {
         if (pop != null && pop!!.isShowing()) {
             pop!!.dismiss()
             pop = null
         }
     }
+
     private fun showPayPop() {
         val view = LayoutInflater.from(this).inflate(R.layout.pay_pop_layout, null)
         val btn_ji = view.findViewById<TextView>(R.id.text_btn_ji)
@@ -215,6 +229,12 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
             info_details_webview.loadDataWithBaseURL(null, result.content + js, "text/html", "utf-8", null)
             info_details_tuijian.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             info_details_pl_recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+
+            //分享
+            info_details_share_icon.setOnClickListener {
+                showSharePop(result.title)
+            }
             if (result.readPower == 1) {
                 val informationList = infoDetailsBean.result.informationList
                 val infoTuiJianAdapter = InfoTuiJianAdapter(this)
@@ -223,6 +243,7 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
                 info_tuijian_linear.visibility = VISIBLE
                 info_details_webview.visibility = VISIBLE
                 info_no_power.visibility = GONE
+
             } else {
                 info_tuijian_linear.visibility = GONE
                 info_details_webview.visibility = GONE
@@ -254,6 +275,55 @@ class InfoDetailsActivity : BaseActivity<Constanct.View, Constanct.Presenter>(),
                 mPresenter!!.getPresenter(Api.INFO_DETAILS, headMap, InfoDetailsBean::class.java, prams)
             }
         }
+    }
+
+    private fun showSharePop(title: String) {
+        val view = LayoutInflater.from(this).inflate(R.layout.layout_share_pop, null)
+        val tv_friend = view.findViewById<LinearLayout>(R.id.tv_friend)
+        val tv_pyq = view.findViewById<LinearLayout>(R.id.tv_pyq)
+        val tv_qx = view.findViewById<TextView>(R.id.tv_qx)
+        pop1 = PopupWindow(view, -1, -2);
+        pop1!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        pop1!!.isOutsideTouchable = true
+        pop1!!.isFocusable = true
+        val lp = window.attributes
+        lp.alpha = 0.5f
+        window.attributes = lp
+        pop1!!.setOnDismissListener {
+            val lp = window.attributes
+            lp.alpha = 1f
+            window.attributes = lp
+        }
+        pop1!!.animationStyle = R.style.main_menu_photo_anim
+        pop1!!.showAtLocation(window.decorView, Gravity.BOTTOM, 0, 0)
+        tv_friend.setOnClickListener {
+            share(false, title)
+            pop1!!.dismiss()
+        }
+        tv_pyq.setOnClickListener {
+            share(true, title)
+            pop1!!.dismiss()
+        }
+        tv_qx.setOnClickListener {
+            pop1!!.dismiss()
+        }
+
+    }
+
+
+    private fun share(friendsCircle: Boolean, title: String) {
+        //初始化一个 WXTextObject 对象，填写分享的文本内容
+        val textObj = WXTextObject()
+        textObj.text = title
+        //用 WXTextObject 对象初始化一个 WXMediaMessage 对象
+        val msg = WXMediaMessage()
+        msg.mediaObject = textObj
+        msg.description = title
+        val req = SendMessageToWX.Req()
+        req.transaction = System.currentTimeMillis().toString()
+        req.message = msg
+        req.scene = if (friendsCircle) SendMessageToWX.Req.WXSceneTimeline else SendMessageToWX.Req.WXSceneSession;
+        api!!.sendReq(req)
     }
 
 }

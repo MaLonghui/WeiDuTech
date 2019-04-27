@@ -133,7 +133,7 @@ class BuyVipActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Cons
             if (payBean !=null){
                 val payRunnable = Runnable {
                     val alipay = PayTask(this)
-                    val result:Map<String,String> = alipay.payV2(payBean.result, true)
+                    val result:Map<String,Any> = alipay.payV2(payBean.result, true)
                     val msg = Message()
                     msg.what = SDK_PAY_FLAG
                     msg.obj = result

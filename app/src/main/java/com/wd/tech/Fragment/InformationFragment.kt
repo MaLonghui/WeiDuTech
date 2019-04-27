@@ -2,12 +2,25 @@ package com.wd.tech.Fragment
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.PopupWindow
+import android.widget.TextView
 import android.widget.Toast
 import com.jcodecraeer.xrecyclerview.ProgressStyle
 import com.jcodecraeer.xrecyclerview.XRecyclerView
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage
+import com.tencent.mm.opensdk.modelmsg.WXTextObject
+import com.tencent.mm.opensdk.openapi.IWXAPI
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.wd.tech.R
 import com.wd.tech.activity.InfoAllPlateActivity
 import com.wd.tech.activity.SearchActivity
@@ -19,6 +32,7 @@ import com.wd.tech.bean.InfoBean
 import com.wd.tech.bean.UserPublicBean
 import com.wd.tech.mvp.Constanct
 import com.wd.tech.mvp.Presenter
+import com.wd.tech.utils.MD5Utils
 import kotlinx.android.synthetic.main.fragment_information.*
 
 /**
@@ -28,6 +42,8 @@ class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(),
     var plateId = 0
     var page = 1
     var count = 5
+    private var api: IWXAPI? = null
+    var pop1: PopupWindow? = null
     var informationAdapter: InformationAdapter? = null
 
     override fun getLayoutId(): Int {
@@ -77,9 +93,12 @@ class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(),
                 mPresenter!!.postPresenter(Api.INFO_COLLECT, sHeadMap, UserPublicBean::class.java, prams)
             } else if (collect == 1) {
                 mPresenter!!.deletePresenter(Api.INFO_CANCEl_COLLECT, sHeadMap, UserPublicBean::class.java, prams)
-
             }
 
+        }
+        //分享
+        informationAdapter!!.setShareClick {
+            showSharePop(it)
         }
         //布局管理器
         val layoutManager = LinearLayoutManager(context)
@@ -141,7 +160,58 @@ class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(),
 
     }
 
+    private fun showSharePop(it1: String) {
+        val view = LayoutInflater.from(context).inflate(R.layout.layout_share_pop, null)
+        val tv_friend = view.findViewById<LinearLayout>(R.id.tv_friend)
+        val tv_pyq = view.findViewById<LinearLayout>(R.id.tv_pyq)
+        val tv_qx = view.findViewById<TextView>(R.id.tv_qx)
+        pop1 = PopupWindow(view, -1, -2);
+        pop1!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        pop1!!.isOutsideTouchable = true
+        pop1!!.isFocusable = true
+        val lp = activity!!.window.attributes
+
+        lp.alpha = 0.5f
+        activity!!.window.attributes = lp
+        pop1!!.setOnDismissListener {
+            val lp = activity!!.window.attributes
+            lp.alpha = 1f
+            activity!!.window.attributes = lp
+        }
+        pop1!!.animationStyle = R.style.main_menu_photo_anim
+        pop1!!.showAtLocation(activity!!.window.decorView, Gravity.BOTTOM, 0, 0)
+        tv_friend.setOnClickListener {
+            share(false, it1)
+            pop1!!.dismiss()
+        }
+        tv_pyq.setOnClickListener {
+            share(true, it1)
+            pop1!!.dismiss()
+        }
+        tv_qx.setOnClickListener {
+            pop1!!.dismiss()
+        }
+    }
+
+    private fun share(friendsCircle: Boolean, it1: String) {
+        //初始化一个 WXTextObject 对象，填写分享的文本内容
+        val textObj = WXTextObject()
+        textObj.text = it1
+        //用 WXTextObject 对象初始化一个 WXMediaMessage 对象
+        val msg = WXMediaMessage()
+        msg.mediaObject = textObj
+        msg.description = it1
+        val req = SendMessageToWX.Req()
+        req.transaction = System.currentTimeMillis().toString()
+        req.message = msg
+        req.scene = if (friendsCircle) SendMessageToWX.Req.WXSceneTimeline else SendMessageToWX.Req.WXSceneSession;
+        api!!.sendReq(req)
+
+    }
+
     override fun initData() {
+        api = WXAPIFactory.createWXAPI(context, "wx4c96b6b8da494224", true);
+        api!!.registerApp("wx4c96b6b8da494224")
         var sp = context!!.getSharedPreferences("config", Context.MODE_PRIVATE)
         var userId = sp.getString("userId", "")
         var sessionId = sp.getString("sessionId", "")

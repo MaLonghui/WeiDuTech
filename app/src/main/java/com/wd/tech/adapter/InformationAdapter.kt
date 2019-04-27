@@ -2,6 +2,7 @@ package com.wd.tech.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.wd.tech.R
 import com.wd.tech.activity.BannerDetailsActivity
 import com.wd.tech.activity.InfoDetailsActivity
+import com.wd.tech.activity.SendMesageActivity
 import com.wd.tech.bean.BannerBean
 import com.wd.tech.bean.BannerResult
 import com.wd.tech.bean.InfoResult
@@ -34,6 +36,10 @@ class InformationAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
     var bannerList:List<BannerResult> ?= null
     var infoList:List<InfoResult>? = null
     private lateinit var collectListener : (Int,Int)->Unit
+    private lateinit var shareListener:(String)->Unit
+    fun setShareClick(shareListener:(String)->Unit){
+        this.shareListener = shareListener
+    }
     fun setCollectClick(collectListener : (Int,Int)->Unit){
         this.collectListener = collectListener
     }
@@ -53,16 +59,7 @@ class InformationAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
         this.infoList = infoList
         notifyDataSetChanged()
     }
-    /*//刷新
-    fun refresh(temList:MutableList<InfoResult>){
-        this.infoList!!.clear()
-        this.infoList!!.addAll(temList)
-    }
-    //加载
-    fun loadMore(list:MutableList<InfoResult>){
-        this.infoList!!.addAll(list)
-        notifyDataSetChanged()
-    }*/
+
 
 
     override fun getItemViewType(position: Int): Int {
@@ -114,8 +111,9 @@ class InformationAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
                 }
             })
             holder.itemView.banner.setOnItemClickListener { banner, model, view, position ->
-                var bannerPrams : HashMap<String,Any> = hashMapOf(Pair("url",bannerList!![position].jumpUrl))
-                JumpActivityUtils.skipValueActivity(context as Activity,BannerDetailsActivity::class.java,bannerPrams)
+                var intent: Intent = Intent(context, BannerDetailsActivity::class.java)
+                intent.putExtra("url",bannerList!![position].jumpUrl)
+                context!!.startActivity(intent)
             }
         }else if(holder is ItemTwoViewHolder){
             val layoutManager = LinearLayoutManager(context)
@@ -126,12 +124,16 @@ class InformationAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
             holder.itemView.info_recycler_view.adapter = infoItemAdapter
             infoItemAdapter.setInfoItemResult(this!!.infoList!!)
             infoItemAdapter.setItemClickListener {
-                var prams : HashMap<String,Any> = hashMapOf(Pair("id",it))
-                JumpActivityUtils.skipValueActivity(context as Activity,InfoDetailsActivity::class.java,prams)
+                var intent: Intent = Intent(context, InfoDetailsActivity::class.java)
+                intent.putExtra("id",it)
+                context!!.startActivity(intent)
             }
             //收藏
             infoItemAdapter.setCollectListener { id, collect ->
                 collectListener.invoke(id,collect)
+            }
+            infoItemAdapter.setShareClickListener {
+                shareListener.invoke(it)
             }
         }
     }
