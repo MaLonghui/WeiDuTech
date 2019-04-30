@@ -64,6 +64,20 @@ class LinkManFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Con
         super.onDestroy()
     }
 
+    override fun onResume() {
+        super.onResume()
+        val sp: SharedPreferences = context!!.getSharedPreferences("config", Context.MODE_PRIVATE)
+        val userId = sp.getString("userId", "")
+        val sessionId = sp.getString("sessionId", "")
+        val headmap: Map<String, Any> = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
+        var nMap: Map<String, Any> = mapOf()
+        if (userId.equals("") || sessionId.equals("")) {
+
+        } else {
+            mPresenter!!.getPresenter(Api.FRIEND_GROUP_LIST, headmap, MyGroupBean::class.java, nMap)
+        }
+    }
+
     override fun initData() {
         val sp: SharedPreferences = context!!.getSharedPreferences("config", Context.MODE_PRIVATE)
         val userId = sp.getString("userId", "")

@@ -16,7 +16,8 @@ class Constanct {
         fun putPresenter(uri: String, headerMap: Map<String,Any>, clazz: Class<*>, parms:Map<String,Any>)
         fun deletePresenter(uri: String, headerMap: Map<String,Any>, clazz: Class<*>, parms:Map<String,Any>)
         fun imagePost(uri:String, headmap: Map<String, String >, image: MultipartBody.Part)
-        fun loadSend(uri: String,headMap: Map<String, Any>,content : String,selectList : MutableList<LocalMedia>)
         fun imgsPostPresenter(uri: String, headerMap: Map<String,Any>, parms:Map<String,Any>, file: File, clazz: Class<*>)
+        fun loadSend(uri: String,headMap: Map<String, Any>,content : String,selectList : MutableList<LocalMedia>)
+        fun headIconPresenter(url: String,headMap: Map<String, Any>, file: File)
     }
 }

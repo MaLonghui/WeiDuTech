@@ -21,8 +21,10 @@ open class JumpActivityUtils {
                 val dialogprogress: DialogUtils = DialogUtils(activity)
                 dialogprogress.showProgressDialog(true, "正在加载数据……")
                 activity.startActivity(Intent(activity, clazz),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
-                activity.finish()
+                        activity.finish()
                 dialogprogress.dismiss()
+                activity.finish()
+
                 /*handler.postDelayed(object : Runnable {
                     override fun run() {
                       //  activity.startActivity(Intent(activity, clazz),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
@@ -35,10 +37,7 @@ open class JumpActivityUtils {
 //                }, 650)*/
                         activity.finish()
                 dialogprogress.dismiss()
-                        activity.finish()
-                dialogprogress.dismiss()
-                activity.finish()
-                dialogprogress.dismiss()
+
             } else {
                 activity.startActivity(Intent(activity, NetActivity::class.java),ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
                 activity.finish()

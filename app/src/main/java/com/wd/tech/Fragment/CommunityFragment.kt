@@ -62,6 +62,18 @@ class CommunityFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), C
         } else {
             mPresenter!!.getPresenter(Api.COMMUNITY, map, Community::class.java, mapone)
         }
+        adapter!!.setIconClickListener { i ->
+            if (userid.equals("") || sessionId.equals("")) {
+                Toast.makeText(context,"还没登录哦！！",Toast.LENGTH_LONG).show()
+
+            }else{
+                var intent: Intent = Intent(activity, FindUserActivity::class.java)
+                intent.putExtra("i", i)
+                startActivity(intent)
+            }
+
+
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -79,11 +91,16 @@ class CommunityFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), C
         } else {
             mPresenter!!.getPresenter(Api.COMMUNITY, map, Community::class.java, mapone)
         }
-        adapter!!.setIconClickListener { i->
+        adapter!!.setIconClickListener { i ->
+            if (userid.equals("") || sessionId.equals("")) {
+                Toast.makeText(context,"还没登录哦！！",Toast.LENGTH_LONG).show()
 
-            var intent:Intent = Intent(activity,FindUserActivity::class.java)
-            intent.putExtra("i",i)
-            startActivity(intent)
+            }else{
+                var intent: Intent = Intent(activity, FindUserActivity::class.java)
+                intent.putExtra("i", i)
+                startActivity(intent)
+            }
+
 
         }
         recycler_community.adapter = adapter
@@ -142,11 +159,14 @@ class CommunityFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), C
                 var prams = mapOf(Pair("communityId", communityId), Pair("content", content))
                 mPresenter!!.postPresenter(Api.INFO_COMMENT_ADD, map, UserPublicBean::class.java, prams)
                 community_relative.visibility = GONE
+                //评论任务
+                val mapcantwo: Map<String, Int> = mapOf(Pair("taskId", 1002))
+                mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcantwo)
             }
         }
         //发布帖子
         comment_release.setOnClickListener {
-           startActivity(Intent(context as Activity,CommunityReleaseActivity::class.java))
+            startActivity(Intent(context as Activity, CommunityReleaseActivity::class.java))
         }
 
 

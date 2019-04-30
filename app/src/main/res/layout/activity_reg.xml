@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/image_touxiang"
         android:layout_marginLeft="@dimen/dp_40"
-        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_35"
         android:layout_marginRight="@dimen/dp_40"
         android:orientation="horizontal">
 
@@ -126,16 +126,54 @@
         android:layout_marginRight="@dimen/dp_40"
         android:layout_marginTop="@dimen/dp_10"
         android:background="#ffffff" />
-    <TextView
-        android:id="@+id/text_verification"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linear_four"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linear_threen"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_30"
         android:layout_marginRight="@dimen/dp_40"
-        android:textColor="#ffffff"
-        android:text="短信验证注册"/>
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/login_icon_verification" />
+
+        <EditText
+            android:id="@+id/edit_note"
+            android:layout_width="@dimen/dp_174"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:background="@null"
+            android:hint="短信验证"
+            android:textColor="#ffffff"
+            android:digits="0123456789"
+            android:maxLength="4"
+            android:singleLine="true"
+            android:textColorHint="#ffffff" />
+        <Button
+            android:id="@+id/but_note"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_25"
+            android:text="短信验证"
+            android:textSize="@dimen/sp_15"
+            android:textColor="#ffffff"
+            android:background="@drawable/reg_btn_shape"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_four"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@+id/linear_four"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="#ffffff" />
+
     <Button
         android:id="@+id/but_reg"
         android:layout_width="match_parent"

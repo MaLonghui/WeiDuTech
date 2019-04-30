@@ -1,7 +1,5 @@
 package com.wd.tech.activity
 
-import android.app.ActivityOptions
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.wd.tech.R
@@ -14,7 +12,7 @@ import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_my_main)
         Flowable.intervalRange(0, 3, 0, 1, TimeUnit.SECONDS)
                 .doOnNext {
                 }

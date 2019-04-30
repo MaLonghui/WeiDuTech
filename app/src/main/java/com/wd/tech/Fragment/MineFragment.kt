@@ -21,12 +21,14 @@ class MineFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Consta
 
 
 
+    var pf: SharedPreferences? = null
     var headPic: String? = null
     var nickName: String? = null
     var signature: String? = null
     var userId: String? = null
     var sessionId: String? = null
-    var pf: SharedPreferences? = null
+
+
 
     override fun View(any: Any) {
         if (any is IndividualBean) {
@@ -34,6 +36,7 @@ class MineFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Consta
             if (bean.status.equals("0000")) {
                 //        头像和名字
                 my_icon_simple.setImageURI(bean.result.headPic)
+
                 text_name.setText(bean.result.nickName)
                 text_qm.text=bean.result.signature
             }
@@ -70,17 +73,21 @@ class MineFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Consta
             no_login_relative.visibility = VISIBLE
             my_linear.visibility = GONE
         }
-        //签到
-        img_qd.setOnClickListener {
-            startActivity(Intent(this.context!!,SigninActivity::class.java))
+        // 完善信息
+        my_icon_simple.setOnClickListener {
+            startActivity(Intent(this.context!!,PerfectAvtivity::class.java))
         }
-//        登录
+        //登录
         no_login_relative.setOnClickListener {
             var it: Intent = Intent(activity, LoginActivity::class.java)
             startActivity(it)
         }
 
-        // 收藏
+        //签到
+        img_qd.setOnClickListener {
+            startActivity(Intent(this.context!!,SigninActivity::class.java))
+        }
+        //收藏
         item_collect.setmOnLSettingItemClick {
             startActivity(Intent(this.context!!, CollectActivity::class.java))
         }
@@ -116,17 +123,15 @@ class MineFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Consta
         pf = activity!!.getSharedPreferences("config", Context.MODE_PRIVATE)
         val userId = pf!!.getString("userId", "")
         val sessionId = pf!!.getString("sessionId", "")
-        //        请求头
+        //请求头
         val map: Map<String, Any> = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
-//        参数
+        //参数
         val mapcan: Map<String, Any> = mapOf()
         mPresenter!!.getPresenter(Api.INDIVIDUALINFORMATION, map, IndividualBean::class.java, mapcan)
-
-
         if (userId!!.isEmpty() || sessionId!!.isEmpty()) {
             no_login_relative.visibility = VISIBLE
             my_linear.visibility = GONE
-//        登录
+            //登录
             no_login_relative.setOnClickListener {
                 var it: Intent = Intent(activity, LoginActivity::class.java)
                 startActivity(it)

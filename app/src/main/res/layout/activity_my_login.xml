@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bitmap">
+
+    <LinearLayout
+        android:id="@+id/Linearphone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_150"
+        android:layout_marginRight="@dimen/dp_40"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:src="@mipmap/login_icon_phone_n" />
+
+        <EditText
+            android:id="@+id/edit_phone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:background="@null"
+            android:hint="手机号"
+            android:maxLength="11"
+            android:digits="0123456789"
+            android:singleLine="true"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textSize="@dimen/sp_18" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@+id/Linearphone"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_40"
+        android:background="#ffffff" />
+
+    <LinearLayout
+        android:id="@+id/Linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Linearphone"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_40"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:src="@mipmap/login_icon_lock_n" />
+
+        <EditText
+            android:id="@+id/edit_pwd"
+            android:layout_width="@dimen/dp_200"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:background="@null"
+            android:hint="登录密码"
+            android:maxLength="11"
+            android:password="true"
+            android:singleLine="true"
+            android:textColor="#ffffff"
+            android:digits="0123456789qweasdzxcrtyfghvbnuiojklnmp,.?!"
+            android:textColorHint="#ffffff"
+            android:textSize="@dimen/sp_18" />
+
+        <ImageView
+            android:id="@+id/iamge_eye"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:src="@mipmap/login_icon_eye_n" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@+id/Linear"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_40"
+        android:background="#ffffff" />
+    <TextView
+        android:id="@+id/text_reg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="快速注册"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/view"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_20"
+        />
+    <Button
+        android:id="@+id/but_login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_40"
+        android:textSize="@dimen/sp_18"
+        android:textColor="#ffffff"
+        android:background="@drawable/reg_btn_shape"
+        android:layout_above="@+id/linear_login"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:text="登录"/>
+    <LinearLayout
+        android:id="@+id/linear_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_40"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_80"
+        android:gravity="center_horizontal"
+        >
+        <View
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_2"
+            android:background="#ffffff"
+            android:layout_marginTop="@dimen/dp_8"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 第三方登录 "
+            android:textColor="#ffffff"/>
+        <View
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_2"
+            android:background="#ffffff"
+            android:layout_marginTop="@dimen/dp_8"
+            />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/image_wx"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30" 
+        android:src="@mipmap/common_icon_weixin_n"
+        android:layout_marginLeft="@dimen/dp_120"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:layout_alignParentBottom="true"
+        />
+    <ImageView
+        android:id="@+id/iamge_face"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30"
+        android:src="@mipmap/login_icon_artificialintelligence_n"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dp_120"
+        android:layout_marginBottom="@dimen/dp_40"/>
+</RelativeLayout>

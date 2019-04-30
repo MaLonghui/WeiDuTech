@@ -14,6 +14,7 @@ import android.widget.Toast
 import com.wd.tech.R
 import com.wd.tech.api.Api
 import com.wd.tech.base.BaseActivity
+import com.wd.tech.bean.GroupInfoBean
 import com.wd.tech.bean.UserByPhoneBean
 import com.wd.tech.mvp.Constanct
 import com.wd.tech.mvp.Presenter
@@ -70,6 +71,19 @@ class AddFriendOrGroupActivity : BaseActivity<Constanct.View, Constanct.Presente
             }
 
         })
+        qun_edit_search.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                    val groupId = v!!.text.toString()
+                    mPresenter!!.getPresenter(Api.GROUP_INFO, headMap, GroupInfoBean::class.java, mapOf(Pair("groupId", groupId)))
+                    //点击回车隐藏软键盘
+                    val service: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    service.hideSoftInputFromWindow(people_edit_search.windowToken, 0)
+                }
+                return false
+            }
+
+        })
     }
 
     override fun View(any: Any) {
@@ -87,8 +101,21 @@ class AddFriendOrGroupActivity : BaseActivity<Constanct.View, Constanct.Presente
                 no_search_result.visibility = VISIBLE
             }
             lin_search_result.setOnClickListener {
-                var intentMap:HashMap<String,Any> = hashMapOf(Pair("userId", result.userId) )
+                var intentMap: HashMap<String, Any> = hashMapOf(Pair("userId", result.userId))
                 JumpActivityUtils.skipValueActivity(this, AddFriendActivity::class.java, intentMap)
+            }
+        } else if (any is GroupInfoBean) {
+            var groupInfoBean: GroupInfoBean = any
+            val infoResult = groupInfoBean.result
+            if (infoResult != null) {
+                lin_search_result.visibility = VISIBLE
+                no_search_result.visibility = GONE
+                val uri = Uri.parse(infoResult.groupImage)
+                img_search_result.setImageURI(uri)
+                name_search_result.text = infoResult.groupName
+                lin_search_result.setOnClickListener {
+
+                }
             }
         }
     }

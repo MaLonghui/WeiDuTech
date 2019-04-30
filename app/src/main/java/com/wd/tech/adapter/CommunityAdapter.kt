@@ -84,6 +84,10 @@ class CommunityAdapter(context: Context) : RecyclerView.Adapter<CommunityAdapter
         p0.recycler_image.adapter=CommunityFileAdapter(this.context!!,split)
         p0.recycler_image.adapter=CommunityFileAdapter(this.context!!,split)
         p0.recycler_image.adapter = CommunityFileAdapter(this.context!!, split)
+        p0.recycler_image.adapter=CommunityFileAdapter(this.context!!,split)
+        p0.recycler_image.adapter = CommunityFileAdapter(this.context!!, split)
+        p0.recycler_image.adapter = CommunityFileAdapter(this.context!!, split)
+        p0.recycler_image.adapter=CommunityFileAdapter(this.context!!,split)
         p0.text_comment.setText("${list!![p1].comment}")
         p0.text_praise.setText("${list!![p1].praise}")
 

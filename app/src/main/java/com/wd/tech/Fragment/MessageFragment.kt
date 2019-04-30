@@ -2,7 +2,9 @@ package com.wd.tech.Fragment
 
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,9 +12,14 @@ import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.Toast
+import chat.activity.fragment.ContactsFragment
+import chat.activity.fragment.ConversationListFragment
+import chat.controller.MenuItemController
+import chat.view.MenuItemView
 
 import com.wd.tech.R
 import com.wd.tech.activity.AddFriendOrGroupActivity
@@ -31,6 +38,10 @@ class MessageFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Con
     var adapter: MyPagerAdapter? = null
     var mlist: MutableList<Fragment>? = null
     var pop: PopupWindow? = null
+    private var mMenuView: View? = null
+    private var mMenuPopWindow: PopupWindow? = null
+    private var mMenuItemView: MenuItemView? = null
+    private var mMenuController: MenuItemController? = null
     override fun getLayoutId(): Int {
         return R.layout.fragment_message
     }
@@ -42,9 +53,9 @@ class MessageFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Con
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         adapter = MyPagerAdapter(activity!!.supportFragmentManager)
-        mlist = ArrayList<Fragment>()
-        mlist!!.add(MessageListFragment())
-        mlist!!.add(LinkManFragment())
+        mlist = ArrayList()
+        mlist!!.add(ConversationListFragment())
+        mlist!!.add(ContactsFragment())
         adapter!!.setFragmentList(mlist as ArrayList<Fragment>)
         view_pager.adapter = adapter
         view_pager.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -87,11 +98,34 @@ class MessageFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Con
                 }
             }
         }
+        mMenuView = activity!!.layoutInflater.inflate(R.layout.drop_down_menu, null)
+        mMenuPopWindow = PopupWindow(mMenuView, WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.WRAP_CONTENT, true)
+        mMenuItemView = MenuItemView(mMenuView)
+        mMenuItemView!!.initModule()
+        mMenuController = MenuItemController(this)
+        mMenuItemView!!.setListeners(mMenuController)
         img_add.setOnClickListener {
-            showPop()
+            showPopWindow()
         }
     }
 
+    fun showPopWindow() {
+        mMenuPopWindow!!.setTouchable(true)
+        mMenuPopWindow!!.setOutsideTouchable(true)
+        mMenuPopWindow!!.setBackgroundDrawable(BitmapDrawable(resources, null as Bitmap?))
+        if (mMenuPopWindow!!.isShowing()) {
+            mMenuPopWindow!!.dismiss()
+        } else {
+            mMenuPopWindow!!.showAsDropDown(img_add, -10, -5)
+        }
+    }
+
+    fun dismissPopWindow() {
+        if (mMenuPopWindow!!.isShowing()) {
+            mMenuPopWindow!!.dismiss()
+        }
+    }
     private fun showPop() {
         val view = LayoutInflater.from(context).inflate(R.layout.message_pop_layout, null)
         pop = PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -109,6 +143,7 @@ class MessageFragment : BaseFragment<Constanct.View, Constanct.Presenter>(), Con
 
         }
     }
+
 
     override fun initData() {
 

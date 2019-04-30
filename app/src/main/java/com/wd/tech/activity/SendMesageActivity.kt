@@ -11,6 +11,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.android.api.content.ImageContent
 import cn.jpush.im.android.api.content.TextContent
 import cn.jpush.im.android.api.enums.ContentType
 import cn.jpush.im.android.api.event.MessageEvent
@@ -34,6 +35,7 @@ class SendMesageActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), 
     var s1 = ""
     var adapter: MessagesListAdapter? = null
     var phone: String? = null
+    var allMessage: MutableList<Message>? = null
     override fun getLayoutId(): Int {
         return R.layout.activity_send_mesage
     }
@@ -50,7 +52,6 @@ class SendMesageActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), 
         var sHeadMap = mapOf(Pair("userId", userId), Pair("sessionId", sessionId))
         val id = intent.getIntExtra("id", 1)
         mPresenter!!.getPresenter(Api.FRIEND_INFORMATION, sHeadMap, FriendInfomation::class.java, mapOf(Pair("friend", id)))
-
     }
 
     override fun initData() {
@@ -122,22 +123,28 @@ class SendMesageActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), 
     override fun View(any: Any) {
         val sp = getSharedPreferences("config", Context.MODE_PRIVATE)
         if (any is FriendInfomation) {
-
             var friendInfomation: FriendInfomation = any
             val result = friendInfomation.result
             phone = result.phone
+            Conversation.createSingleConversation(phone, "")
             val singleConversation = JMessageClient.getSingleConversation(phone, "")
-            val allMessage = singleConversation.allMessage
-            val headPic = sp.getString("headPic", "")
 
+            allMessage = singleConversation.allMessage
+
+            val conversationList = JMessageClient.getConversationList()
+            /*val imageContent = conversationList[0]
+            val content = imageContent.allMessage.get(0).content as ImageContent
+
+            Toast.makeText(this,content.localThumbnailPath,Toast.LENGTH_LONG).show()*/
+            val headPic = sp.getString("headPic", "")
+            adapter = MessagesListAdapter(R.layout.message_adapter_layout, allMessage!!)
+            send_message_recycler.adapter = adapter
             JMessageClient.enterSingleConversation(phone)
             send_message_recycler.scrollToPosition(singleConversation.allMessage.size - 1)
-            adapter = MessagesListAdapter(R.layout.message_adapter_layout, allMessage)
-            send_message_recycler.adapter = adapter
             adapter!!.setUrl(result.headPic, headPic)
 
             send_message_btn.setOnClickListener {
-                val conversation = Conversation.createSingleConversation(result.phone, "d4cf77f0d3b85e9edc540dee")
+                val conversation = Conversation.createSingleConversation(phone, "d4cf77f0d3b85e9edc540dee")
                 if (s1.equals("")) {
                     Toast.makeText(this@SendMesageActivity, "请输入要发送的消息", Toast.LENGTH_LONG).show()
                 } else {
@@ -147,14 +154,13 @@ class SendMesageActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), 
                             if (p0 == 0) {
                                 Toast.makeText(this@SendMesageActivity, "消息发送成功", Toast.LENGTH_LONG).show()
                                 et_input.text = null
-
+                                val service: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                                service.hideSoftInputFromWindow(info_search_edit.windowToken, 0)
                             } else {
                                 Toast.makeText(this@SendMesageActivity, "消息发送失败", Toast.LENGTH_LONG).show()
                             }
                         }
                     })
-                    val service: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    service.hideSoftInputFromWindow(info_search_edit.windowToken, 0)
                     val options = MessageSendingOptions()
                     options.isRetainOffline = false
                     JMessageClient.sendMessage(message)//使用默认控制参数发送消息

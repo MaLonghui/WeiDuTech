@@ -22,6 +22,8 @@ class Api {
         var HEAD = "user/verify/v1/modifyHeadPic"
         //修改密码
         var PWD = "user/verify/v1/modifyUserPwd"
+        //完善
+        var PERFECT="user/verify/v1/perfectUserInfo"
         //用户签到
         var SIGNIN = "user/verify/v1/userSign"
         //用户签到状态
@@ -52,10 +54,10 @@ class Api {
         var TECH_INFOR = "information/v1/infoRecommendList"
         //社区点赞
         // 社区列表
+        var GIVEALIKE="community/verify/v1/addCommunityGreat"
+        // 社区列表
         var COMMUNITY = "community/v1/findCommunityList"
         //点赞
-        //社区点赞
-        var GIVEALIKE="community/verify/v1/addCommunityGreat"
         //社区取消点赞
         var GIVEDELETE = "community/verify/v1/cancelCommunityGreat"
         //3. 资讯详情展示
@@ -112,5 +114,7 @@ class Api {
         var FRIEND_INFORMATION = "user/verify/v1/queryFriendInformation"
         //4.微信分享
         var WX_SHARE = "tool/v1/wxShare"
+        //8. 查询群组详细信息
+        var GROUP_INFO = "group/verify/v1/findGroupInfo"
     }
 }

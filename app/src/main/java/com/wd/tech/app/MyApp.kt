@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import cn.jpush.im.android.api.JMessageClient
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.mob.MobSDK
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.umeng.analytics.MobclickAgent
@@ -25,6 +26,7 @@ class MyApp : Application() {
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL)
         JMessageClient.setDebugMode(true);
         JMessageClient.init(this);
+        MobSDK.init(this,"2ae99603e8708","47d7cae6cfff51929a3a7cc201f7f769");
     }
 
 

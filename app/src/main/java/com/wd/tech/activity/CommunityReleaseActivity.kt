@@ -29,6 +29,7 @@ import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.wd.tech.adapter.GridImageAdapter
 import com.wd.tech.api.Api
+import com.wd.tech.bean.TaskBean
 import com.wd.tech.bean.UserPublicBean
 import com.wd.tech.utils.FullyGridLayoutManager
 import java.util.ArrayList
@@ -123,6 +124,9 @@ class CommunityReleaseActivity : BaseActivity<Constanct.View, Constanct.Presente
                 }
             }
 
+            mPresenter!!.loadSend(Api.COMMUNITY_RELEASE,sHeadMap,content,selectList)
+            val mapcanthress: Map<String, Int> = mapOf(Pair("taskId",1003))
+            mPresenter!!.postPresenter(Api.ZUOTASK, sHeadMap, TaskBean::class.java, mapcanthress)
         }
 
 
@@ -222,8 +226,8 @@ class CommunityReleaseActivity : BaseActivity<Constanct.View, Constanct.Presente
     }
 
     override fun View(any: Any) {
-        if (any != null) {
-            var userPublicBean: UserPublicBean = any as UserPublicBean
+        if (any is UserPublicBean) {
+            var userPublicBean: UserPublicBean = any
            // Toast.makeText(this@CommunityReleaseActivity, userPublicBean.message, Toast.LENGTH_LONG).show()
             if (userPublicBean.status.equals("0000")) {
                 finish()

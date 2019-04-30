@@ -15,9 +15,26 @@ import okhttp3.RequestBody
 import java.io.File
 
 
+
+
+
 class Presenter : BasePresenter<Constanct.View>(), Constanct.Presenter {
     override fun imgsPostPresenter(uri: String, headerMap: Map<String, Any>, parms: Map<String, Any>, file: File, clazz: Class<*>) {
 
+    }
+
+    override fun headIconPresenter(url: String,headMap: Map<String, Any>, file: File) {
+        val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+        val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
+        val apiService = RetrofitManager.INSTANCE.creat(ApiService::class.java)
+        apiService.headicon(url,headMap,body)
+                .subscribeOn(Schedulers.io
+
+                ())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    mView!!.View(it)
+                }
     }
 
     override fun loadSend(uri: String,headMap: Map<String, Any>, content: String, selectList: MutableList<LocalMedia>) {

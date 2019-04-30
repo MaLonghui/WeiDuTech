@@ -124,10 +124,7 @@ class InformationFragment : BaseFragment<Constanct.View, Constanct.Presenter>(),
                         xrecycler_view.loadMoreComplete()
                     }
                 }, 2500)
-
-
             }
-
 
             override fun onRefresh() {
                 Handler().postDelayed(object : Runnable {

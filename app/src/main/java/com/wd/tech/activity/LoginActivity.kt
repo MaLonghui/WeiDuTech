@@ -16,7 +16,7 @@ import com.wd.tech.mvp.Presenter
 import com.wd.tech.utils.JumpActivityUtils
 import com.wd.tech.utils.RsaCoder
 import com.wd.tech.utils.WeiXinUtil
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_my_login.*
 
 /**
  * date:2019/4/12
@@ -42,6 +42,16 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Const
             finish()
             edit.putString("signature", loginBean.result.signature)
             edit.commit()
+            if (loginBean.result != null) {
+                Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
+                finish()
+            }
+
+            edit.putString("signature",loginBean.result.signature)
+            edit.commit()
+            if (loginBean.result != null)
+                Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
+            finish()
         } else {
             Toast.makeText(this, loginBean.message, Toast.LENGTH_SHORT).show()
         }
@@ -49,7 +59,7 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Const
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_login
+        return R.layout.activity_my_login
     }
 
     override fun initPresenter(): Constanct.Presenter {
@@ -62,6 +72,14 @@ class LoginActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Const
             var phone = edit_phone.text.toString().trim()
             var pwd = edit_pwd.text.toString().trim()
             val pwd1 = RsaCoder.encryptByPublicKey(pwd)
+            var sp = getSharedPreferences("config", Context.MODE_PRIVATE)
+
+            val edit = sp.edit()
+            edit.putString("phone",phone)
+            edit.putString("pwd",pwd)
+            edit.commit()
+
+
             if (phone != null && pwd1 != null) {
                 var map: Map<String, Any> = mapOf()
                 var map1: Map<String, Any> = mapOf(Pair("phone", phone), Pair("pwd", pwd1))

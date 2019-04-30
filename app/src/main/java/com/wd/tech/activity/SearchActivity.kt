@@ -23,7 +23,7 @@ import com.wd.tech.base.BaseActivity
 import com.wd.tech.bean.InfoSearchBean
 import com.wd.tech.mvp.Constanct
 import com.wd.tech.mvp.Presenter
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_my_login.*
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Constanct.View {

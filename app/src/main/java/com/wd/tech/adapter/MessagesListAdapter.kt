@@ -45,8 +45,5 @@ class MessagesListAdapter(@LayoutRes layoutResId: Int,@Nullable data: List<Messa
             val parse = Uri.parse(friendHead)
             holder!!.itemView.iv_avator_recieve.setImageURI(parse)
         }
-
-
     }
-
 }

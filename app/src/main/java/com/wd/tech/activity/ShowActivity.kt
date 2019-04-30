@@ -12,6 +12,11 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import chat.database.UserEntry
+import chat.utils.SharePreferenceManager
+import chat.utils.ToastUtil
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.api.BasicCallback
 import com.hjm.bottomtabbar.BottomTabBar
 import com.wd.tech.Fragment.CommunityFragment
 import com.wd.tech.Fragment.InformationFragment
@@ -26,9 +31,151 @@ class ShowActivity : AppCompatActivity() {
     var headPic:String?=null
     var nickName:String?=null
     var signature:String?=null
+    override fun onResume() {
+        super.onResume()
+        val sp: SharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE)
+        val userId = sp.getString("userId", "")
+        val sessionId = sp.getString("sessionId", "")
+        val phone = sp.getString("phone", "")
+        val pwd = sp.getString("pwd", "")
+
+        if (userId.equals("")||sessionId.equals("")){
+            JMessageClient.login("18436003581", "123456",object : BasicCallback() {
+                override fun gotResult(responseCode: Int, responseMessage: String) {
+                    //ToastUtil.shortToast(this@ShowActivity, responseCode.toString())
+                    if (responseCode == 0) {
+                        SharePreferenceManager.setCachedPsw("123456")
+                        val myInfo = JMessageClient.getMyInfo()
+                        val avatarFile = myInfo.avatarFile
+                        //登陆成功,如果用户有头像就把头像存起来,没有就设置null
+                        if (avatarFile != null) {
+                            SharePreferenceManager.setCachedAvatarPath(avatarFile.absolutePath)
+                        } else {
+                            SharePreferenceManager.setCachedAvatarPath(null)
+                        }
+                        val username = myInfo.userName
+                        val appKey = myInfo.appKey
+                        var user: UserEntry? = UserEntry.getUser(username, "d4cf77f0d3b85e9edc540dee")
+                        if (null == user) {
+                            user = UserEntry(username, appKey)
+                            user.save()
+                        }
+                        // mContext.goToActivity(mContext, MainActivity::class.java)
+                        /// ToastUtil.shortToast(mContext, "登陆成功")
+                        // mContext.finish()
+                    } else {
+                        // ToastUtil.shortToast(mContext, "登陆失败$responseMessage")
+                    }
+                }
+            })
+        }else{
+            JMessageClient.login(phone, pwd,object : BasicCallback() {
+                override fun gotResult(responseCode: Int, responseMessage: String) {
+                    //ToastUtil.shortToast(this@ShowActivity, responseCode.toString())
+                    if (responseCode == 0) {
+                        SharePreferenceManager.setCachedPsw("123456")
+                        val myInfo = JMessageClient.getMyInfo()
+                        val avatarFile = myInfo.avatarFile
+                        //登陆成功,如果用户有头像就把头像存起来,没有就设置null
+                        if (avatarFile != null) {
+                            SharePreferenceManager.setCachedAvatarPath(avatarFile.absolutePath)
+                        } else {
+                            SharePreferenceManager.setCachedAvatarPath(null)
+                        }
+                        val username = myInfo.userName
+                        val appKey = myInfo.appKey
+                        var user: UserEntry? = UserEntry.getUser(username, "d4cf77f0d3b85e9edc540dee")
+                        if (null == user) {
+                            user = UserEntry(username, appKey)
+                            user!!.save()
+                        }
+                        // mContext.goToActivity(mContext, MainActivity::class.java)
+                        /// ToastUtil.shortToast(mContext, "登陆成功")
+                        // mContext.finish()
+                    } else {
+                        // ToastUtil.shortToast(mContext, "登陆失败$responseMessage")
+                    }
+                }
+            })
+        }
+
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show)
+
+        val sp: SharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE)
+        val userId = sp.getString("userId", "")
+        val sessionId = sp.getString("sessionId", "")
+        val phone = sp.getString("phone", "")
+        val pwd = sp.getString("pwd", "")
+
+        if (userId.equals("")||sessionId.equals("")){
+            JMessageClient.login("18436003581", "123456",object : BasicCallback() {
+                override fun gotResult(responseCode: Int, responseMessage: String) {
+                    //ToastUtil.shortToast(this@ShowActivity, responseCode.toString())
+                    if (responseCode == 0) {
+                        SharePreferenceManager.setCachedPsw("123456")
+                        val myInfo = JMessageClient.getMyInfo()
+                        val avatarFile = myInfo.avatarFile
+                        //登陆成功,如果用户有头像就把头像存起来,没有就设置null
+                        if (avatarFile != null) {
+                            SharePreferenceManager.setCachedAvatarPath(avatarFile.absolutePath)
+                        } else {
+                            SharePreferenceManager.setCachedAvatarPath(null)
+                        }
+                        val username = myInfo.userName
+                        val appKey = myInfo.appKey
+                        var user: UserEntry? = UserEntry.getUser(username, "d4cf77f0d3b85e9edc540dee")
+                        if (null == user) {
+                            user = UserEntry(username, appKey)
+                            user.save()
+                        }
+                        // mContext.goToActivity(mContext, MainActivity::class.java)
+                        /// ToastUtil.shortToast(mContext, "登陆成功")
+                        // mContext.finish()
+                    } else {
+                        // ToastUtil.shortToast(mContext, "登陆失败$responseMessage")
+                    }
+                }
+            })
+        }else{
+            JMessageClient.login(phone, pwd,object : BasicCallback() {
+                override fun gotResult(responseCode: Int, responseMessage: String) {
+                    //ToastUtil.shortToast(this@ShowActivity, responseCode.toString())
+                    if (responseCode == 0) {
+                        SharePreferenceManager.setCachedPsw("123456")
+                        val myInfo = JMessageClient.getMyInfo()
+                        val avatarFile = myInfo.avatarFile
+                        //登陆成功,如果用户有头像就把头像存起来,没有就设置null
+                        if (avatarFile != null) {
+                            SharePreferenceManager.setCachedAvatarPath(avatarFile.absolutePath)
+                        } else {
+                            SharePreferenceManager.setCachedAvatarPath(null)
+                        }
+                        val username = myInfo.userName
+                        val appKey = myInfo.appKey
+                        var user: UserEntry? = UserEntry.getUser(username, "d4cf77f0d3b85e9edc540dee")
+                        if (null == user) {
+                            user = UserEntry(username, appKey)
+                            user!!.save()
+                        }
+                        // mContext.goToActivity(mContext, MainActivity::class.java)
+                        /// ToastUtil.shortToast(mContext, "登陆成功")
+                        // mContext.finish()
+                    } else {
+                        // ToastUtil.shortToast(mContext, "登陆失败$responseMessage")
+                    }
+                }
+            })
+        }
+
+
+
+
+
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         window.enterTransition = Explode().setDuration(1000)
         window.exitTransition = Explode().setDuration(1000)

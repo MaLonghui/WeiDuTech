@@ -2,9 +2,8 @@ package com.wd.tech.wxapi
 
 import android.content.Context
 import android.content.Intent
-import android.os.Handler
+import android.os.Bundle
 import android.widget.Toast
-import com.tencent.mm.opensdk.constants.ConstantsAPI
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.modelmsg.SendAuth
@@ -22,6 +21,7 @@ import com.wd.tech.utils.WeiXinUtil
 
 class WXEntryActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Constanct.View, IWXAPIEventHandler {
     override fun onReq(p0: BaseReq?) {
+
     }
 
     var code: String? = null
@@ -33,15 +33,12 @@ class WXEntryActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Con
         return Presenter()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        WeiXinUtil.reg(this@WXEntryActivity)!!.handleIntent(intent,this)
+    }
     override fun initData() {
         WeiXinUtil.reg(this@WXEntryActivity)!!.handleIntent(getIntent(), this@WXEntryActivity)
-        val millis = System.currentTimeMillis()
-        val millisStr = millis.toString()
-        var sign = millisStr + "wxShare" + "tech"
-        val mD5Utils = MD5Utils()
-        val signStr = mD5Utils.string2MD5(sign)
-        mPresenter!!.postPresenter(Api.WX_SHARE, mapOf(Pair("time", millisStr), Pair("sign", signStr)), UserPublicBean::class.java, mapOf())
-
     }
 
     override fun View(any: Any) {
@@ -59,19 +56,22 @@ class WXEntryActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Con
     }
 
     override fun onResp(baseResp: BaseResp) {
+
         when (baseResp.errCode) {
             BaseResp.ErrCode.ERR_OK -> {
                 code = (baseResp as SendAuth.Resp).code
                 mPresenter!!.postPresenter(Api.WXLOGIN_API, mapOf(pair = Pair("ak", "0110010010000")), LoginBean::class.java, mapOf(pair = Pair("code", code!!)))
-
             }
             else -> {
-
-
+                val millis = System.currentTimeMillis()
+                val millisStr = millis.toString()
+                var sign = millisStr + "wxShare" + "tech"
+                val mD5Utils = MD5Utils()
+                val signStr = mD5Utils.string2MD5(sign)
+                mPresenter!!.postPresenter(Api.WX_SHARE, mapOf(Pair("time", millisStr), Pair("sign", signStr)), UserPublicBean::class.java, mapOf())
+                finish()
             }
         }
-
-        finish()
 
     }
 }

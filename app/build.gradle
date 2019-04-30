@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.wd.tech"
         minSdkVersion 21
-        targetSdkVersion 22
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -19,9 +19,9 @@ android {
             // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
         }
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
+                JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "d4cf77f0d3b85e9edc540dee", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
     //微信获取code值
@@ -39,6 +39,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {exclude 'META-INF/rxjava.properties'}
 }
 
 dependencies {
@@ -51,53 +52,88 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
     //retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+
     //rxjava2
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+
     //gson的解析器
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+
     //logging-interceptor  //kotlin黄油刀
+
     //    implementation 'com.jakewharton:butterknife:8.8.1'
+
     //    kapt 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
-    //AndroidSchedulers
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation 'com.github.bumptech.glide:glide:4.4.0'
+
+
     //fresco
     implementation 'com.facebook.fresco:fresco:1.12.0'
+
     //底部导航
     implementation 'com.hjm:BottomTabBar:1.1.1'
     implementation 'com.google.code.gson:gson:2.8.5'
+
     //侧滑
     implementation 'com.leon:lsettingviewlibrary:1.3.0'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+
     //xrecyclerview
     implementation 'com.jcodecraeer:xrecyclerview:1.3.2'
+
     //XBanner
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'com.github.xiaohaibin:XBanner:1.6.1'
-    //第三方集成 时间，城市，男女
-    implementation 'com.airsaid.library:pickerview:1.0.3'
+
     //EventBus
     implementation 'org.greenrobot:eventbus:3.1.1'
+
     //微信登录
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+
     //依赖，name里的内容和导入libs下的包一样,集成支付宝支付
     implementation(name: 'alipaySdk-15.5.9-20181123210657-noUtdid', ext: 'aar')
     implementation 'me.imid.swipebacklayout.lib:library:1.0.0'
+
     //u盟统计
     implementation 'com.umeng.umsdk:analytics:7.5.4'
     implementation 'com.umeng.umsdk:common:1.5.4'
 
     //ExpandableTextView
     implementation 'com.github.MZCretin:ExpandableTextView:v1.5.3'
+
     //图片选择
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.9'
-    implementation 'cn.jiguang.sdk:jmessage:2.8.2'  // 此处以JMessage 2.8.2 版本为例。
-    implementation 'cn.jiguang.sdk:jcore:1.2.7'  // 此处以JCore 1.2.7 版本为例。
+    implementation 'cn.jiguang.sdk:jmessage:2.8.2'
+
+    // 此处以JMessage 2.8.2 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:1.2.7'
+
+    // 此处以JCore 1.2.7 版本为例。
+
     //baseQuick
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    implementation files('libs/MobCommons-2019.0409.1452.jar')
+    implementation files('libs/MobTools-2019.0403.1047.jar')
+    implementation files('libs/SDKWrapper-2018.0801.1824.jar')
+    implementation files('libs/SMSSDK-3.3.1.jar')
+    // 此处以JCore 1.2.7 版本为例。
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.jakewharton:butterknife:8.6.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    implementation 'com.github.bumptech.glide:glide:3.6.1'
+    implementation 'com.github.chrisbanes.photoview:library:1.2.4'
+    implementation 'com.facebook.fresco:fresco:1.12.1'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'com.contrarywind:Android-PickerView:3.2.4'
+    implementation 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+    implementation project(':reclib-testemoticons')
 }
 repositories {
     mavenCentral()

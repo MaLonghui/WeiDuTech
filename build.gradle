@@ -24,9 +24,13 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
         //xbanner
         maven { url 'https://jitpack.io' }
         maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
         //集成支付宝支付
         flatDir {
             dirs 'libs'

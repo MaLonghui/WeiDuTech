@@ -27,20 +27,12 @@ class TaskActivity : BaseActivity<Constanct.View, Constanct.Presenter>(), Consta
         val mapcan: Map<String, Any> = mapOf()
         mPresenter!!.getPresenter(Api.TASK, map, TaskBean::class.java, mapcan)
 
-        val mapcanthress: Map<String, Int> = mapOf(Pair("taskId",1003))
         val mapcanfour: Map<String, Int> = mapOf(Pair("taskId",1004))
-
-        val mapcansix: Map<String, Int> = mapOf(Pair("taskId",1006))
         val mapcanseven: Map<String, Int> = mapOf(Pair("taskId",1007))
 
-        val mapcantwo: Map<String, Int> = mapOf(Pair("taskId",1002))
-        mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcantwo)
-        mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcanthress)
-        mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcanfour)
+//        mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcanfour)
 
-
-        mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcansix)
-        mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcanseven)
+//        mPresenter!!.postPresenter(Api.ZUOTASK, map, TaskBean::class.java, mapcanseven)
 
     }
 
